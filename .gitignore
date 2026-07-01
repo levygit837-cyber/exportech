@@ -1,0 +1,9 @@
+# Ignore source reference image
+image-frontend-1.png
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

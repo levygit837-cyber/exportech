@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exportech | Loja Premium de iPhones</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            background: '#040404',
+            surface: '#0f0f12',
+            surfaceHover: '#18181d',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Custom Scrollytelling & Premium Effects */
+    body {
+      background-color: #040404;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card {
+      background: linear-gradient(180deg, rgba(20,20,22,1) 0%, rgba(10,10,12,1) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .fade-edge-image {
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    }
+
+    /* Scroll Reveals */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-reveal > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .stagger-reveal.active > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Dynamic Delays */
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+    
+    /* Infinite subtly rotating gradient for the background */
+    @keyframes orb-float {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(3%, 5%) scale(1.05); }
+      66% { transform: translate(-2%, 2%) scale(0.95); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+    .glow-orb {
+      animation: orb-float 15s infinite ease-in-out;
+    }
+    
+    /* Parallax image inside container */
+    .parallax-img {
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden selection:bg-white/20 selection:text-white">
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 transition-all duration-500 glass-panel border-x-0 border-t-0" id="main-header">
+    <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between text-sm">
+      <!-- Logo -->
+      <a href="#" class="text-2xl font-bold tracking-tight text-white transition-opacity hover:opacity-80" rel="nofollow">
+        Exportech
+      </a>
+      
+      <!-- Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 font-light text-zinc-300">
+        <a href="#" class="hover:text-white transition-colors" rel="nofollow">Loja</a>
+        <div class="flex items-center gap-1 cursor-pointer group">
+          <a href="#" class="group-hover:text-white transition-colors" rel="nofollow">iPhone</a>
+          <i class="ph ph-caret-down text-[10px] group-hover:text-white transition-colors opacity-70"></i>
+        </div>
+        <div class="flex items-center gap-1 cursor-pointer group">
+          <a href="#" class="group-hover:text-white transition-colors" rel="nofollow">Acessórios</a>
+          <i class="ph ph-caret-down text-[10px] group-hover:text-white transition-colors opacity-70"></i>
+        </div>
+        <a href="#" class="hover:text-white transition-colors" rel="nofollow">Sobre nós</a>
+        <a href="#" class="hover:text-white transition-colors" rel="nofollow">Suporte</a>
+      </nav>
+      
+      <!-- Actions -->
+      <div class="flex items-center gap-6">
+        <button class="hidden md:flex items-center gap-2 text-zinc-300 hover:text-white transition-colors font-light">
+          <i class="ph ph-magnifying-glass text-lg"></i>
+          <span>Buscar</span>
+        </button>
+        <button class="text-zinc-300 hover:text-white transition-colors">
+          <i class="ph ph-user text-xl"></i>
+        </button>
+        <button class="text-zinc-300 hover:text-white transition-colors relative">
+          <i class="ph ph-shopping-bag text-xl"></i>
+          <span class="absolute -top-1 -right-2 bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[110vh] flex items-center isolate pt-20 pb-32">
+    <!-- Atmospheric glows -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+      <div class="absolute top-1/4 right-[10%] w-[600px] h-[600px] rounded-full bg-[#5b5145] opacity-20 blur-[100px] glow-orb mix-blend-screen"></div>
+      <div class="absolute bottom-1/4 left-[20%] w-[400px] h-[400px] rounded-full bg-[#3b4155] opacity-15 blur-[120px] glow-orb mix-blend-screen" style="animation-delay: -5s;"></div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Left Copy -->
+      <div class="lg:col-span-5 flex flex-col items-start z-10 reveal-up">
+        <span class="text-zinc-400 font-medium tracking-widest text-xs uppercase mb-4">Novo</span>
+        <h1 class="text-6xl sm:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight mb-6">
+          iPhone 15 Pro
+        </h1>
+        <p class="text-2xl sm:text-3xl font-light text-zinc-300 mb-10 max-w-lg leading-snug">
+          Titânio. Tão forte. Tão leve. Tão Pro.
+        </p>
+        
+        <div class="flex flex-wrap items-center gap-4 mb-10">
+          <a href="#" class="bg-white text-black px-7 py-3.5 rounded-full font-medium flex items-center gap-2 hover:scale-[1.03] transition-transform active:scale-95" rel="nofollow">
+            <span>Comprar agora</span>
+            <i class="ph ph-arrow-right text-lg"></i>
+          </a>
+          <a href="#" class="border border-white/30 text-white px-7 py-3.5 rounded-full font-medium hover:bg-white/10 transition-colors active:scale-95" rel="nofollow">
+            Saiba mais
+          </a>
+        </div>
+        
+        <div class="flex items-center gap-2 text-zinc-500 text-sm font-light">
+          <i class="ph ph-map-pin text-lg"></i>
+          <span>Entregamos para todo Brasil e Paraguai.</span>
+        </div>
+      </div>
+      
+      <!-- Right Image -->
+      <div class="lg:col-span-7 relative flex justify-center lg:justify-end z-0 parallax-container h-[50vh] lg:h-auto">
+        <div class="relative w-[120%] lg:w-[150%] max-w-[1000px] right-0 translate-x-[5%] lg:translate-x-[15%]">
+            <!-- Using a high quality aesthetic Unsplash image, masked to blend into the dark background, simulating the hero product presentation -->
+            <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1470&auto=format&fit=crop" 
+                 alt="iPhone 15 Pro" 
+                 class="w-full h-full object-contain -scale-x-100 fade-edge-image parallax-img"
+                 data-speed="0.05" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shelf Carousel (Glass Tray) -->
+  <section class="max-w-[1400px] mx-auto px-6 relative z-30 -mt-24 mb-32 reveal-up">
+    <div class="glass-panel p-4 rounded-[2rem] flex items-center gap-4 relative">
+      <button class="w-10 h-10 shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full flex items-center justify-center transition-colors">
+        <i class="ph ph-caret-left text-zinc-300"></i>
+      </button>
+      
+      <div class="flex-1 overflow-hidden">
+        <div class="flex gap-4 items-center min-w-max px-2 stagger-reveal active">
+          <!-- Item 1 -->
+          <a href="#" class="flex items-center gap-4 py-3 px-5 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer delay-100" rel="nofollow">
+            <img src="https://images.unsplash.com/photo-1709178295038-acbeec786fcf?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aXBob25lJTIwMTUlMjBwcm98ZW58MHx8MHx8fDA%3D" class="w-14 h-14 object-cover rounded-xl brightness-90 group-hover:brightness-110 transition-all mix-blend-lighten" alt="iPhone 15 Pro">
+            <div>
+              <h4 class="text-white text-sm font-medium">iPhone 15 Pro</h4>
+              <p class="text-zinc-500 text-xs mt-0.5">A partir de<br><span class="text-zinc-300">US$ 999</span></p>
+            </div>
+          </a>
+          
+          <div class="w-px h-12 bg-white/10"></div>
+          
+          <!-- Item 2 -->
+          <a href="#" class="flex items-center gap-4 py-3 px-5 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer delay-200" rel="nofollow">
+            <img src="https://images.unsplash.com/photo-1695048132832-b41495f12eb4?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXBob25lJTIwMTV8ZW58MHx8MHx8fDA%3D" class="w-14 h-14 object-cover rounded-xl brightness-90 group-hover:brightness-110 transition-all mix-blend-lighten" alt="iPhone 15">
+            <div>
+              <h4 class="text-white text-sm font-medium">iPhone 15</h4>
+              <p class="text-zinc-500 text-xs mt-0.5">A partir de<br><span class="text-zinc-300">US$ 799</span></p>
+            </div>
+          </a>
+
+          <div class="w-px h-12 bg-white/10"></div>
+          
+          <!-- Item 3 -->
+          <a href="#" class="flex items-center gap-4 py-3 px-5 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer delay-300" rel="nofollow">
+            <img src="https://images.unsplash.com/photo-1680687688158-e9165395ff00?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXBob25lJTIwMTQlMjBwcm8lMjBtYXh8ZW58MHx8MHx8fDA%3D" class="w-14 h-14 object-cover rounded-xl brightness-90 group-hover:brightness-110 transition-all mix-blend-lighten" alt="iPhone 14">
+            <div>
+              <h4 class="text-white text-sm font-medium">iPhone 14</h4>
+              <p class="text-zinc-500 text-xs mt-0.5">A partir de<br><span class="text-zinc-300">US$ 599</span></p>
+            </div>
+          </a>
+
+          <div class="w-px h-12 bg-white/10"></div>
+          
+          <!-- Item 4 -->
+          <a href="#" class="flex items-center gap-4 py-3 px-5 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer delay-400" rel="nofollow">
+            <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?q=80&w=200&auto=format&fit=crop" class="w-14 h-14 object-cover rounded-xl brightness-90 group-hover:brightness-110 transition-all mix-blend-lighten" alt="iPhone SE">
+            <div>
+              <h4 class="text-white text-sm font-medium">iPhone SE</h4>
+              <p class="text-zinc-500 text-xs mt-0.5">A partir de<br><span class="text-zinc-300">US$ 429</span></p>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+      <button class="w-10 h-10 shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full flex items-center justify-center transition-colors">
+        <i class="ph ph-caret-right text-zinc-300"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Benefits Row -->
+  <section class="max-w-[1400px] mx-auto px-6 border-b border-white/5 pb-24 mb-32">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 stagger-reveal" id="benefits-grid">
+      
+      <div class="flex flex-col items-start gap-4 delay-100">
+        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-300">
+          <i class="ph ph-package text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-white mb-1">Entrega rápida</h3>
+          <p class="text-sm text-zinc-500 font-light">Para Brasil e Paraguai</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4 delay-200">
+        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-300">
+          <i class="ph ph-shield-check text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-white mb-1">Garantia oficial</h3>
+          <p class="text-sm text-zinc-500 font-light">Produtos 100% originais</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4 delay-300">
+        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-300">
+          <i class="ph ph-arrows-left-right text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-white mb-1">Devolução fácil</h3>
+          <p class="text-sm text-zinc-500 font-light">Até 7 dias após o recebimento</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4 delay-400">
+        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-300">
+          <i class="ph ph-credit-card text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-white mb-1">Parcele sem juros</h3>
+          <p class="text-sm text-zinc-500 font-light">Em até 12x no cartão</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Feature Highlight ("Projetado para ir além") -->
+  <section class="max-w-[1400px] mx-auto px-6 py-20 relative isolate overflow-hidden mb-32 reveal-up">
+    <!-- Faint background linear gradient to anchor the section -->
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent pointer-events-none -z-10 rounded-3xl"></div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      
+      <div class="flex flex-col items-start z-10 w-full max-w-lg">
+        <span class="text-zinc-500 text-xs font-semibold tracking-[0.2em] uppercase mb-6">Destaque</span>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
+          Projetado para ir além.
+        </h2>
+        <p class="text-zinc-400 font-light text-lg mb-10">
+          O iPhone 15 Pro combina titânio aeroespacial com o chip A17 Pro para oferecer o máximo em desempenho e durabilidade.
+        </p>
+        <a href="#" class="bg-white text-black px-6 py-3 rounded-full font-medium flex items-center gap-2 hover:scale-[1.03] transition-transform active:scale-95 text-sm" rel="nofollow">
+          <span>Explorar iPhone 15 Pro</span>
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="relative w-full aspect-square md:aspect-auto md:h-[600px] flex items-center justify-center parallax-container">
+        <!-- Lens closeup -->
+        <img src="https://images.unsplash.com/photo-1758745175160-3ff94c3da514?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8" 
+             alt="iPhone Lens System Detail" 
+             class="absolute w-full h-full object-cover rounded-3xl opacity-80 mix-blend-lighten fade-edge-image parallax-img"
+             data-speed="-0.03" />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Details Gallery -->
+  <section class="max-w-[1400px] mx-auto px-6 pb-40 border-b border-white/5">
+    <div class="mb-12 reveal-up">
+      <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-3">Conheça cada detalhe.</h2>
+      <p class="text-zinc-400 font-light">Arraste para explorar o iPhone 15 Pro por todos os ângulos.</p>
+    </div>
+
+    <div class="relative group">
+      
+      <!-- Arrow Left -->
+      <button class="absolute left-0 top-1/2 -translate-y-1/2 -ml-5 z-20 w-10 h-10 bg-surface/80 hover:bg-surfaceHover border border-white/10 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-md">
+        <i class="ph ph-caret-left text-white"></i>
+      </button>
+
+      <div class="flex gap-6 overflow-hidden pb-8 pt-4 stagger-reveal flex-nowrap" id="gallery-track">
+        
+        <!-- Card 1 -->
+        <div class="min-w-[280px] w-[25%] aspect-[3/4] glass-card rounded-[2rem] overflow-hidden relative flex-shrink-0 delay-100 group/card">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none"></div>
+          <img src="https://images.unsplash.com/photo-1602362123045-e48b1cd88986?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGFuZ2xlfGVufDB8fDB8fHww" class="w-full h-full object-cover mix-blend-lighten opacity-80 group-hover/card:scale-105 transition-transform duration-1000 ease-out" alt="Angle 1">
+        </div>
+
+        <!-- Card 2 -->
+        <div class="min-w-[280px] w-[25%] aspect-[3/4] glass-card rounded-[2rem] overflow-hidden relative flex-shrink-0 delay-200 group/card">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none"></div>
+          <!-- Emulating a side profile angle with substitute image -->
+          <img src="https://images.unsplash.com/photo-1554673347-cb5e23b3d623?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGFuZ2Vsc3xlbnwwfHwwfHx8MA%3D%3D" class="w-full h-full object-cover mix-blend-lighten opacity-80 group-hover/card:scale-105 transition-transform duration-1000 ease-out" alt="Angle 2">
+        </div>
+
+        <!-- Card 3 -->
+        <div class="min-w-[280px] w-[25%] aspect-[3/4] glass-card rounded-[2rem] overflow-hidden relative flex-shrink-0 delay-300 group/card">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none"></div>
+          <img src="https://images.unsplash.com/photo-1533813031913-6a764882db2c?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover mix-blend-lighten opacity-80 group-hover/card:scale-105 transition-transform duration-1000 ease-out" alt="Angle 3">
+        </div>
+
+        <!-- Card 4 -->
+        <div class="min-w-[280px] w-[25%] aspect-[3/4] glass-card rounded-[2rem] overflow-hidden relative flex-shrink-0 delay-400 group/card">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none"></div>
+          <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover mix-blend-lighten opacity-80 group-hover/card:scale-105 transition-transform duration-1000 ease-out" alt="Angle 4">
+        </div>
+
+      </div>
+
+      <!-- Arrow Right -->
+      <button class="absolute right-0 top-1/2 -translate-y-1/2 -mr-5 z-20 w-10 h-10 bg-surface/80 hover:bg-surfaceHover border border-white/10 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 backdrop-blur-md">
+        <i class="ph ph-caret-right text-white"></i>
+      </button>
+
+      <!-- Pagination dots -->
+      <div class="flex items-center justify-center gap-2 mt-4">
+        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="max-w-[1400px] mx-auto py-24 mb-10 overflow-hidden relative isolate">
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 h-auto lg:h-[600px] rounded-[2rem] overflow-hidden glass-card reveal-up">
+      
+      <!-- About Text -->
+      <div class="p-10 lg:p-20 flex flex-col justify-center items-start border-r border-white/5 relative z-10 w-full h-full">
+        <span class="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-6">Sobre a Exportech</span>
+        <h2 class="text-4xl md:text-5xl font-medium tracking-tight mb-8 leading-tight">
+          Sua loja premium<br>de iPhones.
+        </h2>
+        <p class="text-zinc-400 font-light text-lg mb-10 max-w-sm">
+          A Exportech nasceu para oferecer a melhor experiência na compra do seu iPhone. Qualidade, confiança e suporte em cada etapa.
+        </p>
+        <a href="#" class="bg-white text-black px-6 py-3 rounded-full font-medium flex items-center gap-2 hover:scale-[1.03] transition-transform active:scale-95 text-sm" rel="nofollow">
+          <span>Sobre nós</span>
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- About Image -->
+      <div class="relative w-full h-64 lg:h-full parallax-container overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvcCUyMGludGVyaW9yfGVufDB8fDB8fHww" 
+             class="absolute inset-0 w-full h-[120%] -top-[10%] object-cover object-center opacity-70 parallax-img pointer-events-none" 
+             data-speed="0.1"
+             alt="Store Interior">
+        <!-- Text overlay fixed inside image to match reference -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none backdrop-blur-[2px]">
+            <h3 class="text-4xl lg:text-5xl font-medium tracking-wide drop-shadow-2xl">Exportech</h3>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="max-w-[1400px] mx-auto px-6 mb-32">
+    <div class="bg-[#0b0c0f] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col lg:flex-row items-center reveal-up relative isolate">
+      
+      <!-- Device Slice -->
+      <div class="w-full lg:w-5/12 h-64 lg:h-[350px] relative">
+         <img src="https://images.unsplash.com/photo-1696417751697-7f999516631b?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover object-left opacity-90 mix-blend-lighten contrast-125" alt="iPhone Pro Lens System">
+         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0b0c0f] hidden lg:block"></div>
+         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0b0c0f] block lg:hidden"></div>
+      </div>
+
+      <!-- Signup form -->
+      <div class="w-full lg:w-7/12 p-10 lg:p-16 flex flex-col z-10">
+        <h3 class="text-3xl md:text-4xl font-medium mb-4 tracking-tight">Fique por dentro das novidades.</h3>
+        <p class="text-zinc-400 font-light mb-10 max-w-sm">
+          Receba lançamentos, ofertas exclusivas e conteúdos especiais.
+        </p>
+
+        <form class="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
+          <input type="email" placeholder="Seu melhor e-mail" class="flex-1 bg-black border border-white/10 rounded-full px-6 py-3.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-white/30 transition-colors">
+          <button type="submit" class="bg-white text-black px-8 py-3.5 rounded-full font-medium hover:scale-[1.03] transition-transform active:scale-95 text-sm whitespace-nowrap">
+            Inscrever-se
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 bg-[#040404] pt-20 pb-10 mt-auto">
+    <div class="max-w-[1400px] mx-auto px-6">
+      
+      <!-- Top Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-20 text-sm font-light text-zinc-400">
+        
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <a href="#" class="text-3xl font-bold tracking-tight text-white inline-block mb-4" rel="nofollow">Exportech</a>
+          <p class="mb-4">iPhones originais com garantia.<br>Entregamos para todo Brasil e Paraguai.</p>
+          <div class="flex items-center gap-4 text-white/50">
+            <a href="#" class="hover:text-white transition-colors" rel="nofollow"><i class="ph ph-instagram-logo text-2xl"></i></a>
+            <a href="#" class="hover:text-white transition-colors" rel="nofollow"><i class="ph ph-facebook-logo text-2xl"></i></a>
+            <a href="#" class="hover:text-white transition-colors" rel="nofollow"><i class="ph ph-youtube-logo text-2xl"></i></a>
+          </div>
+        </div>
+
+        <!-- Links Group 1 -->
+        <div>
+          <h4 class="text-white font-medium mb-6">Comprar</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">iPhone 15 Pro</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">iPhone 15</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">iPhone 14</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">iPhone SE</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Acessórios</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Group 2 -->
+        <div>
+          <h4 class="text-white font-medium mb-6">Institucional</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Sobre nós</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Garantia</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Trocas e devoluções</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Perguntas frequentes</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Contato</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Group 3 -->
+        <div>
+          <h4 class="text-white font-medium mb-6">Ajuda</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Suporte</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Rastrear pedido</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Formas de pagamento</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Política de privacidade</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" rel="nofollow">Termos de uso</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-10 border-t border-white/5 text-xs text-zinc-500 font-light">
+        <p>&copy; 2024 Exportech. Todos os direitos reservados.</p>
+        
+        <div class="flex items-center gap-2 text-[10px]">
+          <!-- Mocking the payment badges purely with Tailwind spans -->
+          <span class="bg-white text-[#1434CB] font-bold px-2 py-1 rounded-sm w-10 flex justify-center pb-0.5 leading-none">VISA</span>
+          <span class="bg-white flex items-center justify-center gap-0 px-2 py-1 rounded-sm w-10 h-5">
+             <div class="w-3 h-3 rounded-full bg-[#EB001B] relative z-10"></div>
+             <div class="w-3 h-3 rounded-full bg-[#F79E1B] -ml-1 relative z-0"></div>
+          </span>
+          <span class="bg-white text-black font-bold italic px-2 py-1 rounded-sm w-10 flex justify-center pb-0.5 leading-none">elc</span>
+          <span class="bg-[#2E77BC] text-white font-bold px-2 py-1 rounded-sm w-10 flex justify-center pb-0.5 leading-none text-[8px]">AMEX</span>
+          <span class="bg-white text-black px-2 py-1 rounded-sm w-10 flex items-center justify-center gap-0.5 pb-0.5 leading-none h-5"><i class="ph-fill ph-apple-logo text-[12px]"></i>Pay</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // Header blur on scroll
+      const header = document.getElementById('main-header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('glass-panel', 'border-b', 'border-white/10');
+          header.classList.remove('border-transparent');
+        } else {
+          // If we want it perfectly clear at top, we remove the glass. 
+          // But reference keeps it glassy. We'll just tweak border.
+          header.classList.remove('border-b', 'border-white/10');
+        }
+      });
+
+      // Intersection Observer for scroll animations (Scrollytelling)
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Select elements to reveal
+      document.querySelectorAll('.reveal-up, .stagger-reveal').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Simple Parallax Effect for images
+      let scrollY = window.scrollY;
+      let ticking = false;
+      const parallaxImages = document.querySelectorAll('.parallax-img');
+      const parallaxContainers = document.querySelectorAll('.parallax-container');
+
+      function updateParallax() {
+        parallaxContainers.forEach((container) => {
+          const rect = container.getBoundingClientRect();
+          // Check if visible
+          if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+            const img = container.querySelector('.parallax-img');
+            if (img) {
+              const speed = parseFloat(img.getAttribute('data-speed')) || 0.1;
+              // Calculate distance from center of screen
+              const distanceFromCenter = (rect.top + rect.height/2) - (window.innerHeight/2);
+              const yPos = distanceFromCenter * speed;
+              img.style.transform = `translate3d(0, ${yPos}px, 0)`;
+              
+              // Special case for hero image to preserve scale-x (-scale-x-100)
+              if(img.classList.contains('-scale-x-100')){
+                 img.style.transform = `translate3d(0, ${yPos}px, 0) scaleX(-1)`;
+              }
+            }
+          }
+        });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        scrollY = window.scrollY;
+        if (!ticking) {
+          window.requestAnimationFrame(() => updateParallax());
+          ticking = true;
+        }
+      });
+      // Initial trigger
+      updateParallax();
+
+    });
+  </script>
+</body>
+</html>
