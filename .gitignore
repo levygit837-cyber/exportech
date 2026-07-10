@@ -1,9 +1,19 @@
 # Ignore source reference image
 image-frontend-1.png
 
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
 # OS / editor junk
 .DS_Store
 Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Local tooling data
+.kimchi/
