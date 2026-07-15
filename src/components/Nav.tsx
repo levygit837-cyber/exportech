@@ -5,8 +5,8 @@ import { MagnifyingGlass, User, ShoppingBag } from "@phosphor-icons/react";
 const links = [
   { label: "Loja", href: "#loja" },
   { label: "iPhone", href: "#iphone" },
-  { label: "Acessórios", href: "#acessorios" },
-  { label: "Ofertas", href: "#ofertas" },
+  { label: "Benefícios", href: "#beneficios" },
+  { label: "Escolha", href: "#escolha" },
   { label: "Suporte", href: "#suporte" },
 ];
 
@@ -47,11 +47,14 @@ export default function Nav() {
           {/* Brand */}
           <a
             href="#"
-            className="flex items-center gap-2 text-[15px] font-medium tracking-tight text-zinc-50"
-            aria-label="Exportech"
+            className="flex h-9 items-center rounded-full px-1.5 transition-opacity hover:opacity-85"
+            aria-label="Exportech, voltar ao início"
           >
-            <LogoMark />
-            <span>Exportech</span>
+            <img
+              src="/brand/exportech-mark.png"
+              alt=""
+              className="h-8 w-auto object-contain"
+            />
           </a>
 
           {/* Center links */}
@@ -153,27 +156,5 @@ export default function Nav() {
         </ul>
       </motion.div>
     </>
-  );
-}
-
-function LogoMark() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
-      <rect width="22" height="22" rx="6" fill="white" fillOpacity="0.06" />
-      <rect
-        x="0.5"
-        y="0.5"
-        width="21"
-        height="21"
-        rx="5.5"
-        stroke="rgba(255,255,255,0.18)"
-      />
-      <path
-        d="M6 7.2C6 6.5373 6.5373 6 7.2 6H14.8C15.4627 6 16 6.5373 16 7.2V14.8C16 15.4627 15.4627 16 14.8 16H7.2C6.5373 16 6 15.4627 6 14.8V7.2Z"
-        stroke="white"
-        strokeWidth="1.2"
-      />
-      <circle cx="11" cy="11" r="1.6" fill="white" />
-    </svg>
   );
 }
