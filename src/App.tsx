@@ -2,7 +2,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import ProductShowcase from "./components/ProductShowcase";
 import BentoBenefits from "./components/BentoBenefits";
-import StorePromise from "./components/StorePromise";
+import BuyingGuide from "./components/BuyingGuide";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
         <Hero />
         <ProductShowcase />
         <BentoBenefits />
-        <StorePromise />
+        <BuyingGuide />
       </main>
       <Footer />
     </div>

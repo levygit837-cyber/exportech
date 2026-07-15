@@ -5,6 +5,7 @@ import {
   ArrowsClockwise,
   ShieldCheck,
   Lock,
+  ArrowRight,
 } from "@phosphor-icons/react";
 import { benefits } from "../data/benefits";
 import { blurReveal, stagger } from "../lib/motion";
@@ -126,11 +127,11 @@ function BenefitCell({
               </div>
               <div className="ml-auto">
                 <a
-                  href="#pagamento"
+                  href="#suporte"
                   className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[12px] text-zinc-100 transition-all hover:bg-white/[0.08]"
                 >
-                  Simular parcelas
-                  <span aria-hidden>→</span>
+                  Consultar condições
+                  <ArrowRight size={13} weight="bold" aria-hidden />
                 </a>
               </div>
             </div>

@@ -1,20 +1,33 @@
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { CaretRight, CaretLeft } from "@phosphor-icons/react";
-import { products, formatBRL } from "../data/products";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useRef, useState } from "react";
+import {
+  convertUSDToBRL,
+  formatBRL,
+  formatUSD,
+  getPriceUSD,
+  INSTALLMENT_COUNT,
+  type Product,
+  products,
+  type StorageId,
+  USD_BRL_RATE,
+} from "../data/products";
 import { blurReveal, stagger } from "../lib/motion";
 
 export default function ProductShowcase() {
   const railRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(sectionRef, { amount: 0.2, once: true });
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { amount: 0.12, once: true });
 
-  const scroll = (dir: "next" | "prev") => {
-    const el = railRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-card]");
-    const step = card ? card.offsetWidth + 16 : 320;
-    el.scrollBy({ left: dir === "next" ? step : -step, behavior: "smooth" });
+  const scroll = (direction: "next" | "prev") => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const card = rail.querySelector<HTMLElement>("[data-card]");
+    const step = card ? card.offsetWidth + 20 : 360;
+    rail.scrollBy({
+      left: direction === "next" ? step : -step,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -27,38 +40,44 @@ export default function ProductShowcase() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <h2 className="text-fluid-h2 text-zinc-50">Toda a linha.</h2>
-            <p className="mt-3 max-w-[40ch] text-[15px] text-zinc-400">
-              Quatro modelos para cada momento. Compare, escolha o seu.
+            <p className="mt-3 max-w-[48ch] text-[15px] leading-relaxed text-zinc-400">
+              Do essencial ao Pro Max. Escolha armazenamento, acabamento e compare o valor final.
+            </p>
+            <p className="mt-3 text-[11px] text-zinc-500">
+              Cotação base: USD 1 = {formatBRL(USD_BRL_RATE, true)}. Valores arredondados para padrão comercial.
             </p>
           </div>
+
           <div className="hidden gap-2 md:flex">
             <button
-              aria-label="Anterior"
+              type="button"
+              aria-label="Ver modelos anteriores"
               onClick={() => scroll("prev")}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-200 transition-all duration-300 hover:bg-white/[0.08] active:scale-[0.96]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-200 transition duration-300 hover:bg-white/[0.08] active:scale-[0.96]"
             >
-              <CaretLeft size={16} weight="regular" />
+              <CaretLeft size={16} weight="bold" />
             </button>
             <button
-              aria-label="Próximo"
+              type="button"
+              aria-label="Ver próximos modelos"
               onClick={() => scroll("next")}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-200 transition-all duration-300 hover:bg-white/[0.08] active:scale-[0.96]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-200 transition duration-300 hover:bg-white/[0.08] active:scale-[0.96]"
             >
-              <CaretRight size={16} weight="regular" />
+              <CaretRight size={16} weight="bold" />
             </button>
           </div>
         </div>
       </div>
 
       <motion.div
-        variants={stagger(0.06)}
+        variants={stagger(0.05)}
         initial="hidden"
         animate={inView ? "show" : "hidden"}
-        className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-8 lg:gap-6"
+        className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-6 md:px-8"
         ref={railRef}
       >
-        {products.map((p, i) => (
-          <ProductCard key={p.id} product={p} index={i} />
+        {products.map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index} />
         ))}
         <div className="w-1 shrink-0" aria-hidden />
       </motion.div>
@@ -66,81 +85,145 @@ export default function ProductShowcase() {
   );
 }
 
-function ProductCard({
-  product,
-  index,
-}: {
-  product: (typeof products)[number];
-  index: number;
-}) {
+function ProductCard({ product, index }: { product: Product; index: number }) {
+  const reduceMotion = useReducedMotion();
+  const [finishId, setFinishId] = useState(product.defaultFinish);
+  const [storageId, setStorageId] = useState<StorageId>(product.defaultStorage);
+
+  const finish = product.finishes.find((item) => item.id === finishId)!;
+  const priceUSD = getPriceUSD(product, finishId, storageId);
+  const priceBRL = convertUSDToBRL(priceUSD);
+
   return (
-    <motion.a
+    <motion.article
       variants={blurReveal}
       data-card
-      href={`#${product.id}`}
-      className="group relative flex w-[78vw] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-4 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:border-white/15 hover:bg-white/[0.04] sm:w-[420px]"
-      style={{
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
-      }}
-      whileHover={{ y: -4 }}
+      id={product.id}
+      className="group relative flex w-[86vw] max-w-[430px] shrink-0 snap-start flex-col rounded-3xl border border-white/[0.08] bg-[#0e0f12] p-3.5 transition-colors duration-500 hover:border-white/[0.16] sm:w-[430px]"
+      style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
+      whileHover={reduceMotion ? undefined : { y: -4 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
     >
-      {/* Image well */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01]">
-        {product.badge && (
-          <span className="absolute top-3 left-3 z-10 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[10px] font-medium tracking-wide text-zinc-50 backdrop-blur-md">
-            {product.badge}
-          </span>
-        )}
+      <figure
+        data-product-media
+        className="product-media-surface relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/[0.06]"
+      >
         <motion.img
-          src={product.image}
-          alt={product.name}
-          loading={index === 0 ? "eager" : "lazy"}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+          key={finish.image}
+          src={finish.image}
+          alt={`${product.name} em ${finish.name}`}
+          loading={index < 2 ? "eager" : "lazy"}
+          className="absolute inset-0 h-full w-full object-contain p-4 sm:p-5"
+          initial={
+            reduceMotion
+              ? false
+              : { opacity: 0, scale: product.mediaScale * 0.98 }
+          }
+          animate={{ opacity: 1, scale: product.mediaScale }}
+          transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_30%,transparent_50%,rgba(10,10,10,0.6)_100%)]" />
-      </div>
+      </figure>
 
-      {/* Body */}
-      <div className="mt-4 flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-[15px] font-medium text-zinc-50">{product.name}</p>
-          <p className="mt-0.5 line-clamp-2 text-[12px] text-zinc-400">
+      <div className="flex flex-1 flex-col px-1 pb-1 pt-4">
+        <div className="min-h-5 text-[11px] text-zinc-500">
+          {product.label && <span>{product.label}</span>}
+        </div>
+
+        <div className="mt-2">
+          <h3 className="text-[18px] font-medium tracking-tight text-zinc-50">
+            {product.name}
+          </h3>
+          <p className="mt-1 min-h-10 text-[13px] leading-relaxed text-zinc-400">
             {product.tagline}
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-[10px] tracking-[0.14em] text-zinc-500 uppercase">
-            A partir de
-          </p>
-          <p className="mt-0.5 font-mono text-[14px] text-zinc-100">
-            {formatBRL(product.priceBRL)}
-          </p>
+
+        <div className="mt-4 grid gap-4">
+          <fieldset>
+            <legend className="mb-2 text-[11px] font-medium text-zinc-400">
+              Armazenamento
+            </legend>
+            <div className="flex flex-wrap gap-2">
+              {product.storages.map((option) => {
+                const selected = option.id === storageId;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setStorageId(option.id)}
+                    className={
+                      "rounded-full border px-3 py-1.5 text-[11px] font-medium transition duration-200 active:scale-[0.98] " +
+                      (selected
+                        ? "border-zinc-100 bg-zinc-100 text-zinc-950"
+                        : "border-white/10 bg-white/[0.03] text-zinc-300 hover:border-white/20 hover:bg-white/[0.06]")
+                    }
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend className="mb-2 text-[11px] font-medium text-zinc-400">
+              Cor: <span className="text-zinc-200">{finish.name}</span>
+            </legend>
+            <div className="flex flex-wrap gap-2">
+              {product.finishes.map((option) => {
+                const selected = option.id === finishId;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    aria-label={`Selecionar ${option.name}`}
+                    aria-pressed={selected}
+                    title={option.name}
+                    onClick={() => setFinishId(option.id)}
+                    className={
+                      "flex h-7 w-7 items-center justify-center rounded-full border transition duration-200 active:scale-[0.94] " +
+                      (selected
+                        ? "border-zinc-100 bg-white/10"
+                        : "border-white/10 bg-transparent hover:border-white/30")
+                    }
+                  >
+                    <span
+                      className="h-3.5 w-3.5 rounded-full ring-1 ring-black/20"
+                      style={{ backgroundColor: option.hex }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
+        </div>
+
+        <div className="mt-5 flex items-end justify-between gap-4 border-t border-white/[0.07] pt-4">
+          <div aria-live="polite">
+            <p className="text-[10px] text-zinc-500">Valor estimado em BRL</p>
+            <p className="mt-0.5 font-mono text-[19px] text-zinc-50">
+              {formatBRL(priceBRL)}
+            </p>
+            <p className="mt-0.5 text-[10px] text-zinc-500">
+              {formatUSD(priceUSD)} · {INSTALLMENT_COUNT}x de {formatBRL(priceBRL / INSTALLMENT_COUNT, true)}
+            </p>
+          </div>
+
+          <a
+            href="#suporte"
+            className="group/link inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.04] px-3 py-2 text-[12px] font-medium text-zinc-200 transition duration-300 hover:border-white/25 hover:bg-white/[0.08] hover:text-white active:scale-[0.98]"
+            aria-label={`Consultar ${product.name}, ${storageId}, ${finish.name}`}
+          >
+            Consultar
+            <CaretRight
+              size={13}
+              weight="bold"
+              className="transition-transform duration-300 group-hover/link:translate-x-0.5"
+            />
+          </a>
         </div>
       </div>
-
-      {/* Colors */}
-      <div className="mt-4 flex items-center justify-between">
-        <ul className="flex items-center gap-1.5">
-          {product.colors.slice(0, 4).map((c) => (
-            <li
-              key={c.name}
-              title={c.name}
-              className="block h-3 w-3 rounded-full ring-1 ring-white/10"
-              style={{ background: c.hex }}
-            />
-          ))}
-          {product.colors.length > 4 && (
-            <li className="text-[10px] text-zinc-500">
-              +{product.colors.length - 4}
-            </li>
-          )}
-        </ul>
-        <span className="inline-flex items-center gap-1 text-[12px] text-zinc-300 transition-colors group-hover:text-zinc-50">
-          Comprar
-          <CaretRight size={12} weight="regular" />
-        </span>
-      </div>
-    </motion.a>
+    </motion.article>
   );
 }
