@@ -45,33 +45,45 @@ Limitações:
 
 ## Modelo gratuito preferencial
 
-Candidato atual:
+Candidato primário validado:
 
 - Título: `iPhone 17 Pro Max`.
+- Autor: Taufiq K.
+- Página: <https://sketchfab.com/3d-models/iphone-17-pro-max-e7c5674931ae4b0ea1b4eaaabb159fdb>.
+- Licença exibida: Creative Commons Attribution 4.0.
+- Arquivo-fonte: GLB de aproximadamente 5 MB, baixado e importado localmente.
+- Geometria validada: 30.032 triângulos, 17,3 mil vértices, 16 materiais e uma malha.
+- Dimensões encontradas: aproximadamente 79,1 x 163,1 mm no plano e 13,5 mm de profundidade total incluindo o conjunto de câmeras.
+- Resultado visual: plataforma horizontal, três lentes, Dynamic Island, botões e proporções coerentes com as referências oficiais; materiais e reflexos funcionam sob iluminação neutra própria.
+
+As medidas oficiais do iPhone 17 Pro Max são 78 x 163,4 x 8,75 mm para o corpo. A proximidade no plano e a profundidade maior causada pelo relevo das câmeras tornam o arquivo adequado como base visual, sem tratá-lo como desenho industrial certificado.
+
+Limitação relevante: toda a geometria está em uma única malha. Frente, lateral, traseira e aproximações podem ser animadas imediatamente, mas a vista explodida exige separar grupos desconectados e materiais das lentes, aros e sensores antes da otimização para web.
+
+Texto provisório de atribuição:
+
+> Modelo 3D base por Taufiq K no Sketchfab, licenciado sob CC BY 4.0; adaptado e otimizado pela Exportech.
+
+Candidato de reserva:
+
 - Autor: MajdyModels (`MG990`).
 - Página: <https://sketchfab.com/3d-models/iphone-17-pro-max-87fc1df741384124a8ce0226d2b2058d>.
 - Licença exibida: Creative Commons Attribution 4.0.
-- Geometria informada: aproximadamente 29,6 mil triângulos e 16,4 mil vértices.
-- Estado: download pendente de login; arquivo ainda não inspecionado.
-
-A licença CC BY permite adaptação e uso comercial com atribuição, mas a adoção só acontece após conferir o arquivo baixado, os metadados, as texturas, a correspondência visual e eventuais restrições adicionais exibidas no pacote.
-
-Texto provisório de atribuição, se o ativo for aprovado:
-
-> Modelo 3D base por MajdyModels no Sketchfab, licenciado sob CC BY 4.0; adaptado e otimizado pela Exportech.
+- Estado: mantido como alternativa visual; arquivo-fonte ainda não foi adotado.
 
 ## Candidatos não adotados
 
 - Modelo que combina `CC Attribution` na interface com `Non-commercial use only` na descrição: rejeitado por licença contraditória.
 - Modelo `Free Standard` marcado como `NoAI`: não deve entrar no fluxo automatizado atual.
 - Modelo CGTrader `Royalty Free` marcado como `no AI`: não deve entrar no fluxo automatizado sem autorização contratual clara.
-- Modelos conceituais publicados antes do produto ou que descrevem titânio, quatro câmeras ou design sem portas: rejeitados por não representar o iPhone 17 Pro Max real.
+- Modelo conceitual de Ranguel, publicado antes do produto: rejeitado porque a ilha de câmeras não corresponde ao desenho oficial lançado.
+- Modelos que descrevem titânio, quatro câmeras ou design sem portas: rejeitados por não representar o iPhone 17 Pro Max real.
 
 ## Próxima validação
 
-1. Baixar o candidato CC BY após login autorizado pelo usuário.
-2. Preservar a página e o texto da licença como evidência.
-3. Inspecionar hierarquia, nomes, materiais, texturas, dimensões e geometria.
-4. Comparar visualmente com referências oficiais atuais.
-5. Decidir entre adaptar o modelo gratuito e continuar o blockout procedural.
-6. Somente então criar a animação de inicialização e a timeline de scroll.
+1. Preservar a página, o autor e o texto da licença como evidência de atribuição.
+2. Separar de forma não destrutiva as lentes, aros, sensores e plataforma da câmera.
+3. Corrigir pequenos materiais e preparar uma variante de acabamento prata.
+4. Otimizar e exportar uma cópia GLB própria para web, preservando o fonte original.
+5. Criar poster estático, fallback para dispositivos limitados e orçamento de desempenho.
+6. Integrar a animação de inicialização e os três estados principais da timeline de scroll.
