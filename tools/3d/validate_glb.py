@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 import bpy
+import mathutils
 
 
 def main() -> None:
@@ -31,11 +32,19 @@ def main() -> None:
     if not meshes or not materials:
         raise RuntimeError("GLB import did not contain the expected meshes and materials")
 
+    world_corners = [obj.matrix_world @ mathutils.Vector(corner) for obj in meshes for corner in obj.bound_box]
+    minimum = mathutils.Vector(tuple(min(point[i] for point in world_corners) for i in range(3)))
+    maximum = mathutils.Vector(tuple(max(point[i] for point in world_corners) for i in range(3)))
+    dimensions = maximum - minimum
+
     print(
         "GLB_VALID "
         f"file={path.name} meshes={len(meshes)} materials={len(materials)} "
-        f"triangles={triangles} bytes={path.stat().st_size}"
+        f"triangles={triangles} bytes={path.stat().st_size} "
+        f"dimensions=({dimensions.x:.4f},{dimensions.y:.4f},{dimensions.z:.4f})"
     )
+    print("GLB_MESHES " + ", ".join(obj.name for obj in meshes))
+    print("GLB_MATERIALS " + ", ".join(sorted(materials)))
 
 
 if __name__ == "__main__":

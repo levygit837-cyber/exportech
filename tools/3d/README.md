@@ -13,6 +13,7 @@ Neste Mac, o Blender precisa ser executado com acesso normal à GPU. A inicializ
 - `diagnostic_blender.py`: teste mínimo de cena, material, iluminação, render e exportação GLB.
 - `create_iphone17_blockout.py`: gera os quatro estados do storyboard, o arquivo Blender e um GLB comprimido com Draco.
 - `validate_glb.py`: reimporta o GLB em uma cena limpa e verifica malhas, materiais e triângulos.
+- `render_glb_candidate.py`: renderiza um GLB candidato sob a mesma iluminação neutra para comparação local.
 
 ## Gerar o blockout
 
