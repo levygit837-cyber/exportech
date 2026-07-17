@@ -30,9 +30,14 @@ def normalize_model(meshes: list[bpy.types.Object], target_height: float = 3.268
     maximum = mathutils.Vector(tuple(max(point[i] for point in corners) for i in range(3)))
     center = (minimum + maximum) * 0.5
     scale = target_height / (maximum.z - minimum.z)
+    root = bpy.data.objects.new("Candidate model root", None)
+    bpy.context.collection.objects.link(root)
     for obj in meshes:
-        obj.location = (obj.location - center) * scale
-        obj.scale *= scale
+        world_matrix = obj.matrix_world.copy()
+        obj.parent = root
+        obj.matrix_world = world_matrix
+    root.scale = (scale, scale, scale)
+    root.location = -center * scale
 
 
 def create_studio() -> bpy.types.Object:

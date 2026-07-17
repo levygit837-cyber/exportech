@@ -1,0 +1,175 @@
+{
+  "date": "2026-07-15",
+  "blender_version": "3.6.23",
+  "source": "iphone-17-pro-max-working-source.glb",
+  "method": "complete disconnected islands grouped semantically; no face cuts",
+  "variant": "silver",
+  "objects": [
+    {
+      "name": "apple_logo",
+      "vertices": 77,
+      "triangles": 73,
+      "source_components": 2,
+      "material": "EX_Rear_Logo_Graphite"
+    },
+    {
+      "name": "camera_main_glass",
+      "vertices": 2169,
+      "triangles": 3614,
+      "source_components": 7,
+      "material": "EX_Camera_Lens_Housing"
+    },
+    {
+      "name": "camera_main_ring",
+      "vertices": 640,
+      "triangles": 1152,
+      "source_components": 1,
+      "material": "EX_Camera_Ring_Aluminum"
+    },
+    {
+      "name": "camera_telephoto_glass",
+      "vertices": 1976,
+      "triangles": 3228,
+      "source_components": 7,
+      "material": "EX_Camera_Lens_Housing"
+    },
+    {
+      "name": "camera_telephoto_ring",
+      "vertices": 640,
+      "triangles": 1152,
+      "source_components": 1,
+      "material": "EX_Camera_Ring_Aluminum"
+    },
+    {
+      "name": "camera_ultrawide_glass",
+      "vertices": 2361,
+      "triangles": 3998,
+      "source_components": 7,
+      "material": "EX_Camera_Lens_Housing"
+    },
+    {
+      "name": "camera_ultrawide_ring",
+      "vertices": 640,
+      "triangles": 1152,
+      "source_components": 1,
+      "material": "EX_Camera_Ring_Aluminum"
+    },
+    {
+      "name": "display",
+      "vertices": 78,
+      "triangles": 74,
+      "source_components": 2,
+      "material": "EX_Display_Off"
+    },
+    {
+      "name": "dynamic_island",
+      "vertices": 1150,
+      "triangles": 806,
+      "source_components": 192,
+      "material": "EX_Sensor_Dark"
+    },
+    {
+      "name": "flash",
+      "vertices": 576,
+      "triangles": 956,
+      "source_components": 4,
+      "material": "EX_Flash_Diffuser"
+    },
+    {
+      "name": "front_bezel",
+      "vertices": 184,
+      "triangles": 180,
+      "source_components": 2,
+      "material": "EX_Sensor_Dark"
+    },
+    {
+      "name": "front_glass",
+      "vertices": 238,
+      "triangles": 226,
+      "source_components": 1,
+      "material": "EX_Front_Glass"
+    },
+    {
+      "name": "lidar",
+      "vertices": 64,
+      "triangles": 94,
+      "source_components": 1,
+      "material": "EX_Sensor_Dark"
+    },
+    {
+      "name": "microphone",
+      "vertices": 32,
+      "triangles": 46,
+      "source_components": 1,
+      "material": "EX_Sensor_Dark"
+    },
+    {
+      "name": "phone_body",
+      "vertices": 4102,
+      "triangles": 6562,
+      "source_components": 50,
+      "material": "EX_Silver_Forged_Aluminum"
+    },
+    {
+      "name": "rear_glass",
+      "vertices": 385,
+      "triangles": 299,
+      "source_components": 29,
+      "material": "EX_Frosted_Rear_Glass"
+    },
+    {
+      "name": "rear_plateau",
+      "vertices": 662,
+      "triangles": 796,
+      "source_components": 6,
+      "material": "EX_Silver_Camera_Plateau"
+    },
+    {
+      "name": "side_buttons",
+      "vertices": 1711,
+      "triangles": 2218,
+      "source_components": 56,
+      "material": "EX_Silver_Forged_Aluminum"
+    },
+    {
+      "name": "speaker_details",
+      "vertices": 1897,
+      "triangles": 1036,
+      "source_components": 212,
+      "material": "EX_Port_And_Speaker_Detail"
+    },
+    {
+      "name": "usb_port",
+      "vertices": 1809,
+      "triangles": 2338,
+      "source_components": 113,
+      "material": "EX_Port_And_Speaker_Detail"
+    }
+  ],
+  "totals": {
+    "objects": 20,
+    "triangles": 30000,
+    "source_triangles": 30032,
+    "removed_degenerate_polygons": 32,
+    "source_components": 695,
+    "dimensions_mm": [
+      79.1153,
+      13.4865,
+      163.0815
+    ]
+  },
+  "animation": {
+    "frame_start": 1,
+    "frame_end": 80,
+    "fully_presented_frame": 48,
+    "return_frame": 80
+  },
+  "cameras": [
+    "camera_back",
+    "camera_close",
+    "camera_close_side",
+    "camera_front",
+    "camera_side"
+  ],
+  "attribution": "Modelo 3D base por Taufiq K no Sketchfab, licenciado sob CC BY 4.0; adaptado e otimizado pela Exportech."
+}

@@ -18,3 +18,12 @@ Thumbs.db
 # Local tooling data
 .kimchi/
 .tools/
+
+# Frozen third-party 3D sources stay local. Only inspection evidence,
+# provenance records and explicitly derived preview assets are versioned.
+artifacts/3d/free-candidates/**/original/
+artifacts/3d/free-candidates/**/original-download.zip
+artifacts/3d/free-candidates/**/renders/
+artifacts/3d/apple-user-remaster/intermediate/
+**/__pycache__/
+*.py[cod]

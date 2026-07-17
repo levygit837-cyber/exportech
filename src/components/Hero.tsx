@@ -1,6 +1,14 @@
 import { ArrowDown, ArrowRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import {
+  Component,
+  lazy,
+  Suspense,
+  useRef,
+  type ErrorInfo,
+  type ReactNode,
+} from "react";
+import { HERO_3D_ASSETS } from "../data/hero3d";
 import {
   convertUSDToBRL,
   featuredProduct,
@@ -11,15 +19,117 @@ import {
 } from "../data/products";
 import { blurReveal, stagger } from "../lib/motion";
 
-export default function Hero() {
+const LazyHero3DExperience = lazy(() => import("./Hero3DExperience"));
+
+function Hero3DPosterFallback({ failed = false }: { failed?: boolean }) {
+  return (
+    <div
+      className="hero-3d-experience relative h-full w-full"
+      aria-label="iPhone 17 Pro Max em laranja-cósmico"
+    >
+      <picture className="hero-3d-poster absolute inset-0">
+        <source
+          media="(max-width: 767px)"
+          srcSet={HERO_3D_ASSETS.mobilePosterUrl}
+        />
+        <img
+          src={HERO_3D_ASSETS.posterUrl}
+          alt="iPhone 17 Pro Max em laranja-cósmico"
+          loading="eager"
+          fetchPriority="high"
+          draggable={false}
+        />
+      </picture>
+      <div className="hero-3d-intro pointer-events-none absolute inset-x-0 top-[18svh] z-20 px-5 text-center md:top-[16svh] md:px-8">
+        <p>iPhone 17 Pro Max</p>
+        <span>Laranja-cósmico</span>
+      </div>
+      {failed ? (
+        <div className="hero-3d-error" role="status">
+          <p>Visualização 3D indisponível</p>
+          <button type="button" onClick={() => window.location.reload()}>
+            Tentar novamente
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+type Hero3DImportBoundaryProps = {
+  children: ReactNode;
+};
+
+class Hero3DImportBoundary extends Component<
+  Hero3DImportBoundaryProps,
+  { failed: boolean }
+> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(_error: Error, _info: ErrorInfo) {
+    // The poster fallback is intentional; a rejected module is retried by
+    // reloading so the browser does not reuse the rejected import promise.
+  }
+
+  render() {
+    return this.state.failed ? (
+      <Hero3DPosterFallback failed />
+    ) : (
+      this.props.children
+    );
+  }
+}
+
+export type HeroMode = "static" | "prototype-3d";
+
+type HeroProps = {
+  mode?: HeroMode;
+};
+
+export default function Hero({ mode = "static" }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useReducedMotion() ?? false;
+  const isPrototype = mode === "prototype-3d";
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: isPrototype ? ["start start", "end end"] : ["start start", "end start"],
   });
-  const phoneY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 48]);
-  const phoneScale = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 0.975]);
+  const phoneY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduceMotion || isPrototype ? 0 : 48],
+  );
+  const phoneScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, reduceMotion || isPrototype ? 1 : 0.975],
+  );
+
+  if (isPrototype) {
+    return (
+      <section
+        id="iphone"
+        ref={ref}
+        className="hero-3d-story relative"
+        data-hero-mode="prototype-3d"
+      >
+        <div className="hero-3d-sticky-shell sticky top-0 h-[100svh] w-full overflow-hidden">
+          <Hero3DImportBoundary>
+            <Suspense fallback={<Hero3DPosterFallback />}>
+              <LazyHero3DExperience
+                scrollProgress={scrollYProgress}
+                reduceMotion={reduceMotion}
+              />
+            </Suspense>
+          </Hero3DImportBoundary>
+        </div>
+      </section>
+    );
+  }
 
   const finish = featuredProduct.finishes.find(
     (item) => item.id === featuredProduct.defaultFinish,
@@ -31,12 +141,8 @@ export default function Hero() {
   );
   const priceBRL = convertUSDToBRL(priceUSD);
 
-  return (
-    <section
-      id="iphone"
-      ref={ref}
-      className="relative flex min-h-[100dvh] items-center pb-16 pt-24 md:pb-20"
-    >
+  const content = (
+    <>
       <div className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-10 px-5 md:grid-cols-12 md:gap-8 md:px-8">
         <motion.div
           variants={stagger(0.1)}
@@ -140,6 +246,16 @@ export default function Hero() {
           </motion.aside>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <section
+      id="iphone"
+      ref={ref}
+      className="relative flex min-h-[100dvh] items-center pb-16 pt-24 md:pb-20"
+    >
+      {content}
     </section>
   );
 }
