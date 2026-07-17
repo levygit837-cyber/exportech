@@ -1,5 +1,6 @@
-import { ArrowDown, ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { Link } from "react-router";
 import {
   Component,
   lazy,
@@ -14,8 +15,7 @@ import {
   featuredProduct,
   formatBRL,
   formatUSD,
-  getPriceUSD,
-  INSTALLMENT_COUNT,
+  getStartingPriceUSD,
 } from "../data/products";
 import { blurReveal, stagger } from "../lib/motion";
 
@@ -134,11 +134,7 @@ export default function Hero({ mode = "static" }: HeroProps) {
   const finish = featuredProduct.finishes.find(
     (item) => item.id === featuredProduct.defaultFinish,
   )!;
-  const priceUSD = getPriceUSD(
-    featuredProduct,
-    featuredProduct.defaultFinish,
-    featuredProduct.defaultStorage,
-  );
+  const priceUSD = getStartingPriceUSD(featuredProduct);
   const priceBRL = convertUSDToBRL(priceUSD);
 
   const content = (
@@ -172,17 +168,17 @@ export default function Hero({ mode = "static" }: HeroProps) {
           </motion.p>
 
           <motion.div variants={blurReveal} className="mt-8">
-            <a
-              href="#loja"
+            <Link
+              to="/iphones"
               className="group inline-flex items-center gap-3 rounded-full bg-zinc-50 px-5 py-3 text-[14px] font-medium text-zinc-950 transition duration-300 hover:bg-white active:scale-[0.98]"
             >
               Ver catálogo
-              <ArrowDown
+              <ArrowRight
                 size={16}
                 weight="bold"
-                className="transition-transform duration-300 group-hover:translate-y-0.5"
+                className="transition-transform duration-300 group-hover:translate-x-0.5"
               />
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
 
@@ -220,7 +216,7 @@ export default function Hero({ mode = "static" }: HeroProps) {
           >
             <div>
               <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-500">
-                A partir de
+                Estimativa a partir de
               </p>
               <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <strong className="font-mono text-2xl font-medium text-zinc-50 sm:text-3xl">
@@ -228,12 +224,10 @@ export default function Hero({ mode = "static" }: HeroProps) {
                 </strong>
                 <span className="text-[11px] text-zinc-500">{formatUSD(priceUSD)}</span>
               </div>
-              <p className="mt-1 text-[12px] text-zinc-400">
-                ou {INSTALLMENT_COUNT}x de {formatBRL(priceBRL / INSTALLMENT_COUNT, true)} sem juros
-              </p>
+              <p className="mt-1 text-[12px] text-zinc-400">Referência original em USD</p>
             </div>
-            <a
-              href="#iphone-17-pro-max"
+            <Link
+              to="/iphones#iphone-17-pro-max"
               className="group inline-flex items-center justify-between gap-3 text-[13px] font-medium text-zinc-200 transition-colors hover:text-white"
             >
               Configurar
@@ -242,7 +236,7 @@ export default function Hero({ mode = "static" }: HeroProps) {
                 weight="bold"
                 className="transition-transform duration-300 group-hover:translate-x-0.5"
               />
-            </a>
+            </Link>
           </motion.aside>
         </div>
       </div>

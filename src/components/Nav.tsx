@@ -1,28 +1,63 @@
-import { useEffect, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { MagnifyingGlass, User, ShoppingBag } from "@phosphor-icons/react";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router";
 
 const links = [
-  { label: "Loja", href: "#loja" },
-  { label: "iPhone", href: "#iphone" },
-  { label: "Benefícios", href: "#beneficios" },
-  { label: "Escolha", href: "#escolha" },
-  { label: "Suporte", href: "#suporte" },
-];
+  { label: "iPhones", to: "/iphones", route: true },
+  { label: "Lançamento", to: "/#iphone", route: false },
+  { label: "Benefícios", to: "/#beneficios", route: false },
+  { label: "Como escolher", to: "/#escolha", route: false },
+] as const;
+
+const baseDesktopLinkClass =
+  "rounded-full px-3 py-2 text-[13px] font-normal transition-colors duration-300";
 
 export default function Nav() {
   const { scrollY } = useScroll();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
 
-  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 24));
+  useMotionValueEvent(scrollY, "change", (value) => setScrolled(value > 24));
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    setMobileOpen(false);
+  }, [location.hash, location.pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const main = document.querySelector("main");
+    const footer = document.querySelector("footer");
+    const focusFrame = window.requestAnimationFrame(() => {
+      firstMobileLinkRef.current?.focus();
+    });
+
+    document.body.style.overflow = "hidden";
+    main?.setAttribute("inert", "");
+    footer?.setAttribute("inert", "");
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+
     return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", closeOnEscape);
       document.body.style.overflow = "";
+      main?.removeAttribute("inert");
+      footer?.removeAttribute("inert");
     };
   }, [mobileOpen]);
+
+  const closeMobileMenu = () => setMobileOpen(false);
 
   return (
     <>
@@ -33,21 +68,22 @@ export default function Nav() {
         className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4 md:top-6"
       >
         <nav
+          aria-label="Navegação principal"
           className={
             "pointer-events-auto flex w-full max-w-[1240px] items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-500 md:px-6 md:py-3 " +
-            (scrolled
-              ? "border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-2xl"
+            (scrolled || mobileOpen
+              ? "border-white/10 bg-[#111318]/88 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-2xl"
               : "border-transparent bg-transparent")
           }
           style={{
-            backdropFilter: scrolled ? "blur(24px) saturate(180%)" : "none",
-            WebkitBackdropFilter: scrolled ? "blur(24px) saturate(180%)" : "none",
+            backdropFilter: scrolled || mobileOpen ? "blur(24px) saturate(180%)" : "none",
+            WebkitBackdropFilter:
+              scrolled || mobileOpen ? "blur(24px) saturate(180%)" : "none",
           }}
         >
-          {/* Brand */}
-          <a
-            href="#"
-            className="flex h-9 items-center rounded-full px-1.5 transition-opacity hover:opacity-85"
+          <Link
+            to="/"
+            className="flex h-11 items-center rounded-full px-1.5 transition-opacity hover:opacity-85"
             aria-label="Exportech, voltar ao início"
           >
             <img
@@ -55,102 +91,122 @@ export default function Nav() {
               alt=""
               className="h-8 w-auto object-contain"
             />
-          </a>
+          </Link>
 
-          {/* Center links */}
           <ul className="hidden items-center gap-1 md:flex">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="rounded-full px-3 py-1.5 text-[13px] font-normal text-zinc-300 transition-colors duration-300 hover:text-zinc-50"
-                >
-                  {l.label}
-                </a>
+            {links.map((link) => (
+              <li key={link.to}>
+                {link.route ? (
+                  <NavLink
+                    to={link.to}
+                    className={({ isActive }) =>
+                      `${baseDesktopLinkClass} ${
+                        isActive
+                          ? "bg-white/[0.07] text-zinc-50"
+                          : "text-zinc-300 hover:text-zinc-50"
+                      }`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ) : (
+                  <Link
+                    to={link.to}
+                    className={`${baseDesktopLinkClass} text-zinc-300 hover:text-zinc-50`}
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
 
-          {/* Right icons */}
-          <div className="flex items-center gap-1">
-            <button
-              aria-label="Buscar"
-              className="rounded-full p-2 text-zinc-300 transition-colors hover:bg-white/5 hover:text-zinc-50"
-            >
-              <MagnifyingGlass size={18} weight="regular" />
-            </button>
-            <button
-              aria-label="Conta"
-              className="hidden rounded-full p-2 text-zinc-300 transition-colors hover:bg-white/5 hover:text-zinc-50 md:block"
-            >
-              <User size={18} weight="regular" />
-            </button>
-            <button
-              aria-label="Sacola"
-              className="rounded-full p-2 text-zinc-300 transition-colors hover:bg-white/5 hover:text-zinc-50"
-            >
-              <ShoppingBag size={18} weight="regular" />
-            </button>
-            <button
-              aria-label="Menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="relative ml-1 h-9 w-9 rounded-full border border-white/10 bg-white/5 md:hidden"
-            >
-              <span
-                className={
-                  "absolute left-1/2 top-1/2 block h-px w-4 -translate-x-1/2 bg-zinc-50 transition-transform duration-500 " +
-                  (mobileOpen ? "rotate-45" : "-translate-y-[4px]")
-                }
-                style={{ transform: mobileOpen ? "translate(-50%, -50%) rotate(45deg)" : "translate(-50%, -6px)" }}
-              />
-              <span
-                className={
-                  "absolute left-1/2 top-1/2 block h-px w-4 -translate-x-1/2 bg-zinc-50 transition-transform duration-500 " +
-                  (mobileOpen ? "-rotate-45" : "translate-y-[4px]")
-                }
-                style={{
-                  transform: mobileOpen
-                    ? "translate(-50%, -50%) rotate(-45deg)"
-                    : "translate(-50%, 6px)",
-                }}
-              />
-            </button>
-          </div>
+          <div className="hidden h-11 w-11 md:block" aria-hidden />
+
+          <button
+            ref={menuButtonRef}
+            type="button"
+            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setMobileOpen((open) => !open)}
+            className="relative h-11 w-11 rounded-full border border-white/10 bg-white/5 md:hidden"
+          >
+            <span
+              className="absolute left-1/2 top-1/2 block h-px w-4 bg-zinc-50 transition-transform duration-300"
+              style={{
+                transform: mobileOpen
+                  ? "translate(-50%, -50%) rotate(45deg)"
+                  : "translate(-50%, -6px)",
+              }}
+            />
+            <span
+              className="absolute left-1/2 top-1/2 block h-px w-4 bg-zinc-50 transition-transform duration-300"
+              style={{
+                transform: mobileOpen
+                  ? "translate(-50%, -50%) rotate(-45deg)"
+                  : "translate(-50%, 6px)",
+              }}
+            />
+          </button>
         </nav>
       </motion.header>
 
-      {/* Mobile sheet */}
       <motion.div
+        id="mobile-navigation"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu principal"
+        aria-hidden={!mobileOpen}
         initial={false}
         animate={{
           opacity: mobileOpen ? 1 : 0,
           pointerEvents: mobileOpen ? "auto" : "none",
         }}
-        transition={{ duration: 0.3 }}
-        className="fixed inset-0 z-30 backdrop-blur-3xl md:hidden"
-        style={{
-          background: mobileOpen ? "rgba(10,10,10,0.92)" : "rgba(10,10,10,0)",
-        }}
+        transition={{ duration: 0.22 }}
+        className="fixed inset-0 z-30 bg-[#0a0a0a]/96 backdrop-blur-3xl md:hidden"
       >
-        <ul className="mt-32 flex flex-col items-center gap-6 px-8">
-          {links.map((l, i) => (
+        <ul className="mt-32 flex flex-col items-center gap-4 px-8">
+          {links.map((link, index) => (
             <motion.li
-              key={l.href}
-              initial={{ opacity: 0, y: 16 }}
-              animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              key={link.to}
+              initial={false}
+              animate={
+                mobileOpen
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 12 }
+              }
               transition={{
-                duration: 0.5,
-                delay: mobileOpen ? 0.1 + i * 0.06 : 0,
+                duration: 0.34,
+                delay: mobileOpen ? 0.05 + index * 0.04 : 0,
                 ease: [0.32, 0.72, 0, 1],
               }}
             >
-              <a
-                href={l.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-3xl font-medium tracking-tight text-zinc-50"
-              >
-                {l.label}
-              </a>
+              {link.route ? (
+                <NavLink
+                  ref={index === 0 ? firstMobileLinkRef : undefined}
+                  to={link.to}
+                  onClick={closeMobileMenu}
+                  tabIndex={mobileOpen ? undefined : -1}
+                  className={({ isActive }) =>
+                    `flex min-h-11 items-center px-3 text-3xl font-medium tracking-tight transition-colors ${
+                      isActive ? "text-[color:var(--color-accent-soft)]" : "text-zinc-50"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ) : (
+                <Link
+                  ref={index === 0 ? firstMobileLinkRef : undefined}
+                  to={link.to}
+                  onClick={closeMobileMenu}
+                  tabIndex={mobileOpen ? undefined : -1}
+                  className="flex min-h-11 items-center px-3 text-3xl font-medium tracking-tight text-zinc-50"
+                >
+                  {link.label}
+                </Link>
+              )}
             </motion.li>
           ))}
         </ul>

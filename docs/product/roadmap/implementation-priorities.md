@@ -80,6 +80,8 @@ Desbloqueia: roteamento seguro e conteúdo de suporte confiável.
 
 ### Entrega 1 — roteamento e catálogo dedicado
 
+Status em 2026-07-15: implementada no aplicativo e em validação. O fallback da hospedagem de produção permanece pendente porque o provedor ainda não foi definido.
+
 Objetivo: criar a primeira página útil reaproveitando o trabalho existente.
 
 Trabalho:
@@ -90,6 +92,22 @@ Trabalho:
 - manter o catálogo completo também na home durante a primeira validação;
 - trocar âncoras por URLs reais sem perder fallbacks seguros em desenvolvimento;
 - configurar a hospedagem para atualizações diretas de rota.
+
+Implementado nesta entrega:
+
+- React Router em modo declarativo com `/`, `/iphones` e página não encontrada;
+- shell compartilhado, navegação ativa, histórico e links com hash;
+- card único reutilizado pelo rail da home e pela grade dedicada;
+- catálogo dedicado com todos os sete produtos e valores existentes;
+- remoção de CTAs sem destino e de parcelamento não validado;
+- Playwright em desktop e mobile Chromium; WebKit permanece pendente porque a versão atual do Playwright não oferece esse engine no macOS 12 desta máquina.
+
+Pendente antes de concluir a entrega em produção:
+
+- definir o provedor de hospedagem;
+- configurar e verificar o fallback de SPA no domínio real;
+- fornecer um número oficial antes de ativar WhatsApp;
+- criar conteúdo substancial antes de publicar `/iphones/:slug`.
 
 Pré-condições:
 

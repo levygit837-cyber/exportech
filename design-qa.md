@@ -1,5 +1,31 @@
 # QA de design — restauração da Exportech
 
+## Atualização: roteamento e catálogo `/iphones` em 2026-07-15
+
+Estado atual: aprovado em desktop Chromium e mobile Chromium.
+
+Evidências verificadas:
+
+- `/iphones` desktop, 1440 × 900: `tests/e2e/storefront.spec.ts-snapshots/iphones-page-desktop-chromium-darwin.png`;
+- `/iphones` mobile, 390 × 844: `tests/e2e/storefront.spec.ts-snapshots/iphones-page-mobile-chromium-darwin.png`;
+- último card mobile com imagem lazy decodificada: `tests/e2e/storefront.spec.ts-snapshots/iphone-15-mobile-mobile-chromium-darwin.png`;
+- troca de acabamento do iPhone 17 Pro Max em desktop e mobile;
+- menu mobile aberto com foco inicial visível.
+
+Validação funcional:
+
+- `npm run build`: aprovado;
+- `npm run test:e2e`: 10 testes aprovados e 2 pulados por serem cenários exclusivamente mobile no projeto desktop;
+- rotas `/`, `/iphones` e `*`, histórico e hashes: aprovados;
+- sete produtos, cores, armazenamentos, USD e BRL: aprovados;
+- overflow horizontal, alvos de toque, foco, Escape e redução de movimento: aprovados;
+- ausência de WhatsApp, checkout, detalhes sem destino e parcelamento não validado: aprovada;
+- `git diff --check`: aprovado.
+
+Limite de ambiente: o Playwright atual não oferece WebKit no macOS 12 desta máquina. Safari/WebKit permanece pendente para uma máquina suportada; não foi declarado como aprovado.
+
+As seções abaixo registram a verificação histórica da restauração anterior ao roteamento.
+
 - Referência visual: capturas das anotações do navegador anexadas à tarefa atual; o projeto excluído não preservou cópias no sistema de arquivos.
 - Implementação: aplicação Vite restaurada em `http://127.0.0.1:5173/`.
 - Viewport desejado: referência desktop próxima de 837 × 718, além do comportamento responsivo definido pelos breakpoints atuais.
@@ -59,4 +85,4 @@ Bloqueada. As capturas de referência continuam disponíveis no histórico da ta
 - Exercitar armazenamento, acabamento, carrossel e controles do guia de escolha.
 - Conferir erros do console depois do primeiro carregamento completo das imagens.
 
-resultado final: bloqueado
+resultado histórico da restauração: bloqueado naquele momento

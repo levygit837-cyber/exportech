@@ -1,5 +1,4 @@
 export const USD_BRL_RATE = 5.27;
-export const INSTALLMENT_COUNT = 24;
 
 export type StorageId = "128gb" | "256gb" | "512gb" | "1tb";
 
