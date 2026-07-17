@@ -5,6 +5,7 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router";
+import type { HeroMode } from "./components/Hero";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import HomePage from "./pages/HomePage";
@@ -44,7 +45,7 @@ function RouteEffects() {
   return null;
 }
 
-function RoutedContent() {
+function RoutedContent({ heroMode }: { heroMode: HeroMode }) {
   const location = useLocation();
   const reduceMotion = useReducedMotion();
 
@@ -61,7 +62,7 @@ function RoutedContent() {
         }}
       >
         <Routes location={location}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage heroMode={heroMode} />} />
           <Route path="/iphones" element={<IphonesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
@@ -71,11 +72,19 @@ function RoutedContent() {
 }
 
 export default function App() {
+  const prototypeEnabled =
+    import.meta.env.VITE_ENABLE_HERO3D_PROTOTYPE === "true";
+  const heroMode: HeroMode =
+    prototypeEnabled &&
+    new URLSearchParams(window.location.search).get("hero3d") === "1"
+      ? "prototype-3d"
+      : "static";
+
   return (
     <div className="relative min-h-[100dvh] overflow-x-clip bg-[#0A0A0A] text-zinc-50">
       <RouteEffects />
       <Nav />
-      <RoutedContent />
+      <RoutedContent heroMode={heroMode} />
       <Footer />
     </div>
   );

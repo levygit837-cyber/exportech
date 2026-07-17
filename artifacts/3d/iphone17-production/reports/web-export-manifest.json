@@ -1,0 +1,129 @@
+{
+  "date": "2026-07-15",
+  "blender_version": "3.6.23",
+  "output": "iphone-17-pro-max-optimized.glb",
+  "bytes": 1097504,
+  "sha256": "80337c87c58dbfb8956918f4ab61c8f7e93001108b84586e02be79276449a765",
+  "objects": [
+    {
+      "name": "apple_logo",
+      "triangles": 73
+    },
+    {
+      "name": "camera_main_glass",
+      "triangles": 3614
+    },
+    {
+      "name": "camera_main_ring",
+      "triangles": 1152
+    },
+    {
+      "name": "camera_telephoto_glass",
+      "triangles": 3228
+    },
+    {
+      "name": "camera_telephoto_ring",
+      "triangles": 1152
+    },
+    {
+      "name": "camera_ultrawide_glass",
+      "triangles": 3998
+    },
+    {
+      "name": "camera_ultrawide_ring",
+      "triangles": 1152
+    },
+    {
+      "name": "display",
+      "triangles": 74
+    },
+    {
+      "name": "dynamic_island",
+      "triangles": 806
+    },
+    {
+      "name": "flash",
+      "triangles": 956
+    },
+    {
+      "name": "front_bezel",
+      "triangles": 180
+    },
+    {
+      "name": "front_glass",
+      "triangles": 226
+    },
+    {
+      "name": "lidar",
+      "triangles": 94
+    },
+    {
+      "name": "microphone",
+      "triangles": 46
+    },
+    {
+      "name": "phone_body",
+      "triangles": 6562
+    },
+    {
+      "name": "rear_glass",
+      "triangles": 299
+    },
+    {
+      "name": "rear_plateau",
+      "triangles": 796
+    },
+    {
+      "name": "side_buttons",
+      "triangles": 2218
+    },
+    {
+      "name": "speaker_details",
+      "triangles": 1036
+    },
+    {
+      "name": "usb_port",
+      "triangles": 2338
+    }
+  ],
+  "triangles_before_reimport": 30000,
+  "materials_before_reimport": [
+    "EX_Camera_Lens_Cover",
+    "EX_Camera_Lens_Housing",
+    "EX_Camera_Lens_Optic",
+    "EX_Camera_Ring_Aluminum",
+    "EX_Display_Off",
+    "EX_Flash_Diffuser",
+    "EX_Front_Glass",
+    "EX_Frosted_Rear_Glass",
+    "EX_Port_And_Speaker_Detail",
+    "EX_Rear_Logo_Graphite",
+    "EX_Sensor_Dark",
+    "EX_Silver_Camera_Plateau",
+    "EX_Silver_Forged_Aluminum"
+  ],
+  "animation": {
+    "name": "camera_exploded",
+    "frame_start": 1,
+    "frame_end": 80,
+    "mounted_frames": [
+      1,
+      80
+    ],
+    "fully_presented_frame": 48
+  },
+  "settings": {
+    "format": "GLB",
+    "source_geometry_decimated": false,
+    "textures_in_production_materials": false,
+    "draco": false,
+    "draco_level": null,
+    "position_quantization_bits": null,
+    "normal_quantization_bits": null,
+    "texcoord_quantization_bits": null,
+    "cameras_exported": false,
+    "lights_exported": false,
+    "display_state": "off"
+  },
+  "attribution": "Modelo 3D base por Taufiq K no Sketchfab, licenciado sob CC BY 4.0; adaptado e otimizado pela Exportech."
+}

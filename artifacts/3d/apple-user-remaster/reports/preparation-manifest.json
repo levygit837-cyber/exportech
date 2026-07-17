@@ -1,0 +1,1053 @@
+{
+  "date": "2026-07-16",
+  "blender_version": "3.6.23",
+  "source": {
+    "filename": "iphone17promax.glb",
+    "bytes": 5320600,
+    "sha256": "6aba520a8b57f168228f67556b67b47bca37f9853d23d8ae53baebd665a7143a",
+    "author": "Apple User",
+    "page": "https://sketchfab.com/3d-models/apple-iphone-17-pro-max-43570bd2d48f48b6aafb8adbb04e346d",
+    "license": "Free Standard",
+    "noai": true,
+    "totals": {
+      "meshes": 83,
+      "vertices": 55354,
+      "triangles": 76426,
+      "materials": 32,
+      "images": 17,
+      "draw_calls_estimate": 83,
+      "dimensions_mm": [
+        78.980409,
+        13.179803,
+        162.937731
+      ],
+      "decoded_texture_budget_bytes": 18235392
+    }
+  },
+  "master": {
+    "blend": "remaster-master.blend",
+    "web_meshes": 83,
+    "source_reference_preserved": true,
+    "topology_decimated": false,
+    "bevels_added": false,
+    "animations": [],
+    "web_scale": 18.0
+  },
+  "remaster_changes": [
+    "vidro frontal escuro com reflexão limpa",
+    "elementos ópticos reconstruídos sem mapas de 64-128 px",
+    "cor sólida e resposta metálica do alumínio laranja-cósmico",
+    "Controle da Câmera alinhado ao acabamento lateral",
+    "lentes opacas estáveis com camada óptica discreta",
+    "vidro do LiDAR com contraste e reflexo próprios",
+    "flash com emissão controlada para evitar estouro",
+    "vidro traseiro limpo, sem depender do mapa de cor borrado",
+    "anéis das câmeras com highlights mais definidos"
+  ],
+  "objects": [
+    {
+      "name": "front_glass",
+      "source_name": "AGRAGZgDdQiqAwv.001",
+      "group": "front",
+      "triangles": 1982,
+      "materials": [
+        "EX_Front_Glass"
+      ]
+    },
+    {
+      "name": "product_detail_02",
+      "source_name": "AepdVkPZeAmapGK",
+      "group": "details",
+      "triangles": 152,
+      "materials": [
+        "EX_Source_iAKEWdNafBldSCV"
+      ]
+    },
+    {
+      "name": "camera_detail_03",
+      "source_name": "BwYqVlkQuMdREsr",
+      "group": "cameras",
+      "triangles": 140,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "lidar_inner",
+      "source_name": "CUXydfOmpZTOIwn.001",
+      "group": "cameras",
+      "triangles": 52,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "product_detail_05",
+      "source_name": "DUMhFmRQRtYyIsa",
+      "group": "details",
+      "triangles": 196,
+      "materials": [
+        "EX_Source_EOPlztmjOhyFwUF"
+      ]
+    },
+    {
+      "name": "product_detail_06",
+      "source_name": "EPzOBwSqqcogiwK.001",
+      "group": "details",
+      "triangles": 180,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "camera_upper_housing",
+      "source_name": "FcKPMmFYyTgIxkR",
+      "group": "cameras",
+      "triangles": 2912,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "camera_detail_08",
+      "source_name": "FegzLCaANkYSjhw",
+      "group": "cameras",
+      "triangles": 180,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "port_detail_09",
+      "source_name": "HEpFadyGgDnvrsX.001",
+      "group": "ports",
+      "triangles": 24,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "display_surface",
+      "source_name": "HkNSnYzBPABcqwM.001",
+      "group": "front",
+      "triangles": 237,
+      "materials": [
+        "EX_Display"
+      ]
+    },
+    {
+      "name": "camera_detail_11",
+      "source_name": "HyENgPuODCHFvcE.001",
+      "group": "cameras",
+      "triangles": 60,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "port_detail_12",
+      "source_name": "IvdeSiYDweqsnZm.001",
+      "group": "ports",
+      "triangles": 290,
+      "materials": [
+        "EX_Source_nwfiSfJrPZRLBAj"
+      ]
+    },
+    {
+      "name": "port_detail_13",
+      "source_name": "KUfjtwUmEyDNVXZ",
+      "group": "ports",
+      "triangles": 699,
+      "materials": [
+        "EX_Source_edDerJJLuuabITp"
+      ]
+    },
+    {
+      "name": "port_detail_14",
+      "source_name": "KwGbUIcVQHqwxOo.001",
+      "group": "ports",
+      "triangles": 32,
+      "materials": [
+        "EX_Source_edDerJJLuuabITp"
+      ]
+    },
+    {
+      "name": "camera_detail_15",
+      "source_name": "LLPSOlzuFgdAHGd.001",
+      "group": "cameras",
+      "triangles": 192,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "camera_control",
+      "source_name": "LXcFmsoszzDyTrR",
+      "group": "buttons",
+      "triangles": 700,
+      "materials": [
+        "EX_Camera_Control"
+      ]
+    },
+    {
+      "name": "product_detail_17",
+      "source_name": "LnrCtdgEqGwpDEs",
+      "group": "details",
+      "triangles": 40,
+      "materials": [
+        "EX_Source_CVcxUAKakDuRdCf"
+      ]
+    },
+    {
+      "name": "camera_detail_18",
+      "source_name": "LvSiRAJgYXMPgYk",
+      "group": "cameras",
+      "triangles": 200,
+      "materials": [
+        "EX_Source_AYSuIKiLIvlGvvQ"
+      ]
+    },
+    {
+      "name": "action_button",
+      "source_name": "MurNHnRHsVHWaxp",
+      "group": "buttons",
+      "triangles": 632,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "camera_upper_glass",
+      "source_name": "NfdueRaYqzGELQN.001",
+      "group": "cameras",
+      "triangles": 312,
+      "materials": [
+        "EX_Lens_Glass"
+      ]
+    },
+    {
+      "name": "usb_c_shell",
+      "source_name": "OKxkTkuhCyxGhZE.001",
+      "group": "ports",
+      "triangles": 1390,
+      "materials": [
+        "EX_Source_VXTclbUnoLmmPoD"
+      ]
+    },
+    {
+      "name": "camera_detail_22",
+      "source_name": "OVqomEMzWqyRLyn",
+      "group": "cameras",
+      "triangles": 288,
+      "materials": [
+        "EX_Source_AYSuIKiLIvlGvvQ"
+      ]
+    },
+    {
+      "name": "camera_center_glass",
+      "source_name": "OXoCgzLWQYAQquU.001",
+      "group": "cameras",
+      "triangles": 312,
+      "materials": [
+        "EX_Lens_Glass"
+      ]
+    },
+    {
+      "name": "camera_detail_24",
+      "source_name": "PHWKwDZnTREMYuI.001",
+      "group": "cameras",
+      "triangles": 608,
+      "materials": [
+        "EX_Source_NUlImpGytyodpBy"
+      ]
+    },
+    {
+      "name": "camera_detail_25",
+      "source_name": "PjXKYqLWQECXPUd.001",
+      "group": "cameras",
+      "triangles": 144,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "body_detail_26",
+      "source_name": "QadnjIWVMhZXiTR",
+      "group": "body",
+      "triangles": 8,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "port_detail_27",
+      "source_name": "QndSmERADslDLLp",
+      "group": "ports",
+      "triangles": 76,
+      "materials": [
+        "EX_Source_YQFhPSFSryEqJMp"
+      ]
+    },
+    {
+      "name": "camera_detail_28",
+      "source_name": "QrifvpLHKFTTEsa",
+      "group": "cameras",
+      "triangles": 600,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "port_detail_29",
+      "source_name": "RhBESHcBbtHIQyo.001",
+      "group": "ports",
+      "triangles": 226,
+      "materials": [
+        "EX_Source_nwfiSfJrPZRLBAj"
+      ]
+    },
+    {
+      "name": "camera_lower_glass",
+      "source_name": "SRAnKQnxTzzZwap.001",
+      "group": "cameras",
+      "triangles": 312,
+      "materials": [
+        "EX_Lens_Glass"
+      ]
+    },
+    {
+      "name": "camera_detail_31",
+      "source_name": "SRHCjsrOCyJnNJF.001",
+      "group": "cameras",
+      "triangles": 144,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "camera_detail_32",
+      "source_name": "SpxFcMfkxdvIFUi.001",
+      "group": "cameras",
+      "triangles": 52,
+      "materials": [
+        "EX_Source_hqDUrVMlYhzYusu"
+      ]
+    },
+    {
+      "name": "product_detail_33",
+      "source_name": "TqzMEiskVyWdFvm",
+      "group": "details",
+      "triangles": 166,
+      "materials": [
+        "EX_Source_yPEFElLJTRhfWfw"
+      ]
+    },
+    {
+      "name": "camera_center_housing",
+      "source_name": "UduOrBpYBvdbGKN.001",
+      "group": "cameras",
+      "triangles": 2912,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "product_detail_35",
+      "source_name": "VAAxcOWnKYsQZew.001",
+      "group": "details",
+      "triangles": 152,
+      "materials": [
+        "EX_Source_PJgHvfOhNXkxvzq"
+      ]
+    },
+    {
+      "name": "volume_down",
+      "source_name": "VOwOyTIgUdFOGSH.001",
+      "group": "buttons",
+      "triangles": 572,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "usb_c_trim",
+      "source_name": "VQJvjrUDkUerjps",
+      "group": "ports",
+      "triangles": 1416,
+      "materials": [
+        "EX_Source_edDerJJLuuabITp"
+      ]
+    },
+    {
+      "name": "camera_detail_38",
+      "source_name": "WOjLDhAMoKnWjRh.001",
+      "group": "cameras",
+      "triangles": 608,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "product_detail_39",
+      "source_name": "WaSQjvRMKxQhvQe",
+      "group": "details",
+      "triangles": 180,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "port_detail_40",
+      "source_name": "WrVlZlHzKteWiwK",
+      "group": "ports",
+      "triangles": 24,
+      "materials": [
+        "EX_Source_HETovHCBsEjcSiP"
+      ]
+    },
+    {
+      "name": "camera_detail_41",
+      "source_name": "XMqdcXhDiFUsJct.001",
+      "group": "cameras",
+      "triangles": 288,
+      "materials": [
+        "EX_Source_AYSuIKiLIvlGvvQ"
+      ]
+    },
+    {
+      "name": "camera_detail_42",
+      "source_name": "XzQQIMeXTQrDuOE",
+      "group": "cameras",
+      "triangles": 180,
+      "materials": [
+        "EX_Source_NUlImpGytyodpBy"
+      ]
+    },
+    {
+      "name": "volume_up",
+      "source_name": "YMhcZuJreIkCuNy.001",
+      "group": "buttons",
+      "triangles": 572,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "camera_detail_44",
+      "source_name": "ZfPoPnUTDmjoFQo",
+      "group": "cameras",
+      "triangles": 288,
+      "materials": [
+        "EX_Source_AYSuIKiLIvlGvvQ"
+      ]
+    },
+    {
+      "name": "camera_detail_45",
+      "source_name": "ZlrVlZDcyrymzYf",
+      "group": "cameras",
+      "triangles": 144,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "lidar_glass",
+      "source_name": "aAftszMZbNEMhoe.001",
+      "group": "cameras",
+      "triangles": 156,
+      "materials": [
+        "EX_LiDAR_Glass"
+      ]
+    },
+    {
+      "name": "product_detail_47",
+      "source_name": "abBhkuHIWeWxdnv",
+      "group": "details",
+      "triangles": 180,
+      "materials": [
+        "EX_Source_YVjGRIfwSbFphGH"
+      ]
+    },
+    {
+      "name": "camera_detail_48",
+      "source_name": "bWNFUbSszjChSpE.001",
+      "group": "cameras",
+      "triangles": 288,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "port_detail_49",
+      "source_name": "cTzAYNMxyxGrXkR",
+      "group": "ports",
+      "triangles": 1204,
+      "materials": [
+        "EX_Source_nwfiSfJrPZRLBAj"
+      ]
+    },
+    {
+      "name": "camera_lower_housing",
+      "source_name": "dlfOvjAvSNEnzpf.001",
+      "group": "cameras",
+      "triangles": 2912,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "camera_detail_51",
+      "source_name": "eKXwwuvnxDrqUCv",
+      "group": "cameras",
+      "triangles": 20,
+      "materials": [
+        "EX_Source_ybSvSfarxzoBKlb"
+      ]
+    },
+    {
+      "name": "product_detail_52",
+      "source_name": "fWLoYzYzArWJkEs",
+      "group": "details",
+      "triangles": 120,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "flash_diffuser",
+      "source_name": "fbdwSPZAhafRoVX.001",
+      "group": "cameras",
+      "triangles": 4440,
+      "materials": [
+        "EX_Flash_Diffuser"
+      ]
+    },
+    {
+      "name": "rear_glass",
+      "source_name": "gCMlCSdRJrizepS",
+      "group": "rear",
+      "triangles": 1342,
+      "materials": [
+        "EX_Rear_Glass"
+      ]
+    },
+    {
+      "name": "front_detail_55",
+      "source_name": "gpNYXfBgCggjIbD.001",
+      "group": "front",
+      "triangles": 148,
+      "materials": [
+        "EX_Front_Glass"
+      ]
+    },
+    {
+      "name": "camera_detail_56",
+      "source_name": "gucycQBzeMjlWnc",
+      "group": "cameras",
+      "triangles": 600,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "camera_detail_57",
+      "source_name": "hdubzDKKYvrSSSW",
+      "group": "cameras",
+      "triangles": 208,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "camera_detail_58",
+      "source_name": "hghphNGYoiYXKSv",
+      "group": "cameras",
+      "triangles": 208,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "camera_detail_59",
+      "source_name": "iFmtcpQJRoqvVtP",
+      "group": "cameras",
+      "triangles": 192,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "port_detail_60",
+      "source_name": "iQKdKnqnDYUsYJz",
+      "group": "ports",
+      "triangles": 76,
+      "materials": [
+        "EX_Source_hiWLrxfkqoGxruc"
+      ]
+    },
+    {
+      "name": "camera_detail_61",
+      "source_name": "iZDNdcKAFcuEfFc.001",
+      "group": "cameras",
+      "triangles": 140,
+      "materials": [
+        "EX_Source_NUlImpGytyodpBy"
+      ]
+    },
+    {
+      "name": "unibody_structure",
+      "source_name": "iiaJouajajQCUNT",
+      "group": "body",
+      "triangles": 26190,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "front_detail_63",
+      "source_name": "kcFXUCVebfKtSVh",
+      "group": "front",
+      "triangles": 132,
+      "materials": [
+        "EX_Source_ieDmCkHnOnSIOcm"
+      ]
+    },
+    {
+      "name": "camera_detail_64",
+      "source_name": "lAVJNLotEOnEKjC.001",
+      "group": "cameras",
+      "triangles": 40,
+      "materials": [
+        "EX_Flash_Emitter"
+      ]
+    },
+    {
+      "name": "camera_center_ring",
+      "source_name": "lqtBOuVuGZSmIKO",
+      "group": "cameras",
+      "triangles": 1456,
+      "materials": [
+        "EX_Camera_Rings"
+      ]
+    },
+    {
+      "name": "inner_structure",
+      "source_name": "lwfmQebmsqyrPXh",
+      "group": "body",
+      "triangles": 5155,
+      "materials": [
+        "EX_Inner_Structure"
+      ]
+    },
+    {
+      "name": "camera_detail_67",
+      "source_name": "nkejtxZPZMUnCYr.001",
+      "group": "cameras",
+      "triangles": 520,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "camera_detail_68",
+      "source_name": "nsOllonHmAArGzD",
+      "group": "cameras",
+      "triangles": 608,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "side_button",
+      "source_name": "oKryyXghVaYcnxt",
+      "group": "buttons",
+      "triangles": 572,
+      "materials": [
+        "EX_Unibody_Orange"
+      ]
+    },
+    {
+      "name": "camera_upper_ring",
+      "source_name": "pJRQKDwCsreIOlZ",
+      "group": "cameras",
+      "triangles": 1456,
+      "materials": [
+        "EX_Camera_Rings"
+      ]
+    },
+    {
+      "name": "camera_detail_71",
+      "source_name": "pPfvBmJoSbStZtX.001",
+      "group": "cameras",
+      "triangles": 208,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "camera_detail_72",
+      "source_name": "qIpThkQkOPtihXV",
+      "group": "cameras",
+      "triangles": 260,
+      "materials": [
+        "EX_Optical_Elements"
+      ]
+    },
+    {
+      "name": "product_detail_73",
+      "source_name": "rGBwAZqKCRwHJRN",
+      "group": "details",
+      "triangles": 628,
+      "materials": [
+        "EX_Inner_Structure"
+      ]
+    },
+    {
+      "name": "port_detail_74",
+      "source_name": "rrEEeCyzzfvqwIm",
+      "group": "ports",
+      "triangles": 76,
+      "materials": [
+        "EX_Source_YQFhPSFSryEqJMp"
+      ]
+    },
+    {
+      "name": "camera_detail_75",
+      "source_name": "sDrQkCDINonvXWK",
+      "group": "cameras",
+      "triangles": 576,
+      "materials": [
+        "EX_Source_AYSuIKiLIvlGvvQ"
+      ]
+    },
+    {
+      "name": "camera_lower_ring",
+      "source_name": "sPzwKNuTuRdmZwe.001",
+      "group": "cameras",
+      "triangles": 1456,
+      "materials": [
+        "EX_Camera_Rings"
+      ]
+    },
+    {
+      "name": "camera_detail_77",
+      "source_name": "tpKxrouqvFhpDNb",
+      "group": "cameras",
+      "triangles": 382,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ]
+    },
+    {
+      "name": "port_detail_78",
+      "source_name": "txrfsibKZozkTYh",
+      "group": "ports",
+      "triangles": 384,
+      "materials": [
+        "EX_Source_YQFhPSFSryEqJMp"
+      ]
+    },
+    {
+      "name": "flash_bezel",
+      "source_name": "uPJJfDjsnCmUqMb.001",
+      "group": "cameras",
+      "triangles": 560,
+      "materials": [
+        "EX_Source_QEOvfSZiwySWiUk"
+      ]
+    },
+    {
+      "name": "rear_glass_detail",
+      "source_name": "vDwikmBvgqpSImF.001",
+      "group": "rear",
+      "triangles": 483,
+      "materials": [
+        "EX_Rear_Glass"
+      ]
+    },
+    {
+      "name": "product_detail_81",
+      "source_name": "vmIWkrgpdvorqPu",
+      "group": "details",
+      "triangles": 166,
+      "materials": [
+        "EX_Source_awYxKfiOpRgQIxD"
+      ]
+    },
+    {
+      "name": "port_detail_82",
+      "source_name": "wJjzGrVrAsJPEUm",
+      "group": "ports",
+      "triangles": 76,
+      "materials": [
+        "EX_Source_hiWLrxfkqoGxruc"
+      ]
+    },
+    {
+      "name": "usb_c_inner",
+      "source_name": "yTmdRacfvebHTTS",
+      "group": "ports",
+      "triangles": 1934,
+      "materials": [
+        "EX_Source_nwfiSfJrPZRLBAj"
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "name": "anchor_unibody",
+      "annotation_id": "unibody",
+      "position_model_m": [
+        0.03948,
+        -0.001109,
+        0.003289
+      ],
+      "position_web": [
+        0.71064,
+        0.0592,
+        0.019964
+      ],
+      "normal_web": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_action_button",
+      "annotation_id": "action-button",
+      "position_model_m": [
+        -0.03972,
+        -0.001109,
+        0.047289
+      ],
+      "position_web": [
+        -0.71496,
+        0.8512,
+        0.019964
+      ],
+      "normal_web": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "direction": "left"
+    },
+    {
+      "name": "anchor_camera_control",
+      "annotation_id": "camera-control",
+      "position_model_m": [
+        0.03948,
+        -0.001109,
+        -0.029711
+      ],
+      "position_web": [
+        0.71064,
+        -0.5348,
+        0.019964
+      ],
+      "normal_web": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_display",
+      "annotation_id": "display",
+      "position_model_m": [
+        -2e-05,
+        -0.006909,
+        0.013289
+      ],
+      "position_web": [
+        -0.00036,
+        0.2392,
+        0.124364
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "direction": "left"
+    },
+    {
+      "name": "anchor_ceramic_shield",
+      "annotation_id": "ceramic-shield",
+      "position_model_m": [
+        0.02398,
+        -0.006909,
+        0.060289
+      ],
+      "position_web": [
+        0.43164,
+        1.0852,
+        0.124364
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_camera_system",
+      "annotation_id": "camera-system",
+      "position_model_m": [
+        0.02468,
+        0.006691,
+        0.057289
+      ],
+      "position_web": [
+        0.44424,
+        1.0312,
+        -0.120436
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_lidar",
+      "annotation_id": "lidar",
+      "position_model_m": [
+        -0.02522,
+        0.005091,
+        0.047389
+      ],
+      "position_web": [
+        -0.45396,
+        0.853,
+        -0.091636
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "direction": "left"
+    }
+  ],
+  "cameras": {
+    "web_intro": {
+      "position": [
+        1.71,
+        0.684,
+        5.4
+      ],
+      "target": [
+        0.0,
+        0.09,
+        -0.0
+      ],
+      "fov": 31.0
+    },
+    "web_right_side": {
+      "position": [
+        5.67,
+        0.36,
+        0.36
+      ],
+      "target": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "fov": 31.5
+    },
+    "web_rear": {
+      "position": [
+        1.08,
+        0.756,
+        -5.49
+      ],
+      "target": [
+        0.09,
+        0.216,
+        -0.0
+      ],
+      "fov": 31.0
+    },
+    "web_camera_macro": {
+      "position": [
+        1.26,
+        1.494,
+        -2.97
+      ],
+      "target": [
+        0.396,
+        1.008,
+        -0.108
+      ],
+      "fov": 34.0
+    },
+    "web_left_side": {
+      "position": [
+        -5.67,
+        0.468,
+        0.324
+      ],
+      "target": [
+        0.0,
+        0.144,
+        -0.0
+      ],
+      "fov": 31.5
+    },
+    "web_front": {
+      "position": [
+        -0.27,
+        0.36,
+        5.49
+      ],
+      "target": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "fov": 31.0
+    },
+    "web_outro": {
+      "position": [
+        -1.62,
+        0.612,
+        5.49
+      ],
+      "target": [
+        0.0,
+        0.072,
+        -0.0
+      ],
+      "fov": 32.0
+    },
+    "evidence_button_macro": {
+      "position": [
+        -1.89,
+        0.936,
+        1.35
+      ],
+      "target": [
+        -0.684,
+        0.648,
+        -0.0
+      ],
+      "fov": 38.0
+    }
+  },
+  "runtime": {
+    "model_url": "/models/iphone-17-pro-max/apple-user-remastered-web.glb",
+    "poster_url": "/models/iphone-17-pro-max/apple-user-poster.webp",
+    "mobile_poster_url": "/models/iphone-17-pro-max/apple-user-poster-mobile.webp",
+    "environment_url": "/models/iphone-17-pro-max/studio_small_08_1k.hdr",
+    "target_glb_bytes": 8000000,
+    "target_draw_calls": 45,
+    "target_triangles": 85000
+  }
+}

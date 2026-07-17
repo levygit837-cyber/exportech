@@ -1,0 +1,572 @@
+{
+  "date": "2026-07-16",
+  "blender_version": "3.6.23",
+  "asset": {
+    "filename": "apple-user-remastered-web.glb",
+    "bytes": 6534224,
+    "sha256": "9d401b6b32bc57a86cafa266245b107e6e597b86fc441e2287d4facd3aa2a8b8",
+    "triangles": 76426,
+    "meshes": 32,
+    "materials": 32,
+    "draw_calls_estimate": 32,
+    "anchors": [
+      "anchor_unibody",
+      "anchor_action_button",
+      "anchor_camera_control",
+      "anchor_display",
+      "anchor_ceramic_shield",
+      "anchor_camera_system",
+      "anchor_lidar"
+    ]
+  },
+  "settings": {
+    "format": "GLB",
+    "draco": false,
+    "topology_decimated": false,
+    "merged_by_material": true,
+    "tangents_exported": true,
+    "animations_exported": false,
+    "cameras_exported": false,
+    "lights_exported": false,
+    "extras_exported": true
+  },
+  "objects": [
+    {
+      "name": "web_01_ex_camera_control",
+      "triangles": 700,
+      "materials": [
+        "EX_Camera_Control"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_02_ex_camera_rings",
+      "triangles": 4368,
+      "materials": [
+        "EX_Camera_Rings"
+      ],
+      "source_mesh_count": 3
+    },
+    {
+      "name": "web_03_ex_display",
+      "triangles": 237,
+      "materials": [
+        "EX_Display"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_04_ex_flash_diffuser",
+      "triangles": 4440,
+      "materials": [
+        "EX_Flash_Diffuser"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_05_ex_flash_emitter",
+      "triangles": 40,
+      "materials": [
+        "EX_Flash_Emitter"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_06_ex_front_glass",
+      "triangles": 2130,
+      "materials": [
+        "EX_Front_Glass"
+      ],
+      "source_mesh_count": 2
+    },
+    {
+      "name": "web_07_ex_inner_structure",
+      "triangles": 5783,
+      "materials": [
+        "EX_Inner_Structure"
+      ],
+      "source_mesh_count": 2
+    },
+    {
+      "name": "web_08_ex_lens_glass",
+      "triangles": 936,
+      "materials": [
+        "EX_Lens_Glass"
+      ],
+      "source_mesh_count": 3
+    },
+    {
+      "name": "web_09_ex_lidar_glass",
+      "triangles": 156,
+      "materials": [
+        "EX_LiDAR_Glass"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_10_ex_optical_elements",
+      "triangles": 3876,
+      "materials": [
+        "EX_Optical_Elements"
+      ],
+      "source_mesh_count": 10
+    },
+    {
+      "name": "web_11_ex_rear_glass",
+      "triangles": 1825,
+      "materials": [
+        "EX_Rear_Glass"
+      ],
+      "source_mesh_count": 2
+    },
+    {
+      "name": "web_12_ex_source_aysuikilivlgvvq",
+      "triangles": 1640,
+      "materials": [
+        "EX_Source_AYSuIKiLIvlGvvQ"
+      ],
+      "source_mesh_count": 5
+    },
+    {
+      "name": "web_13_ex_source_cvcxuakakdurdcf",
+      "triangles": 40,
+      "materials": [
+        "EX_Source_CVcxUAKakDuRdCf"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_14_ex_source_eoplztmjohyfwuf",
+      "triangles": 196,
+      "materials": [
+        "EX_Source_EOPlztmjOhyFwUF"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_15_ex_source_hetovhcbsejcsip",
+      "triangles": 24,
+      "materials": [
+        "EX_Source_HETovHCBsEjcSiP"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_16_ex_source_nulimpgytyodpby",
+      "triangles": 928,
+      "materials": [
+        "EX_Source_NUlImpGytyodpBy"
+      ],
+      "source_mesh_count": 3
+    },
+    {
+      "name": "web_17_ex_source_pjghvfohnxkxvzq",
+      "triangles": 152,
+      "materials": [
+        "EX_Source_PJgHvfOhNXkxvzq"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_18_ex_source_qeovfsziwyswiuk",
+      "triangles": 560,
+      "materials": [
+        "EX_Source_QEOvfSZiwySWiUk"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_19_ex_source_vxtclbunolmmpod",
+      "triangles": 1390,
+      "materials": [
+        "EX_Source_VXTclbUnoLmmPoD"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_20_ex_source_yqfhpsfsryeqjmp",
+      "triangles": 536,
+      "materials": [
+        "EX_Source_YQFhPSFSryEqJMp"
+      ],
+      "source_mesh_count": 3
+    },
+    {
+      "name": "web_21_ex_source_yvjgrifwsbfphgh",
+      "triangles": 180,
+      "materials": [
+        "EX_Source_YVjGRIfwSbFphGH"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_22_ex_source_awyxkfioprgqixd",
+      "triangles": 166,
+      "materials": [
+        "EX_Source_awYxKfiOpRgQIxD"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_23_ex_source_edderjjluuabitp",
+      "triangles": 2147,
+      "materials": [
+        "EX_Source_edDerJJLuuabITp"
+      ],
+      "source_mesh_count": 3
+    },
+    {
+      "name": "web_24_ex_source_hiwlrxfkqogxruc",
+      "triangles": 152,
+      "materials": [
+        "EX_Source_hiWLrxfkqoGxruc"
+      ],
+      "source_mesh_count": 2
+    },
+    {
+      "name": "web_25_ex_source_hqdurvmlyhzyusu",
+      "triangles": 52,
+      "materials": [
+        "EX_Source_hqDUrVMlYhzYusu"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_26_ex_source_iakewdnafbldscv",
+      "triangles": 152,
+      "materials": [
+        "EX_Source_iAKEWdNafBldSCV"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_27_ex_source_iedmckhnonsiocm",
+      "triangles": 132,
+      "materials": [
+        "EX_Source_ieDmCkHnOnSIOcm"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_28_ex_source_nwfisfjrpzrlbaj",
+      "triangles": 3654,
+      "materials": [
+        "EX_Source_nwfiSfJrPZRLBAj"
+      ],
+      "source_mesh_count": 4
+    },
+    {
+      "name": "web_29_ex_source_ufgsppdnopnkbqw",
+      "triangles": 2374,
+      "materials": [
+        "EX_Source_uFgsppDNoPNkBqW"
+      ],
+      "source_mesh_count": 15
+    },
+    {
+      "name": "web_30_ex_source_ypefelljtrhfwfw",
+      "triangles": 166,
+      "materials": [
+        "EX_Source_yPEFElLJTRhfWfw"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_31_ex_source_ybsvsfarxzobklb",
+      "triangles": 20,
+      "materials": [
+        "EX_Source_ybSvSfarxzoBKlb"
+      ],
+      "source_mesh_count": 1
+    },
+    {
+      "name": "web_32_ex_unibody_orange",
+      "triangles": 37274,
+      "materials": [
+        "EX_Unibody_Orange"
+      ],
+      "source_mesh_count": 8
+    }
+  ],
+  "source": {
+    "filename": "iphone17promax.glb",
+    "bytes": 5320600,
+    "sha256": "6aba520a8b57f168228f67556b67b47bca37f9853d23d8ae53baebd665a7143a",
+    "author": "Apple User",
+    "page": "https://sketchfab.com/3d-models/apple-iphone-17-pro-max-43570bd2d48f48b6aafb8adbb04e346d",
+    "license": "Free Standard",
+    "noai": true,
+    "totals": {
+      "meshes": 83,
+      "vertices": 55354,
+      "triangles": 76426,
+      "materials": 32,
+      "images": 17,
+      "draw_calls_estimate": 83,
+      "dimensions_mm": [
+        78.980409,
+        13.179803,
+        162.937731
+      ],
+      "decoded_texture_budget_bytes": 18235392
+    }
+  },
+  "runtime": {
+    "model_url": "/models/iphone-17-pro-max/apple-user-remastered-web.glb",
+    "poster_url": "/models/iphone-17-pro-max/apple-user-poster.webp",
+    "mobile_poster_url": "/models/iphone-17-pro-max/apple-user-poster-mobile.webp",
+    "environment_url": "/models/iphone-17-pro-max/studio_small_08_1k.hdr",
+    "target_glb_bytes": 8000000,
+    "target_draw_calls": 45,
+    "target_triangles": 85000
+  },
+  "cameras": {
+    "web_intro": {
+      "position": [
+        1.71,
+        0.684,
+        5.4
+      ],
+      "target": [
+        0.0,
+        0.09,
+        -0.0
+      ],
+      "fov": 31.0
+    },
+    "web_right_side": {
+      "position": [
+        5.67,
+        0.36,
+        0.36
+      ],
+      "target": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "fov": 31.5
+    },
+    "web_rear": {
+      "position": [
+        1.08,
+        0.756,
+        -5.49
+      ],
+      "target": [
+        0.09,
+        0.216,
+        -0.0
+      ],
+      "fov": 31.0
+    },
+    "web_camera_macro": {
+      "position": [
+        1.26,
+        1.494,
+        -2.97
+      ],
+      "target": [
+        0.396,
+        1.008,
+        -0.108
+      ],
+      "fov": 34.0
+    },
+    "web_left_side": {
+      "position": [
+        -5.67,
+        0.468,
+        0.324
+      ],
+      "target": [
+        0.0,
+        0.144,
+        -0.0
+      ],
+      "fov": 31.5
+    },
+    "web_front": {
+      "position": [
+        -0.27,
+        0.36,
+        5.49
+      ],
+      "target": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "fov": 31.0
+    },
+    "web_outro": {
+      "position": [
+        -1.62,
+        0.612,
+        5.49
+      ],
+      "target": [
+        0.0,
+        0.072,
+        -0.0
+      ],
+      "fov": 32.0
+    },
+    "evidence_button_macro": {
+      "position": [
+        -1.89,
+        0.936,
+        1.35
+      ],
+      "target": [
+        -0.684,
+        0.648,
+        -0.0
+      ],
+      "fov": 38.0
+    }
+  },
+  "annotations": [
+    {
+      "name": "anchor_unibody",
+      "annotation_id": "unibody",
+      "position_model_m": [
+        0.03948,
+        -0.001109,
+        0.003289
+      ],
+      "position_web": [
+        0.71064,
+        0.0592,
+        0.019964
+      ],
+      "normal_web": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_action_button",
+      "annotation_id": "action-button",
+      "position_model_m": [
+        -0.03972,
+        -0.001109,
+        0.047289
+      ],
+      "position_web": [
+        -0.71496,
+        0.8512,
+        0.019964
+      ],
+      "normal_web": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "direction": "left"
+    },
+    {
+      "name": "anchor_camera_control",
+      "annotation_id": "camera-control",
+      "position_model_m": [
+        0.03948,
+        -0.001109,
+        -0.029711
+      ],
+      "position_web": [
+        0.71064,
+        -0.5348,
+        0.019964
+      ],
+      "normal_web": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_display",
+      "annotation_id": "display",
+      "position_model_m": [
+        -2e-05,
+        -0.006909,
+        0.013289
+      ],
+      "position_web": [
+        -0.00036,
+        0.2392,
+        0.124364
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "direction": "left"
+    },
+    {
+      "name": "anchor_ceramic_shield",
+      "annotation_id": "ceramic-shield",
+      "position_model_m": [
+        0.02398,
+        -0.006909,
+        0.060289
+      ],
+      "position_web": [
+        0.43164,
+        1.0852,
+        0.124364
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_camera_system",
+      "annotation_id": "camera-system",
+      "position_model_m": [
+        0.02468,
+        0.006691,
+        0.057289
+      ],
+      "position_web": [
+        0.44424,
+        1.0312,
+        -0.120436
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "direction": "right"
+    },
+    {
+      "name": "anchor_lidar",
+      "annotation_id": "lidar",
+      "position_model_m": [
+        -0.02522,
+        0.005091,
+        0.047389
+      ],
+      "position_web": [
+        -0.45396,
+        0.853,
+        -0.091636
+      ],
+      "normal_web": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "direction": "left"
+    }
+  ],
+  "attribution": "Modelo 3D de demonstração por Apple User no Sketchfab. Modelo não oficial, adaptado para esta prévia privada."
+}
