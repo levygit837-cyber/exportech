@@ -30,8 +30,8 @@ export const benefits: Benefit[] = [
   },
   {
     id: "checkout",
-    title: "Atendimento especializado",
-    description: "Consulte disponibilidade e condições comerciais antes de confirmar a compra.",
+    title: "Referência preservada",
+    description: "A estimativa em BRL permanece acompanhada do preço original em USD.",
     variant: "narrow",
     tone: "neutral",
   },

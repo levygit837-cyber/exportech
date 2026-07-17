@@ -12,6 +12,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { useRef, useState } from "react";
+import { Link } from "react-router";
 import {
   convertUSDToBRL,
   formatBRL,
@@ -229,7 +230,7 @@ export default function BuyingGuide() {
 
               <div className="mt-auto border-t border-white/[0.08] pt-6">
                 <p className="text-[10px] uppercase tracking-[0.14em] text-zinc-500">
-                  A partir de
+                  Estimativa a partir de
                 </p>
                 <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <strong className="font-mono text-2xl font-medium text-zinc-50">
@@ -240,20 +241,14 @@ export default function BuyingGuide() {
                   </span>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3">
-                  <a
-                    href={`#${product.id}`}
+                <div className="mt-6">
+                  <Link
+                    to={`/iphones#${product.id}`}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-zinc-50 px-5 py-3 text-[13px] font-medium whitespace-nowrap text-zinc-950 transition hover:bg-white active:scale-[0.98]"
                   >
                     Ver esta configuração
                     <ArrowRight size={14} weight="bold" aria-hidden />
-                  </a>
-                  <a
-                    href="#suporte"
-                    className="inline-flex w-full items-center justify-center rounded-full border border-white/12 bg-white/[0.03] px-5 py-3 text-[13px] font-medium whitespace-nowrap text-zinc-200 transition hover:bg-white/[0.07] active:scale-[0.98]"
-                  >
-                    Falar com especialista
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

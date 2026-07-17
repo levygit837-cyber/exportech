@@ -5,7 +5,6 @@ import {
   ArrowsClockwise,
   ShieldCheck,
   Lock,
-  ArrowRight,
 } from "@phosphor-icons/react";
 import { benefits } from "../data/benefits";
 import { blurReveal, stagger } from "../lib/motion";
@@ -112,29 +111,9 @@ function BenefitCell({
 
         {variant === "wide" && (
           <div className="mt-auto pt-8">
-            <div className="flex flex-wrap items-end gap-x-8 gap-y-3">
-              <div>
-                <p className="font-mono text-3xl text-zinc-50 md:text-4xl">
-                  24x
-                </p>
-                <p className="mt-1 text-[12px] text-zinc-500">sem juros</p>
-              </div>
-              <div>
-                <p className="font-mono text-3xl text-zinc-50 md:text-4xl">
-                  0%
-                </p>
-                <p className="mt-1 text-[12px] text-zinc-500">de juros</p>
-              </div>
-              <div className="ml-auto">
-                <a
-                  href="#suporte"
-                  className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[12px] text-zinc-100 transition-all hover:bg-white/[0.08]"
-                >
-                  Consultar condições
-                  <ArrowRight size={13} weight="bold" aria-hidden />
-                </a>
-              </div>
-            </div>
+            <p className="max-w-[42ch] text-[12px] leading-relaxed text-zinc-500">
+              BRL como estimativa principal, com a referência em USD mantida em cada configuração.
+            </p>
           </div>
         )}
       </div>

@@ -25,6 +25,14 @@ Status: arquitetura-alvo proposta
 
 Este é um mapa-alvo. Não é necessário publicar todas as rotas ao mesmo tempo.
 
+## Rotas publicadas atualmente
+
+- `/`: home preservada com o catálogo completo durante a transição;
+- `/iphones`: catálogo dedicado com todos os produtos existentes;
+- `*`: página não encontrada com retorno seguro para home ou catálogo.
+
+As demais rotas deste documento continuam como arquitetura-alvo. `/iphones/:slug` não possui link ou placeholder público. O WhatsApp também permanece fora da interface até existir um número oficial.
+
 ## Responsabilidade de cada rota
 
 | Rota | Pergunta principal | Função | Condição de publicação |

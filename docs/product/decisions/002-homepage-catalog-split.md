@@ -1,7 +1,8 @@
 # Decisão 002: separar a home do catálogo completo
 
-Status: aceita para implementação futura
+Status: em transição; catálogo dedicado implementado e home ainda preservada
 Data: 2026-07-14
+Início da transição: 2026-07-15
 
 ## Contexto
 
@@ -63,3 +64,10 @@ Publicar e validar `/iphones` primeiro. Depois, substituir o catálogo completo 
 - O catálogo completo permanece a uma ação de distância.
 - A mesma fonte de dados alimenta home e `/iphones`.
 - A mudança pode ser revertida sem reconstruir os dados dos produtos.
+
+## Estado da transição
+
+- `/iphones` reutiliza os sete produtos, imagens, configurações e regras de preço de `src/data/products.ts`.
+- O catálogo completo continua na home durante a validação funcional e visual.
+- A redução da home para três caminhos editoriais ainda não foi executada.
+- A etapa seguinte só começa depois da validação da rota dedicada e da configuração de fallback na hospedagem real.

@@ -7,6 +7,8 @@ node_modules/
 # Build output
 dist/
 *.tsbuildinfo
+playwright-report/
+test-results/
 
 # OS / editor junk
 .DS_Store

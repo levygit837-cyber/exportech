@@ -39,6 +39,10 @@
   html {
     scroll-behavior: smooth;
   }
+  section[id],
+  article[id] {
+    scroll-margin-top: 7rem;
+  }
   :focus-visible {
     outline: 2px solid var(--color-accent-soft);
     outline-offset: 3px;
@@ -91,6 +95,60 @@
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
       0 18px 42px rgba(0, 0, 0, 0.36);
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .product-card {
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .catalog-grid > * {
+    grid-column: span 2;
+  }
+
+  .catalog-grid > :last-child:nth-child(odd) {
+    grid-column: 2 / span 2;
+  }
+}
+
+@media (min-width: 1280px) {
+  .catalog-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .catalog-grid > * {
+    grid-column: span 2;
+  }
+
+  .catalog-grid > :last-child:nth-child(3n + 1) {
+    grid-column: 3 / span 2;
+  }
+
+  .catalog-grid > :nth-last-child(2):nth-child(3n + 1) {
+    grid-column: 2 / span 2;
+  }
+
+  .catalog-grid > :last-child:nth-child(3n + 2) {
+    grid-column: 4 / span 2;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.16);
   }
 }
 

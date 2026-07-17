@@ -1,7 +1,8 @@
 # Decisão 001: roteamento progressivo para múltiplas páginas
 
-Status: aceita para implementação futura
+Status: implementada no aplicativo; fallback de produção pendente
 Data: 2026-07-14
+Implementação: 2026-07-15
 
 ## Contexto
 
@@ -89,3 +90,13 @@ A orientação oficial atual sustenta o uso declarativo em uma aplicação Vite 
 - `products.ts` permanece como fonte única de dados.
 - Rotas devem ser publicadas apenas quando tiverem conteúdo real.
 - A implementação continua reversível enquanto a home preservar um caminho seguro para o catálogo.
+
+## Estado da implementação
+
+- `BrowserRouter`, `Routes`, `Route`, `Link` e `NavLink` foram adicionados em modo declarativo.
+- As rotas públicas atuais são `/`, `/iphones` e o estado `*` de página não encontrada.
+- Header e footer são compartilhados, e os links de seção da home funcionam a partir de outras rotas.
+- `/iphones/:slug` permanece adiada; não existe botão de detalhes sem página substancial.
+- O CTA de WhatsApp permanece ausente até existir um número oficial validado.
+- Pesquisa, conta, sacola, checkout e rotas sem conteúdo não são exibidos.
+- A abertura direta foi coberta no servidor Vite local. O rewrite da hospedagem de produção permanece pendente até a definição do provedor.
