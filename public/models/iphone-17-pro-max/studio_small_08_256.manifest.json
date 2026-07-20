@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-19",
+  "pipeline": {
+    "script": "tools/3d/resize_hero_hdri.py",
+    "blender": "3.6.23",
+    "local_only": true,
+    "source_uploaded": false,
+    "resampling": "Blender Image.scale"
+  },
+  "source": {
+    "filename": "studio_small_08_1k.hdr",
+    "bytes": 1508872,
+    "sha256": "f6a989f89432eb4eee3191364a9c1ceed195c4ec3544173a3c04fd96cb91d0ba",
+    "width": 1024,
+    "height": 512,
+    "sampled_linear_rgb": {
+      "samples": 16384,
+      "min_rgb": [
+        0.00196838,
+        0.00299072,
+        0.00294495
+      ],
+      "max_rgb": [
+        69.0,
+        69.5,
+        81.0
+      ],
+      "mean_rgb": [
+        0.64574419,
+        0.66082809,
+        0.72817089
+      ]
+    }
+  },
+  "output": {
+    "filename": "studio_small_08_256.hdr",
+    "bytes": 100269,
+    "sha256": "cabef74bb4fa7e4183cd4bd456f11ceda8faf5c6bc330066625a220a6ca12cdf",
+    "width": 256,
+    "height": 128,
+    "format": "Radiance RGBE",
+    "max_bytes": 150000,
+    "reduction_percent": 93.35,
+    "sampled_linear_rgb": {
+      "samples": 16384,
+      "min_rgb": [
+        0.00384521,
+        0.00494385,
+        0.00509644
+      ],
+      "max_rgb": [
+        62.5,
+        62.0,
+        72.5
+      ],
+      "mean_rgb": [
+        0.66278963,
+        0.67939064,
+        0.74850797
+      ]
+    }
+  },
+  "provenance": {
+    "asset": "Studio Small 08",
+    "source": "https://polyhaven.com/a/studio_small_08",
+    "license": "CC0"
+  },
+  "validation": {
+    "radiance_header": true,
+    "float_reimport": true,
+    "equirectangular_aspect_ratio": "2:1",
+    "dynamic_range_preserved": true
+  }
+}

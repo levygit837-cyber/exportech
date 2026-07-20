@@ -1,0 +1,754 @@
+{
+  "date": "2026-07-19",
+  "pipeline": {
+    "script": "tools/3d/build_apple_user_runtime.py",
+    "gltf_transform": "4.4.1",
+    "local_only": true,
+    "source_uploaded": false
+  },
+  "source": {
+    "filename": "apple-user-remastered-lod0.glb",
+    "bytes": 1955400,
+    "sha256": "9e0fa4c4f6fcbdd18cc62acc84c781fadc936f852890b78b41cefce2ae4ba6e3",
+    "summary": {
+      "triangles": 76426,
+      "nodes": 39,
+      "meshes": 32,
+      "materials": 32,
+      "textures": 13,
+      "images": 13,
+      "embedded_image_bytes": 1238752,
+      "attributes": {
+        "NORMAL": 32,
+        "POSITION": 32,
+        "TANGENT": 7,
+        "TEXCOORD_0": 13
+      },
+      "extensions_used": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular",
+        "KHR_materials_transmission",
+        "KHR_mesh_quantization"
+      ],
+      "extensions_required": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_mesh_quantization"
+      ]
+    },
+    "decoded_rgba8_mip_texture_bytes": 18262684,
+    "texture_inventory": [
+      {
+        "texture": 0,
+        "image": 0,
+        "name": "qdsydWzrhLrPUFb",
+        "mime_type": "image/webp",
+        "width": 512,
+        "height": 512,
+        "encoded_bytes": 366378,
+        "decoded_rgba8_mip_bytes": 1398100,
+        "slots": [
+          "normalTexture"
+        ]
+      },
+      {
+        "texture": 1,
+        "image": 1,
+        "name": "gdQFWHoaObPzopH",
+        "mime_type": "image/jpeg",
+        "width": 1024,
+        "height": 2048,
+        "encoded_bytes": 299247,
+        "decoded_rgba8_mip_bytes": 11184812,
+        "slots": [
+          "emissiveTexture"
+        ]
+      },
+      {
+        "texture": 2,
+        "image": 2,
+        "name": "clesGXJfkRwjywp",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 10204,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 3,
+        "image": 3,
+        "name": "dXPKKVmwQNTRGqg",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 13926,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 4,
+        "image": 4,
+        "name": "ZHfKunYSTKCyTaN",
+        "mime_type": "image/webp",
+        "width": 512,
+        "height": 512,
+        "encoded_bytes": 191780,
+        "decoded_rgba8_mip_bytes": 1398100,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 5,
+        "image": 5,
+        "name": "WmPnZDdkVninxbo",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 31372,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "normalTexture"
+        ]
+      },
+      {
+        "texture": 6,
+        "image": 6,
+        "name": "EeVeyNJSIHppxSU",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 18836,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "metallicRoughnessTexture"
+        ]
+      },
+      {
+        "texture": 7,
+        "image": 8,
+        "name": "lJEaZKraQyzURJV",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 3694,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 8,
+        "image": 7,
+        "name": "gifCotEVzPDadqZ",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 81072,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "normalTexture"
+        ]
+      },
+      {
+        "texture": 9,
+        "image": 9,
+        "name": "bLWvmDGuMMHmzWP-DomZBVQOhxtvXup",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 14440,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "metallicRoughnessTexture"
+        ]
+      },
+      {
+        "texture": 10,
+        "image": 10,
+        "name": "ZHfKunYSTKCyTaN",
+        "mime_type": "image/webp",
+        "width": 512,
+        "height": 512,
+        "encoded_bytes": 191798,
+        "decoded_rgba8_mip_bytes": 1398100,
+        "slots": [
+          "metallicRoughnessTexture"
+        ]
+      },
+      {
+        "texture": 11,
+        "image": 11,
+        "name": "qepPQriqVzVsOBY",
+        "mime_type": "image/jpeg",
+        "width": 128,
+        "height": 128,
+        "encoded_bytes": 3213,
+        "decoded_rgba8_mip_bytes": 87380,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 12,
+        "image": 12,
+        "name": "qyXpURmXgcnUrAh",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 12792,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      }
+    ]
+  },
+  "output": {
+    "filename": "apple-user-remastered-runtime.glb",
+    "bytes": 812008,
+    "sha256": "d3fb041bce8a34570d8273da83040ab7876c09b90d5d4694de0e2d25155002ab",
+    "max_bytes": 1300000,
+    "reduction_percent": 58.47,
+    "summary": {
+      "triangles": 76426,
+      "nodes": 39,
+      "meshes": 32,
+      "materials": 32,
+      "textures": 13,
+      "images": 13,
+      "embedded_image_bytes": 102756,
+      "attributes": {
+        "NORMAL": 32,
+        "POSITION": 32,
+        "TANGENT": 7,
+        "TEXCOORD_0": 13
+      },
+      "extensions_used": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_mesh_quantization"
+      ],
+      "extensions_required": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_mesh_quantization"
+      ]
+    },
+    "decoded_rgba8_mip_texture_bytes": 5679772,
+    "max_decoded_texture_bytes": 6000000,
+    "decoded_texture_reduction_percent": 68.9,
+    "texture_inventory": [
+      {
+        "texture": 0,
+        "image": 0,
+        "name": "qdsydWzrhLrPUFb",
+        "mime_type": "image/webp",
+        "width": 512,
+        "height": 512,
+        "encoded_bytes": 16982,
+        "decoded_rgba8_mip_bytes": 1398100,
+        "slots": [
+          "normalTexture"
+        ]
+      },
+      {
+        "texture": 1,
+        "image": 1,
+        "name": "gdQFWHoaObPzopH",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 512,
+        "encoded_bytes": 15876,
+        "decoded_rgba8_mip_bytes": 699052,
+        "slots": [
+          "emissiveTexture"
+        ]
+      },
+      {
+        "texture": 2,
+        "image": 2,
+        "name": "clesGXJfkRwjywp",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 360,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 3,
+        "image": 3,
+        "name": "dXPKKVmwQNTRGqg",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 860,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 4,
+        "image": 4,
+        "name": "ZHfKunYSTKCyTaN",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 15306,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 5,
+        "image": 5,
+        "name": "WmPnZDdkVninxbo",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 4868,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "normalTexture"
+        ]
+      },
+      {
+        "texture": 6,
+        "image": 6,
+        "name": "EeVeyNJSIHppxSU",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 1778,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "metallicRoughnessTexture"
+        ]
+      },
+      {
+        "texture": 7,
+        "image": 8,
+        "name": "lJEaZKraQyzURJV",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 11712,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 8,
+        "image": 7,
+        "name": "gifCotEVzPDadqZ",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 15272,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "normalTexture"
+        ]
+      },
+      {
+        "texture": 9,
+        "image": 9,
+        "name": "bLWvmDGuMMHmzWP-DomZBVQOhxtvXup",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 11310,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "metallicRoughnessTexture"
+        ]
+      },
+      {
+        "texture": 10,
+        "image": 10,
+        "name": "ZHfKunYSTKCyTaN",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 7306,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "metallicRoughnessTexture"
+        ]
+      },
+      {
+        "texture": 11,
+        "image": 11,
+        "name": "qepPQriqVzVsOBY",
+        "mime_type": "image/webp",
+        "width": 128,
+        "height": 128,
+        "encoded_bytes": 392,
+        "decoded_rgba8_mip_bytes": 87380,
+        "slots": [
+          "baseColorTexture"
+        ]
+      },
+      {
+        "texture": 12,
+        "image": 12,
+        "name": "qyXpURmXgcnUrAh",
+        "mime_type": "image/webp",
+        "width": 256,
+        "height": 256,
+        "encoded_bytes": 734,
+        "decoded_rgba8_mip_bytes": 349524,
+        "slots": [
+          "baseColorTexture"
+        ]
+      }
+    ]
+  },
+  "changes": {
+    "texture_policy": {
+      "all_maximum_dimension": 512,
+      "ZHfKunYSTKCyTaN_maximum_dimension": 256,
+      "resampling": "Lanczos3",
+      "normal_and_metallic_roughness_webp_quality": 95,
+      "base_color_and_emissive_webp_quality": 92
+    },
+    "material_conversions": [
+      {
+        "material": "EX_Unibody_Orange",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.11999999731779099,
+            "clearcoatRoughnessFactor": 0.18000000715255737
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0.9200000166893005,
+          "roughnessFactor": 0.27000001072883606
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0.9200000166893005,
+          "roughnessFactor": 0.25
+        },
+        "reason": "Fold the subtle clearcoat highlight into the metal roughness."
+      },
+      {
+        "material": "EX_Front_Glass",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.8999999761581421,
+            "clearcoatRoughnessFactor": 0.04500000178813934
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.07500000298023224
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.055
+        },
+        "reason": "Keep the front cover dark and glossy with one core-PBR lobe."
+      },
+      {
+        "material": "EX_Display",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.25,
+            "clearcoatRoughnessFactor": 0
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.22
+        },
+        "reason": "Retain a restrained screen reflection over the emissive map."
+      },
+      {
+        "material": "EX_Source_ieDmCkHnOnSIOcm",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.23000000417232513,
+            "clearcoatRoughnessFactor": 0
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.35
+        },
+        "reason": "Replace the low-energy clearcoat on the black insert."
+      },
+      {
+        "material": "EX_Rear_Glass",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.25999999046325684,
+            "clearcoatRoughnessFactor": 0.1599999964237213
+          },
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0.03999999910593033,
+          "roughnessFactor": 0.3100000023841858
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0.03999999910593033,
+          "roughnessFactor": 0.29
+        },
+        "reason": "Approximate clearcoat plus suppressed dielectric specular."
+      },
+      {
+        "material": "EX_Optical_Elements",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.699999988079071,
+            "clearcoatRoughnessFactor": 0.0010000000474974513
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0.18000000715255737,
+          "roughnessFactor": 0.11999999731779099
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0.22,
+          "roughnessFactor": 0.065
+        },
+        "reason": "Preserve the dark reflective optical stack without clearcoat."
+      },
+      {
+        "material": "EX_Lens_Glass",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 1,
+            "clearcoatRoughnessFactor": 0.02500000037252903
+          },
+          "KHR_materials_ior": {
+            "ior": 1.4600000381469727
+          },
+          "KHR_materials_transmission": {
+            "transmissionFactor": 0.10000000149011612
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0.05000000074505806,
+          "roughnessFactor": 0.04500000178813934
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0.18,
+          "roughnessFactor": 0.04
+        },
+        "reason": "Approximate low transmission and IOR with dark glossy PBR."
+      },
+      {
+        "material": "EX_Source_hqDUrVMlYhzYusu",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.20000000298023224,
+            "clearcoatRoughnessFactor": 0
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 1,
+          "roughnessFactor": 0.10000000149011612
+        },
+        "core_pbr_after": {
+          "metallicFactor": 1,
+          "roughnessFactor": 0.085
+        },
+        "reason": "Preserve the glossy alpha-blended textured layer."
+      },
+      {
+        "material": "EX_LiDAR_Glass",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.800000011920929,
+            "clearcoatRoughnessFactor": 0.10000000149011612
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0.07999999821186066,
+          "roughnessFactor": 0.11999999731779099
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0.1,
+          "roughnessFactor": 0.09
+        },
+        "reason": "Keep the LiDAR cover glossy without a second coat lobe."
+      },
+      {
+        "material": "EX_Flash_Diffuser",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.20000000298023224,
+            "clearcoatRoughnessFactor": 0.33000001311302185
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.23999999463558197
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.24
+        },
+        "reason": "The emissive diffuser already carries the visible energy."
+      },
+      {
+        "material": "EX_Source_YQFhPSFSryEqJMp",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.10000000149011612,
+            "clearcoatRoughnessFactor": 0.15000000596046448
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0.6000000238418579,
+          "roughnessFactor": 1
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0.6000000238418579,
+          "roughnessFactor": 0.9
+        },
+        "reason": "Retain the authored roughness texture with a subtle coat bias."
+      },
+      {
+        "material": "EX_Source_CVcxUAKakDuRdCf",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.25,
+            "clearcoatRoughnessFactor": 0
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.24
+        },
+        "reason": "Replace clearcoat on the dark alpha-blended overlay."
+      },
+      {
+        "material": "EX_Source_yPEFElLJTRhfWfw",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.20000000298023224,
+            "clearcoatRoughnessFactor": 0.05000000074505806
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.10000000149011612
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.085
+        },
+        "reason": "Preserve the glossy translucent orange accent."
+      },
+      {
+        "material": "EX_Source_PJgHvfOhNXkxvzq",
+        "removed_extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 1,
+            "clearcoatRoughnessFactor": 0
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.22
+        },
+        "reason": "Use the roughness map as a restrained glossy alpha layer."
+      },
+      {
+        "material": "EX_Source_awYxKfiOpRgQIxD",
+        "removed_extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "core_pbr_before": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        },
+        "core_pbr_after": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.7
+        },
+        "reason": "Reduce the default core dielectric highlight after specular removal."
+      }
+    ],
+    "advanced_material_extensions_removed": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_ior",
+      "KHR_materials_specular",
+      "KHR_materials_transmission"
+    ],
+    "topology_simplified": false,
+    "mesh_material_node_names_changed": false,
+    "anchors_changed": false
+  },
+  "provenance": {
+    "source_author": "Apple User",
+    "source_page": "https://sketchfab.com/3d-models/apple-iphone-17-pro-max-43570bd2d48f48b6aafb8adbb04e346d",
+    "source_license": "Free Standard",
+    "source_noai": true,
+    "attribution": "Modelo 3D de demonstração por Apple User no Sketchfab. Modelo não oficial, adaptado para esta prévia privada."
+  },
+  "publication_gate": "Revalidar os termos vinculantes do pacote Sketchfab antes de publicar. O ativo e seus derivados mantêm a marcação NoAI e não podem ser enviados a serviços generativos.",
+  "validation": {
+    "gltf_validator_errors": 0,
+    "gltf_validator_warnings": 0,
+    "source_and_output_triangles_equal": true,
+    "mesh_material_node_counts_and_names_equal": true,
+    "anchors_preserved": [
+      "anchor_action_button",
+      "anchor_camera_control",
+      "anchor_camera_system",
+      "anchor_ceramic_shield",
+      "anchor_display",
+      "anchor_lidar",
+      "anchor_unibody"
+    ],
+    "scene_attribution_preserved": true,
+    "advanced_material_extensions_absent": true,
+    "runtime_byte_budget_passed": true,
+    "decoded_texture_budget_passed": true
+  }
+}

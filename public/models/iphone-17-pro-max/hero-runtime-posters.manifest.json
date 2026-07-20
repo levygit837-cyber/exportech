@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-19",
+  "source": "Primeiro frame real do Hero3DCanvas com o ativo apple-user-remastered-runtime.glb",
+  "capture": {
+    "local_only": true,
+    "uploaded": false,
+    "format": "image/webp",
+    "quality": 0.82,
+    "background": "transparent"
+  },
+  "desktop": {
+    "filename": "hero-runtime-poster-desktop.webp",
+    "bytes": 21150,
+    "width": 1425,
+    "height": 900,
+    "sha256": "3102228531cb9867edeb621b8b91db04f829ccac049cd961e80829afc595b802"
+  },
+  "mobile": {
+    "filename": "hero-runtime-poster-mobile.webp",
+    "bytes": 15282,
+    "width": 375,
+    "height": 844,
+    "sha256": "c15c8ba692e9d9df8b6d576ec64549ed6c61be09e957a4544ed0497839b1dd5f"
+  },
+  "provenance": {
+    "source_author": "Apple User",
+    "source_license": "Free Standard",
+    "source_noai": true,
+    "publication_gate": "Revalidar os termos vinculantes do pacote Sketchfab antes de publicar."
+  }
+}
