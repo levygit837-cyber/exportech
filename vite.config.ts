@@ -29,6 +29,26 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       omitPrivateHeroAssets(hero3DEnabled),
     ],
-    server: { host: true, port: 5173 },
+    optimizeDeps: hero3DEnabled
+      ? {
+          include: [
+            "three",
+            "@react-three/fiber",
+            "@react-three/drei/core/Gltf",
+          ],
+        }
+      : undefined,
+    server: {
+      host: true,
+      port: 5173,
+      warmup: hero3DEnabled
+        ? {
+            clientFiles: [
+              "./src/components/Hero3DExperience.tsx",
+              "./src/components/Hero3DCanvas.tsx",
+            ],
+          }
+        : undefined,
+    },
   };
 });

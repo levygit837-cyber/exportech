@@ -1,10 +1,16 @@
 import { ArrowRight } from "@phosphor-icons/react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import { Link } from "react-router";
 import {
   Component,
   lazy,
   Suspense,
+  useLayoutEffect,
   useRef,
   type ErrorInfo,
   type ReactNode,
@@ -40,7 +46,7 @@ function Hero3DPosterFallback({ failed = false }: { failed?: boolean }) {
           draggable={false}
         />
       </picture>
-      <div className="hero-3d-intro pointer-events-none absolute inset-x-0 top-[18svh] z-20 px-5 text-center md:top-[16svh] md:px-8">
+      <div className="hero-3d-intro pointer-events-none absolute z-20">
         <p>iPhone 17 Pro Max</p>
         <span>Laranja-cósmico</span>
       </div>
@@ -92,8 +98,23 @@ type HeroProps = {
 
 export default function Hero({ mode = "static" }: HeroProps) {
   const ref = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion() ?? false;
+  const motionPreference = useReducedMotion();
+  // Motion's subscription can settle one render after hydration. Read the
+  // media query synchronously too, so reduced-motion users never start the
+  // private renderer or its network requests during that gap.
+  const reduceMotion =
+    (typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches) ||
+    Boolean(motionPreference);
   const isPrototype = mode === "prototype-3d";
+  useLayoutEffect(() => {
+    if (!isPrototype || reduceMotion) return;
+    // Experience and renderer are separate chunks to keep reduced-motion and
+    // the public hero lightweight. Start the renderer chunk from the parent
+    // commit so it downloads in parallel with the experience instead of
+    // waiting for a second lazy-import waterfall.
+    void import("./Hero3DCanvas");
+  }, [isPrototype, reduceMotion]);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: isPrototype ? ["start start", "end end"] : ["start start", "end start"],
@@ -117,6 +138,14 @@ export default function Hero({ mode = "static" }: HeroProps) {
         className="hero-3d-story relative"
         data-hero-mode="prototype-3d"
       >
+        {!reduceMotion ? (
+          <link
+            rel="preload"
+            href={HERO_3D_ASSETS.modelUrl}
+            as="fetch"
+            crossOrigin="anonymous"
+          />
+        ) : null}
         <div className="hero-3d-sticky-shell sticky top-0 h-[100svh] w-full overflow-hidden">
           <Hero3DImportBoundary>
             <Suspense fallback={<Hero3DPosterFallback />}>

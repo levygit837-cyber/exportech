@@ -1,0 +1,117 @@
+{
+  "date": "2026-07-19",
+  "pipeline": {
+    "script": "tools/3d/build_apple_user_lod0.py",
+    "gltf_transform": "4.4.1",
+    "local_only": true,
+    "source_uploaded": false
+  },
+  "source": {
+    "filename": "apple-user-remastered-web.glb",
+    "bytes": 6534224,
+    "sha256": "9d401b6b32bc57a86cafa266245b107e6e597b86fc441e2287d4facd3aa2a8b8",
+    "summary": {
+      "triangles": 76426,
+      "nodes": 39,
+      "meshes": 32,
+      "materials": 32,
+      "textures": 18,
+      "images": 13,
+      "embedded_image_bytes": 1561123,
+      "attributes": {
+        "COLOR_0": 32,
+        "NORMAL": 32,
+        "POSITION": 32,
+        "TANGENT": 32,
+        "TEXCOORD_0": 32,
+        "TEXCOORD_1": 11
+      },
+      "extensions_used": [
+        "KHR_materials_clearcoat",
+        "KHR_materials_specular",
+        "KHR_materials_transmission",
+        "KHR_materials_ior"
+      ],
+      "extensions_required": []
+    }
+  },
+  "output": {
+    "filename": "apple-user-remastered-lod0.glb",
+    "bytes": 1955400,
+    "sha256": "9e0fa4c4f6fcbdd18cc62acc84c781fadc936f852890b78b41cefce2ae4ba6e3",
+    "reduction_percent": 70.07,
+    "max_bytes": 2100000,
+    "summary": {
+      "triangles": 76426,
+      "nodes": 39,
+      "meshes": 32,
+      "materials": 32,
+      "textures": 13,
+      "images": 13,
+      "embedded_image_bytes": 1238752,
+      "attributes": {
+        "NORMAL": 32,
+        "POSITION": 32,
+        "TANGENT": 7,
+        "TEXCOORD_0": 13
+      },
+      "extensions_used": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_materials_clearcoat",
+        "KHR_materials_ior",
+        "KHR_materials_specular",
+        "KHR_materials_transmission",
+        "KHR_mesh_quantization"
+      ],
+      "extensions_required": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_mesh_quantization"
+      ]
+    }
+  },
+  "changes": {
+    "removed_attribute_bindings": {
+      "COLOR_0": 32,
+      "TANGENT": 25,
+      "TEXCOORD_0": 19,
+      "TEXCOORD_1": 11
+    },
+    "png_to_webp": "lossless",
+    "meshopt_level": "high",
+    "quantization": {
+      "position_bits": 16,
+      "normal_bits": 12,
+      "texcoord_bits": 14
+    },
+    "topology_simplified": false,
+    "materials_changed": false,
+    "textures_resized": false,
+    "anchors_changed": false
+  },
+  "provenance": {
+    "source_author": "Apple User",
+    "source_page": "https://sketchfab.com/3d-models/apple-iphone-17-pro-max-43570bd2d48f48b6aafb8adbb04e346d",
+    "source_license": "Free Standard",
+    "source_noai": true,
+    "attribution": "Modelo 3D de demonstração por Apple User no Sketchfab. Modelo não oficial, adaptado para esta prévia privada."
+  },
+  "publication_gate": "Revalidar os termos vinculantes do pacote Sketchfab antes de publicar. O ativo e seus derivados mantêm a marcação NoAI e não podem ser enviados a serviços generativos.",
+  "validation": {
+    "gltf_validator_errors": 0,
+    "gltf_validator_warnings": 0,
+    "source_and_output_triangles_equal": true,
+    "mesh_and_material_names_equal": true,
+    "anchors_preserved": [
+      "anchor_action_button",
+      "anchor_camera_control",
+      "anchor_camera_system",
+      "anchor_ceramic_shield",
+      "anchor_display",
+      "anchor_lidar",
+      "anchor_unibody"
+    ],
+    "scene_attribution_preserved": true
+  }
+}

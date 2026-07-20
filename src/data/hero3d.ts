@@ -18,6 +18,13 @@ export type HeroAnnotationId =
   | "camera-system"
   | "lidar";
 
+export type Hero3DVisualState = {
+  progress: number;
+  chapter: HeroChapterId;
+  annotationIds: HeroAnnotationId[];
+  settled: boolean;
+};
+
 export type Vector3Tuple = readonly [number, number, number];
 
 export type HeroCameraPreset = {
@@ -39,12 +46,12 @@ export type HeroAnnotation = {
 };
 
 export const HERO_3D_ASSETS = {
-  modelUrl: "/models/iphone-17-pro-max/apple-user-remastered-web.glb",
-  posterUrl: "/models/iphone-17-pro-max/apple-user-poster.webp",
-  mobilePosterUrl:
-    "/models/iphone-17-pro-max/apple-user-poster-mobile.webp",
-  environmentUrl:
-    "/models/iphone-17-pro-max/studio_small_08_1k.hdr",
+  modelUrl: "/models/iphone-17-pro-max/apple-user-remastered-runtime.glb",
+  // These lightweight posters are captures of the exact first rendered pose,
+  // so the crossfade no longer morphs from a two-phone catalog composition.
+  posterUrl: "/models/iphone-17-pro-max/hero-runtime-poster-desktop.webp",
+  mobilePosterUrl: "/models/iphone-17-pro-max/hero-runtime-poster-mobile.webp",
+  environmentUrl: "/models/iphone-17-pro-max/studio_small_08_256.hdr",
 } as const;
 
 export const HERO_3D_MANIFEST = {
@@ -53,13 +60,13 @@ export const HERO_3D_MANIFEST = {
     "Modelo tridimensional não oficial do iPhone 17 Pro Max em laranja-cósmico. Role a página para conhecer a estrutura, os controles, as câmeras e a tela.",
   asset: {
     sha256:
-      "9d401b6b32bc57a86cafa266245b107e6e597b86fc441e2287d4facd3aa2a8b8",
-    bytes: 6_534_224,
+      "d3fb041bce8a34570d8273da83040ab7876c09b90d5d4694de0e2d25155002ab",
+    bytes: 812_008,
     triangles: 76_426,
     meshes: 32,
     materials: 32,
     drawCalls: 32,
-    decodedTextureBudgetBytes: 18_235_392,
+    decodedTextureBudgetBytes: 5_679_772,
     boundsMeters: [0.078980409, 0.162937731, 0.013179803] as Vector3Tuple,
     scale: 18,
   },
@@ -155,10 +162,10 @@ export const HERO_ANNOTATIONS: ReadonlyArray<HeroAnnotation> = [
     anchor: "anchor_unibody",
     title: "Alumínio unibody",
     body: "Estrutura única em alumínio.",
-    position: [0.03948, 0.003289, 0.001109],
-    normal: [1, 0, 0],
-    direction: "right",
-    range: [0.65, 0.735],
+    position: [-0.03972, 0.003289, 0.001109],
+    normal: [-1, 0, 0],
+    direction: "left",
+    range: [0.69, 0.755],
     mobilePriority: 1,
   },
   {
@@ -169,7 +176,7 @@ export const HERO_ANNOTATIONS: ReadonlyArray<HeroAnnotation> = [
     position: [-0.03972, 0.047289, 0.001109],
     normal: [-1, 0, 0],
     direction: "left",
-    range: [0.715, 0.8],
+    range: [0.755, 0.82],
     mobilePriority: 2,
   },
   {
@@ -180,7 +187,7 @@ export const HERO_ANNOTATIONS: ReadonlyArray<HeroAnnotation> = [
     position: [-0.00002, 0.013289, 0.006909],
     normal: [0, 0, 1],
     direction: "left",
-    range: [0.815, 0.895],
+    range: [0.855, 0.915],
     mobilePriority: 1,
   },
   {
@@ -191,7 +198,7 @@ export const HERO_ANNOTATIONS: ReadonlyArray<HeroAnnotation> = [
     position: [0.02398, 0.060289, 0.006909],
     normal: [0, 0, 1],
     direction: "right",
-    range: [0.875, 0.94],
+    range: [0.9, 0.95],
     mobilePriority: 2,
   },
 ];

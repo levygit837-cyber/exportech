@@ -1,0 +1,77 @@
+{
+  "date": "2026-07-19",
+  "method": {
+    "renderer": "Blender 3.6.23 Eevee",
+    "script": "tools/3d/render_glb_candidate.py",
+    "comparison_script": "tools/3d/compare_runtime_renders.py",
+    "resolution": "800x800",
+    "samples": 64,
+    "local_only": true,
+    "external_vision_service": false,
+    "note": "The Meshopt GLBs were decoded locally and WebP images were converted locally to PNG only because the Blender 3.6 importer does not support EXT_texture_webp."
+  },
+  "source": {
+    "file": "public/models/iphone-17-pro-max/apple-user-remastered-lod0.glb",
+    "sha256": "9e0fa4c4f6fcbdd18cc62acc84c781fadc936f852890b78b41cefce2ae4ba6e3"
+  },
+  "candidate": {
+    "file": "public/models/iphone-17-pro-max/apple-user-remastered-runtime.glb",
+    "sha256": "d3fb041bce8a34570d8273da83040ab7876c09b90d5d4694de0e2d25155002ab"
+  },
+  "structural_comparison": {
+    "triangles_equal": true,
+    "triangles": 76426,
+    "nodes_equal": true,
+    "nodes": 39,
+    "meshes_equal": true,
+    "meshes": 32,
+    "materials_equal": true,
+    "materials": 32,
+    "mesh_material_node_names_equal": true,
+    "anchors_equal": true,
+    "anchors": 7,
+    "scene_bbox_equal": true,
+    "scene_bbox_min": [-0.03949, -0.08147, -0.00659],
+    "scene_bbox_max": [0.03949, 0.08147, 0.00659],
+    "render_vertex_count_equal": true,
+    "render_vertex_count": 229278,
+    "upload_vertex_count_equal": true,
+    "upload_vertex_count": 72454
+  },
+  "pixel_comparison": {
+    "interpretation": "Color and luma differences are expected because four physical material extensions were intentionally replaced by core PBR. Silhouette metrics are threshold-based and respond to highlight intensity as well as geometry.",
+    "pairs": [
+      {
+        "render": "01-back.png",
+        "rgb_mae": 0.01704636,
+        "foreground_rgb_mae": 0.03840484,
+        "foreground_psnr_db": 26.9033,
+        "foreground_luma_mae": 0.03580911,
+        "silhouette_iou": 0.935784
+      },
+      {
+        "render": "02-front-angle.png",
+        "rgb_mae": 0.00504865,
+        "foreground_rgb_mae": 0.00817672,
+        "foreground_psnr_db": 34.6858,
+        "foreground_luma_mae": 0.00687794,
+        "silhouette_iou": 0.93838
+      },
+      {
+        "render": "03-dynamic-island-close.png",
+        "rgb_mae": 0.01120229,
+        "foreground_rgb_mae": 0.01212708,
+        "foreground_psnr_db": 34.1785,
+        "foreground_luma_mae": 0.0112185,
+        "silhouette_iou": 0.97418
+      }
+    ],
+    "mean_foreground_rgb_mae": 0.01956955,
+    "mean_silhouette_iou": 0.949448
+  },
+  "decision": {
+    "status": "accepted_as_runtime_test_candidate",
+    "reason": "The candidate keeps structural identity, removes transmission and advanced shader lobes, stays below both runtime budgets, and retains the closest aggregate neutral-render match among the two core-PBR mappings tested.",
+    "remaining_gate": "Approve materials, transparency, highlights, screen sharpness and callout visibility in the real Three.js cameras, Safari and physical mobile devices."
+  }
+}

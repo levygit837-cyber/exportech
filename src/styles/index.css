@@ -95,14 +95,19 @@
   }
 
   .hero-3d-story {
-    height: 320dvh;
-    min-height: 320dvh;
+    /* Keep the cinematic timeline stable while mobile browser chrome opens or
+       closes. Dynamic viewport units can otherwise change the denominator of
+       scroll progress in the middle of a gesture. */
+    height: 720svh;
+    min-height: 720svh;
     background: transparent;
   }
 
   .hero-3d-sticky-shell {
     min-height: 100svh;
-    background: transparent;
+    background:
+      radial-gradient(circle at 50% 52%, rgba(218, 103, 50, 0.1), transparent 36%),
+      #0a0a0a;
     isolation: isolate;
   }
 
@@ -137,8 +142,9 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: 50% 50%;
+    filter: saturate(1.04) contrast(1.02);
   }
 
   .hero-3d-canvas {
@@ -159,7 +165,7 @@
   }
 
   .hero-3d-intro p {
-    font-size: clamp(2.15rem, 5vw, 5.4rem);
+    font-size: clamp(2.4rem, 4vw, 4.6rem);
     font-weight: 600;
     line-height: 0.96;
     letter-spacing: -0.045em;
@@ -176,7 +182,13 @@
     color: #c8c8cc;
   }
 
-  .hero-3d-loading,
+  .hero-3d-intro {
+    top: clamp(8.5rem, 21svh, 12rem);
+    left: max(1.5rem, 7vw);
+    width: min(31vw, 26rem);
+    text-align: left;
+  }
+
   .hero-3d-error {
     position: absolute;
     z-index: 24;
@@ -188,17 +200,6 @@
     letter-spacing: 0.08em;
     text-align: center;
     text-transform: uppercase;
-  }
-
-  .hero-3d-loading::before {
-    content: "";
-    display: inline-block;
-    width: 0.36rem;
-    height: 0.36rem;
-    margin-right: 0.55rem;
-    border-radius: 50%;
-    background: currentColor;
-    animation: hero-3d-loading-pulse 1.1s ease-in-out infinite alternate;
   }
 
   .hero-3d-error {
@@ -220,78 +221,149 @@
     text-transform: none;
   }
 
-  .hero-3d-callout-anchor {
+  .hero-3d-loading {
+    position: absolute;
+    z-index: 24;
+    right: max(1.25rem, 6vw);
+    bottom: max(1.25rem, 5svh);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.62rem;
+    padding: 0.66rem 0.82rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    background: rgba(14, 15, 18, 0.78);
+    color: #c7c7cc;
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  }
+
+  .hero-3d-loading > span {
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.24);
+    border-top-color: #f4f4f5;
+    border-radius: 50%;
+    animation: hero-3d-loading-spin 760ms linear infinite;
+  }
+
+  .hero-3d-narrative {
+    position: absolute;
+    z-index: 22;
+    right: max(1.5rem, 5vw);
+    bottom: max(1.5rem, 5.5svh);
+    width: min(18rem, calc(100vw - 3rem));
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 180ms var(--ease-fluid),
+      transform 180ms var(--ease-fluid);
+    pointer-events: none;
+  }
+
+  @supports (backdrop-filter: blur(18px)) {
+    .hero-3d-loading {
+      backdrop-filter: blur(18px) saturate(1.08);
+    }
+  }
+
+  .hero-3d-narrative.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-3d-narrative.is-visible.is-moving {
+    opacity: 0.92;
+  }
+
+  .hero-3d-detail-summary {
+    display: grid;
+    gap: 0.24rem;
+    padding-top: 0.72rem;
+    border-top: 1px solid rgba(244, 244, 245, 0.42);
+  }
+
+  .hero-3d-detail-summary strong {
+    font-size: clamp(0.72rem, 0.84vw, 0.8rem);
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: 0.005em;
+    color: #fafafa;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.92);
+  }
+
+  .hero-3d-detail-summary small {
+    font-size: clamp(0.6rem, 0.74vw, 0.7rem);
+    line-height: 1.3;
+    color: #aaaab2;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.92);
+  }
+
+  .hero-3d-indicator-anchor {
     pointer-events: none !important;
   }
 
-  .hero-3d-callout {
+  .hero-3d-indicator {
     display: flex;
     align-items: center;
     width: max-content;
-    max-width: min(42vw, 330px);
+    max-width: min(36vw, 18rem);
     opacity: 0;
-    transform: translateY(-50%);
-    transition: opacity 380ms var(--ease-fluid);
+    transform: translate(
+      var(--hero-indicator-screen-shift, 0px),
+      -50%
+    );
+    will-change: opacity;
+    transition: opacity 460ms var(--ease-fluid);
   }
 
-  .hero-3d-callout.is-left {
+  .hero-3d-indicator.is-left {
     flex-direction: row-reverse;
-    transform: translate(-100%, -50%);
+    transform: translate(
+      calc(-100% + var(--hero-indicator-screen-shift, 0px)),
+      -50%
+    );
     text-align: right;
   }
 
-  .hero-3d-callout.is-active.is-facing {
+  .hero-3d-indicator.is-active.is-facing {
     opacity: 1;
   }
 
-  .hero-3d-callout-line {
+  .hero-3d-indicator-line {
     display: block;
-    flex: 0 0 clamp(48px, 6vw, 96px);
-    width: clamp(48px, 6vw, 96px);
+    flex: 0 0 clamp(2.5rem, 5vw, 4.5rem);
+    width: clamp(2.5rem, 5vw, 4.5rem);
     height: 1px;
-    background: rgba(244, 244, 245, 0.52);
-    transform: scaleX(0.58);
+    background: rgba(250, 250, 250, 0.86);
+    transform: scaleX(0.18);
     transform-origin: left center;
     transition: transform 420ms var(--ease-fluid);
+    box-shadow:
+      0 0 1px rgba(255, 255, 255, 0.72),
+      0 1px 7px rgba(0, 0, 0, 0.72);
   }
 
-  .hero-3d-callout.is-left .hero-3d-callout-line {
+  .hero-3d-indicator.is-left .hero-3d-indicator-line {
     transform-origin: right center;
   }
 
-  .hero-3d-callout.is-active.is-facing .hero-3d-callout-line {
+  .hero-3d-indicator.is-active.is-facing .hero-3d-indicator-line {
     transform: scaleX(1);
   }
 
-  .hero-3d-callout-copy {
-    display: grid;
-    gap: 0.22rem;
-    max-width: 190px;
-    padding-inline: 0.8rem;
-    transform: translateX(12px);
-    transition: transform 420ms var(--ease-fluid);
-  }
-
-  .hero-3d-callout.is-left .hero-3d-callout-copy {
-    transform: translateX(-12px);
-  }
-
-  .hero-3d-callout.is-active.is-facing .hero-3d-callout-copy {
-    transform: translateX(0);
-  }
-
-  .hero-3d-callout-copy strong {
-    font-size: clamp(0.68rem, 0.84vw, 0.78rem);
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: 0.015em;
+  .hero-3d-indicator strong {
+    max-width: 10rem;
+    padding-inline: 0.62rem;
     color: #fafafa;
-  }
-
-  .hero-3d-callout-copy small {
-    font-size: clamp(0.6rem, 0.74vw, 0.7rem);
-    line-height: 1.3;
-    color: #a1a1aa;
+    font-size: clamp(0.66rem, 0.76vw, 0.74rem);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.96);
   }
 
   .hero-3d-reduced-details {
@@ -336,37 +408,77 @@
   }
 }
 
-@keyframes hero-3d-loading-pulse {
+@keyframes hero-3d-callout-in {
   from {
-    opacity: 0.28;
-    transform: scale(0.76);
+    opacity: 0;
+    transform: translateY(3px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-3d-loading-spin {
+  to {
+    transform: rotate(1turn);
   }
 }
 
 @media (min-width: 768px) {
   .hero-3d-story {
-    height: 420dvh;
-    min-height: 420dvh;
+    height: 800svh;
+    min-height: 800svh;
   }
 }
 
 @media (max-width: 767px) {
+  .hero-3d-intro {
+    top: 13svh;
+    right: 1.25rem;
+    left: 1.25rem;
+    width: auto;
+  }
+
+  .hero-3d-intro p {
+    max-width: 9ch;
+    font-size: clamp(2.15rem, 11vw, 3rem);
+  }
+
   .hero-3d-callout {
-    max-width: 78vw;
+    max-width: none;
   }
 
-  .hero-3d-callout-line {
-    flex-basis: clamp(48px, 14vw, 64px);
-    width: clamp(48px, 14vw, 64px);
+  .hero-3d-loading {
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
-  .hero-3d-callout-copy {
-    max-width: 156px;
-    padding-inline: 0.65rem;
+  .hero-3d-narrative {
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: auto;
+    width: min(14.5rem, calc(100vw - 2rem));
+  }
+
+  .hero-3d-narrative-callouts {
+    grid-template-columns: 1fr;
+    gap: 0.62rem;
+  }
+
+  .hero-3d-indicator {
+    max-width: 72vw;
+  }
+
+  .hero-3d-indicator-line {
+    flex-basis: clamp(1.8rem, 9vw, 2.6rem);
+    width: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .hero-3d-indicator strong {
+    max-width: 8rem;
+    padding-inline: 0.48rem;
+    font-size: 0.64rem;
   }
 }
 

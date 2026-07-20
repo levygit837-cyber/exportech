@@ -12,7 +12,7 @@ import {
   lazy,
   useCallback,
   useEffect,
-  useMemo,
+  useLayoutEffect,
   useRef,
   useState,
   type ErrorInfo,
@@ -24,12 +24,24 @@ import {
   HERO_3D_MANIFEST,
   HERO_ANNOTATIONS,
   getActiveHeroAnnotations,
-  type Hero3DState,
+  getHeroChapter,
   type HeroAnnotationId,
+  type Hero3DVisualState,
+  type Hero3DState,
 } from "../data/hero3d";
 
 const DRAG_YAW_LIMIT = (18 * Math.PI) / 180;
 const DRAG_PITCH_LIMIT = (8 * Math.PI) / 180;
+const NARRATIVE_SETTLE_DELAY_MS = 180;
+let webGLSupport: boolean | null = null;
+let hero3DCanvasModule: Promise<typeof import("./Hero3DCanvas")> | null = null;
+
+function loadHero3DCanvas() {
+  hero3DCanvasModule ??= import("./Hero3DCanvas");
+  return hero3DCanvasModule;
+}
+
+const LazyHero3DCanvas = lazy(loadHero3DCanvas);
 
 type Hero3DExperienceProps = {
   scrollProgress: MotionValue<number>;
@@ -82,13 +94,45 @@ function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value));
 }
 
+function sameAnnotationIds(
+  current: readonly string[],
+  next: readonly string[],
+) {
+  return (
+    current.length === next.length &&
+    current.every((id, index) => id === next[index])
+  );
+}
+
+function retainAnnotationIds(
+  progress: number,
+  mobile: boolean,
+  current: HeroAnnotationId[],
+): HeroAnnotationId[] {
+  const active = getActiveHeroAnnotations(progress, mobile);
+  if (active.length > 0) return active;
+
+  const firstRangeStart = HERO_ANNOTATIONS[0]?.range[0] ?? 0;
+  const lastRangeEnd = HERO_ANNOTATIONS.at(-1)?.range[1] ?? 1;
+  const insideNarrative =
+    progress >= firstRangeStart && progress < lastRangeEnd;
+
+  // Small gaps between detail ranges are camera hand-offs, not moments where
+  // the interface should flash empty. Hold the previous callout until the
+  // next anchored detail is ready to replace it.
+  return insideNarrative ? current : [];
+}
+
 function supportsWebGL() {
+  if (webGLSupport !== null) return webGLSupport;
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(
-      canvas.getContext("webgl2") || canvas.getContext("webgl"),
-    );
+    const context = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    webGLSupport = Boolean(context);
+    context?.getExtension("WEBGL_lose_context")?.loseContext();
+    return webGLSupport;
   } catch {
+    webGLSupport = false;
     return false;
   }
 }
@@ -111,21 +155,16 @@ function useMobileViewport() {
   return mobile;
 }
 
-function sameAnnotations(
-  left: readonly HeroAnnotationId[],
-  right: readonly HeroAnnotationId[],
-) {
-  return left.length === right.length && left.every((id, index) => id === right[index]);
-}
-
 export default function Hero3DExperience({
   scrollProgress,
   reduceMotion,
 }: Hero3DExperienceProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const pointerSessionRef = useRef<PointerSession | null>(null);
-  const annotationTimerRef = useRef<number | null>(null);
   const keyboardTimerRef = useRef<number | null>(null);
+  const narrativeTimerRef = useRef<number | null>(null);
+  const mountedRef = useRef(true);
+  const shouldLoadRef = useRef(false);
   const mobile = useMobileViewport();
 
   const [experienceState, setExperienceState] =
@@ -134,12 +173,23 @@ export default function Hero3DExperience({
   const [isVisible, setIsVisible] = useState(true);
   const [attempt, setAttempt] = useState(0);
   const [requiresPageReload, setRequiresPageReload] = useState(false);
-  const [activeAnnotationIds, setActiveAnnotationIds] = useState<
-    HeroAnnotationId[]
-  >(() => getActiveHeroAnnotations(scrollProgress.get(), mobile));
+  const [narrativeMoving, setNarrativeMoving] = useState(false);
+  const [visualState, setVisualState] = useState<Hero3DVisualState>(() => {
+    const progress = scrollProgress.get();
+    return {
+      progress,
+      chapter: getHeroChapter(progress),
+      annotationIds: getActiveHeroAnnotations(progress, mobile),
+      settled: true,
+    };
+  });
+  const [indicatorIds, setIndicatorIds] = useState(
+    () => visualState.annotationIds,
+  );
 
   const dragYawTarget = useMotionValue(0);
   const dragPitchTarget = useMotionValue(0);
+  const renderedProgress = useMotionValue(scrollProgress.get());
   const dragYaw = useSpring(dragYawTarget, {
     stiffness: 210,
     damping: 28,
@@ -151,28 +201,19 @@ export default function Hero3DExperience({
     mass: 0.72,
   });
   const introOpacity = useTransform(
-    scrollProgress,
+    renderedProgress,
     [0, 0.09, 0.14],
     [1, 0.72, 0],
   );
-  const introY = useTransform(scrollProgress, [0, 0.14], [0, -18]);
-  const stageOpacity = useTransform(
-    scrollProgress,
-    [0, 0.94, 1],
-    [1, 1, 0],
-  );
-
-  const LazyHero3DCanvas = useMemo(
-    () => lazy(() => import("./Hero3DCanvas")),
-    [attempt],
-  );
+  const introY = useTransform(renderedProgress, [0, 0.14], [0, -18]);
 
   const resetDrag = useCallback(() => {
-    dragYawTarget.set(0);
-    dragPitchTarget.set(0);
+    if (dragYawTarget.get() !== 0) dragYawTarget.set(0);
+    if (dragPitchTarget.get() !== 0) dragPitchTarget.set(0);
   }, [dragPitchTarget, dragYawTarget]);
 
   const failExperience = useCallback((error?: unknown) => {
+    if (!mountedRef.current) return;
     if (
       error instanceof Error &&
       /dynamically imported module|loading (?:css )?chunk|module script failed/i.test(
@@ -181,6 +222,7 @@ export default function Hero3DExperience({
     ) {
       setRequiresPageReload(true);
     }
+    shouldLoadRef.current = false;
     setShouldLoad(false);
     setExperienceState("error");
     resetDrag();
@@ -192,24 +234,20 @@ export default function Hero3DExperience({
       failExperience();
       return;
     }
+    // Start fetching the renderer chunk before React reaches the lazy boundary.
+    // The guarded loader preserves the static-only reduced-motion path.
+    void loadHero3DCanvas();
+    shouldLoadRef.current = true;
     setExperienceState("loading");
     setShouldLoad(true);
   }, [failExperience, reduceMotion]);
 
-  useEffect(() => {
-    const host = hostRef.current;
-    if (!host || reduceMotion || shouldLoad || experienceState !== "poster") return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        observer.disconnect();
-        startExperience();
-      },
-      { rootMargin: "600px 0px", threshold: 0 },
-    );
-    observer.observe(host);
-    return () => observer.disconnect();
+  useLayoutEffect(() => {
+    if (reduceMotion || shouldLoad || experienceState !== "poster") return;
+    // This prototype hero is the first section of the page. Starting the
+    // renderer chunk in the layout phase removes an avoidable observer/paint
+    // waterfall while the eager poster continues to cover preparation.
+    startExperience();
   }, [experienceState, reduceMotion, shouldLoad, startExperience]);
 
   useEffect(() => {
@@ -225,55 +263,82 @@ export default function Hero3DExperience({
 
   useEffect(() => {
     if (!shouldLoad || experienceState !== "loading") return;
-    const timeout = window.setTimeout(failExperience, 12_000);
+    // Keep the static poster interactive on genuinely slow/software WebGL
+    // devices instead of tearing down a renderer that is still compiling.
+    // Production hardware normally finishes far sooner; this is a safety cap.
+    const timeout = window.setTimeout(failExperience, 20_000);
     return () => window.clearTimeout(timeout);
   }, [experienceState, failExperience, shouldLoad]);
 
   useEffect(() => {
     if (!reduceMotion) return;
+    shouldLoadRef.current = false;
     setShouldLoad(false);
     setExperienceState("poster");
     resetDrag();
   }, [reduceMotion, resetDrag]);
 
-  useEffect(() => {
-    const next = getActiveHeroAnnotations(scrollProgress.get(), mobile);
-    setActiveAnnotationIds((current) =>
-      sameAnnotations(current, next) ? current : next,
-    );
-  }, [mobile, scrollProgress]);
-
-  useMotionValueEvent(scrollProgress, "change", (progress) => {
+  useMotionValueEvent(scrollProgress, "change", () => {
+    pointerSessionRef.current = null;
     resetDrag();
-    const next = getActiveHeroAnnotations(progress, mobile);
-    if (sameAnnotations(activeAnnotationIds, next)) return;
-    if (annotationTimerRef.current !== null) {
-      window.clearTimeout(annotationTimerRef.current);
-    }
-    annotationTimerRef.current = window.setTimeout(() => {
-      setActiveAnnotationIds(next);
-      annotationTimerRef.current = null;
-    }, 120);
   });
 
-  useEffect(
-    () => () => {
-      if (annotationTimerRef.current !== null) {
-        window.clearTimeout(annotationTimerRef.current);
-      }
+  useMotionValueEvent(renderedProgress, "change", (progress) => {
+    setIndicatorIds((current) => {
+      const next = retainAnnotationIds(progress, mobile, current);
+      return sameAnnotationIds(current, next) ? current : next;
+    });
+  });
+
+  useEffect(() => {
+    const next = getActiveHeroAnnotations(renderedProgress.get(), mobile);
+    setIndicatorIds((current) =>
+      sameAnnotationIds(current, next) ? current : next,
+    );
+  }, [mobile, renderedProgress]);
+
+  const handleVisualState = useCallback((next: Hero3DVisualState) => {
+    if (narrativeTimerRef.current !== null) {
+      window.clearTimeout(narrativeTimerRef.current);
+      narrativeTimerRef.current = null;
+    }
+
+    if (!next.settled) {
+      // Keep the last stable explanation on screen while the camera moves.
+      // Replacing it with transient chapters is what caused fast-scroll text
+      // flashes; hiding it entirely made the narrative appear to be missing.
+      setNarrativeMoving(true);
+      return;
+    }
+
+    narrativeTimerRef.current = window.setTimeout(() => {
+      setVisualState(next);
+      setNarrativeMoving(false);
+      narrativeTimerRef.current = null;
+    }, NARRATIVE_SETTLE_DELAY_MS);
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
       if (keyboardTimerRef.current !== null) {
         window.clearTimeout(keyboardTimerRef.current);
       }
-    },
-    [],
-  );
+      if (narrativeTimerRef.current !== null) {
+        window.clearTimeout(narrativeTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleReady = useCallback(() => {
-    window.requestAnimationFrame(() => {
+    if (!mountedRef.current || !shouldLoadRef.current || reduceMotion) return;
+    setExperienceState((current) => {
+      if (current !== "loading") return current;
       setRequiresPageReload(false);
-      setExperienceState("ready");
+      return "ready";
     });
-  }, []);
+  }, [reduceMotion]);
 
   const handleRetry = () => {
     if (requiresPageReload) {
@@ -285,6 +350,7 @@ export default function Hero3DExperience({
       failExperience();
       return;
     }
+    shouldLoadRef.current = true;
     setExperienceState("loading");
     setShouldLoad(true);
   };
@@ -379,6 +445,12 @@ export default function Hero3DExperience({
         : experienceState === "error"
           ? "Visualização 3D indisponível. A imagem estática permanece disponível."
           : "Imagem estática do iPhone 17 Pro Max em laranja-cósmico.";
+  const visibleAnnotations = visualState.annotationIds
+    .map((id) => HERO_ANNOTATIONS.find((annotation) => annotation.id === id))
+    .filter((annotation) => annotation !== undefined);
+  const detailAnnotation = visibleAnnotations[0];
+  const narrativeVisible =
+    experienceState === "ready" && !reduceMotion;
 
   return (
     <div
@@ -389,10 +461,15 @@ export default function Hero3DExperience({
     >
       <motion.div
         className="hero-3d-stage absolute inset-0"
-        style={reduceMotion ? undefined : { opacity: stageOpacity }}
-        role="group"
-        aria-label="Visualização 3D interativa"
-        tabIndex={0}
+        role={reduceMotion ? "img" : "group"}
+        aria-label={
+          reduceMotion
+            ? "Imagem estática do iPhone 17 Pro Max"
+            : "Visualização 3D interativa"
+        }
+        tabIndex={
+          experienceState === "ready" && !reduceMotion ? 0 : undefined
+        }
         onKeyDown={handleKeyDown}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -427,11 +504,13 @@ export default function Hero3DExperience({
                 key={attempt}
                 assetAttempt={attempt}
                 scrollProgress={scrollProgress}
+                renderedProgress={renderedProgress}
                 dragYaw={dragYaw}
                 dragPitch={dragPitch}
-                activeAnnotationIds={activeAnnotationIds}
                 isVisible={isVisible}
                 mobile={mobile}
+                indicatorIds={indicatorIds}
+                onVisualState={handleVisualState}
                 onReady={handleReady}
                 onError={failExperience}
               />
@@ -440,9 +519,10 @@ export default function Hero3DExperience({
         ) : null}
 
         {experienceState === "loading" ? (
-          <p className="hero-3d-loading" role="status">
-            Preparando visualização 3D
-          </p>
+          <div className="hero-3d-loading" role="status">
+            <span aria-hidden="true" />
+            Preparando experiência 3D
+          </div>
         ) : null}
 
         {experienceState === "error" ? (
@@ -456,12 +536,39 @@ export default function Hero3DExperience({
       </motion.div>
 
       <motion.div
-        className="hero-3d-intro pointer-events-none absolute inset-x-0 top-[18svh] z-20 px-5 text-center md:top-[16svh] md:px-8"
+        className="hero-3d-intro pointer-events-none absolute z-20"
         style={reduceMotion ? undefined : { opacity: introOpacity, y: introY }}
       >
         <p>iPhone 17 Pro Max</p>
         <span>Laranja-cósmico</span>
       </motion.div>
+
+      {!reduceMotion ? (
+        <aside
+          className={`hero-3d-narrative ${narrativeVisible ? "is-visible" : ""} ${narrativeMoving ? "is-moving" : ""}`}
+          data-hero-3d-narrative={visualState.chapter}
+          aria-hidden="true"
+        >
+          <div className="hero-3d-detail-summary">
+            <strong>
+              {detailAnnotation?.title ??
+                (visualState.chapter === "intro"
+                  ? "iPhone 17 Pro Max"
+                  : visualState.chapter === "outro"
+                    ? "Pronto para escolher o seu?"
+                    : "Continue explorando")}
+            </strong>
+            <small>
+              {detailAnnotation?.body ??
+                (visualState.chapter === "intro"
+                  ? "Conheça cada detalhe em uma sequência contínua."
+                  : visualState.chapter === "outro"
+                    ? "Continue para comparar toda a linha de iPhones."
+                    : "O próximo detalhe aparece quando o enquadramento estabilizar.")}
+            </small>
+          </div>
+        </aside>
+      ) : null}
 
       {reduceMotion ? (
         <div className="hero-3d-reduced-details">
@@ -477,13 +584,15 @@ export default function Hero3DExperience({
         </div>
       ) : null}
 
-      <ul className="sr-only">
-        {HERO_ANNOTATIONS.map((annotation) => (
-          <li key={annotation.id}>
-            {annotation.title}: {annotation.body}
-          </li>
-        ))}
-      </ul>
+      {!reduceMotion ? (
+        <ul className="sr-only">
+          {HERO_ANNOTATIONS.map((annotation) => (
+            <li key={annotation.id}>
+              {annotation.title}: {annotation.body}
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {stateMessage}
       </p>
