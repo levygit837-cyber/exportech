@@ -9,6 +9,7 @@ dist/
 *.tsbuildinfo
 playwright-report/
 test-results/
+artifacts/product-audit/
 
 # OS / editor junk
 .DS_Store
