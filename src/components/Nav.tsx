@@ -4,8 +4,7 @@ import { Link, NavLink, useLocation } from "react-router";
 
 const links = [
   { label: "iPhones", to: "/iphones", route: true },
-  { label: "Lançamento", to: "/#iphone", route: false },
-  { label: "Benefícios", to: "/#beneficios", route: false },
+  { label: "Destaques", to: "/#destaques", route: false },
   { label: "Como escolher", to: "/#escolha", route: false },
 ] as const;
 
@@ -72,13 +71,12 @@ export default function Nav() {
           className={
             "pointer-events-auto flex w-full max-w-[1240px] items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-500 md:px-6 md:py-3 " +
             (scrolled || mobileOpen
-              ? "border-white/10 bg-[#111318]/88 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-2xl"
-              : "border-transparent bg-transparent")
+              ? "border-white/20 bg-[linear-gradient(135deg,rgba(255,255,255,0.12),rgba(17,19,24,0.58))] shadow-[0_14px_40px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.16)]"
+              : "border-white/15 bg-[linear-gradient(135deg,rgba(255,255,255,0.09),rgba(17,19,24,0.32))] shadow-[0_10px_30px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,0.14)]")
           }
           style={{
-            backdropFilter: scrolled || mobileOpen ? "blur(24px) saturate(180%)" : "none",
-            WebkitBackdropFilter:
-              scrolled || mobileOpen ? "blur(24px) saturate(180%)" : "none",
+            backdropFilter: "blur(20px) saturate(160%)",
+            WebkitBackdropFilter: "blur(20px) saturate(160%)",
           }}
         >
           <Link

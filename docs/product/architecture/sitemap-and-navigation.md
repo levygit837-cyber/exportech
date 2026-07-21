@@ -1,7 +1,7 @@
 # Mapa do site e navegação
 
-Status: arquitetura-alvo proposta
-Última atualização: 2026-07-15
+Status: arquitetura atual documentada e expansão proposta
+Última atualização: 2026-07-20
 
 ## Mapa do site desejado
 
@@ -23,58 +23,74 @@ Status: arquitetura-alvo proposta
     └── /privacidade
 ```
 
-Este é um mapa-alvo. Não é necessário publicar todas as rotas ao mesmo tempo.
+Este é um mapa-alvo. Ele não representa uma sequência obrigatória nem pressupõe que já exista conteúdo para todas as rotas.
+
+## Camadas de expansão
+
+### Mapa mínimo atual
+
+- `/`;
+- `/iphones`;
+- `/iphones/:slug`;
+- `*`.
+
+### Próxima expansão recomendada
+
+- nenhuma nova rota antes de validar a Home de curadoria e observar dúvidas reais.
+
+### Backlog condicionado a sinais de uso
+
+- `/comparar`;
+- `/guias`;
+- `/guias/:slug`.
+
+### Backlog condicionado a fatos comerciais
+
+- `/sobre`;
+- `/ajuda`;
+- `/atendimento`;
+- `/politicas/*`.
+
+Rotas condicionadas devem permanecer ausentes enquanto não houver conteúdo real. A quantidade de páginas não é uma medida de maturidade do produto.
 
 ## Rotas publicadas atualmente
 
-- `/`: home preservada com o catálogo completo durante a transição;
+- `/`: Home de curadoria com Hero 3D, três destaques e guia compacto;
 - `/iphones`: catálogo dedicado com todos os produtos existentes;
+- `/iphones/:slug`: página detalhada reutilizável, com acabamento e armazenamento preservados na query string;
 - `*`: página não encontrada com retorno seguro para home ou catálogo.
 
-As demais rotas deste documento continuam como arquitetura-alvo. `/iphones/:slug` não possui link ou placeholder público. O WhatsApp também permanece fora da interface até existir um número oficial.
+As demais rotas deste documento continuam como arquitetura-alvo. O CTA genérico de WhatsApp das páginas detalhadas permanece uma pendência comercial separada e não deve ser alterado até existir um número oficial aprovado.
 
 ## Responsabilidade de cada rota
 
 | Rota | Pergunta principal | Função | Condição de publicação |
 |---|---|---|---|
-| `/` | Por que devo continuar? | Impacto de marca, lançamento, caminhos selecionados e prévia de confiança | O catálogo deve existir antes da remoção do catálogo completo da home |
+| `/` | Por que devo continuar? | Curadoria, exploração 3D e caminhos claros para três modelos | Catálogo e detalhes permanecem acessíveis em rotas próprias |
 | `/iphones` | O que posso comprar? | Catálogo completo e configuração | Comportamento atual dos produtos preservado |
 | `/iphones/:slug` | Este é o modelo certo para mim? | Detalhes, opções e modelos relacionados | Template reutilizável e dados válidos |
-| `/comparar` | Qual é a diferença que realmente importa? | Apoio à decisão | Campos comparativos estruturados |
-| `/guias` | O que preciso entender antes? | Educação e profundidade editorial | Pelo menos dois artigos substanciais |
+| `/comparar` | Qual é a diferença que realmente importa? | Apoio à decisão | Dúvidas recorrentes e campos comparativos estruturados |
+| `/guias` | O que preciso entender antes? | Educação e profundidade editorial | Pelo menos um conteúdo substancial baseado em dúvida observada |
 | `/guias/:slug` | Este conteúdo responde à minha dúvida? | Um tema editorial específico | Revisor identificado e data de atualização |
 | `/sobre` | Por que confiar na Exportech? | Identidade empresarial verificável | História, canais, imagens e fatos reais |
 | `/ajuda` | Como funcionam compra e pós-venda? | Processos e navegação das políticas | Informações operacionais validadas |
 | `/atendimento` | Como falar com alguém? | Contato real e definição de expectativas | Canal ativo e política de resposta |
 | `/politicas/*` | Quais são os termos exatos? | Referência durável de políticas | Revisão comercial, operacional e legal |
 
-## Cabeçalho recomendado
+## Cabeçalho atual
 
 No desktop:
 
-1. Logo → `/`
-2. iPhones → `/iphones`
-3. Comparar → `/comparar`, somente depois de existir
-4. Guias → `/guias`, somente com conteúdo útil
-5. Sobre → `/sobre`, somente com evidências reais
-6. Ajuda → `/ajuda`, somente com políticas validadas
-7. Ação principal → `/atendimento` ou destino real do WhatsApp
+1. Logo → `/`;
+2. iPhones → `/iphones`;
+3. Destaques → `/#destaques`;
+4. Como escolher → `/#escolha`.
 
 Não exibir uma opção inativa como se estivesse pronta. Enquanto a rota não existir, é melhor omiti-la do que levar a uma página vazia.
 
-## Rodapé recomendado
+## Rodapé atual
 
-O rodapé concentra destinos secundários e legais:
-
-- Catálogo;
-- Como escolher;
-- Atendimento;
-- Pagamento;
-- Entrega;
-- Garantia;
-- Trocas e devoluções;
-- Privacidade;
-- identificação real da empresa, quando aprovada para publicação.
+O rodapé repete somente destinos reais: início, iPhones, destaques e como escolher. Atendimento, políticas, redes sociais e conteúdo institucional continuam ausentes até existirem de fato.
 
 ## Pesquisa, conta e sacola
 
@@ -142,5 +158,5 @@ Exemplo:
 1. publicar e validar `/iphones`;
 2. apontar um CTA seguro para a nova rota;
 3. verificar navegação, URL direta e retorno do navegador;
-4. substituir o catálogo completo da home por uma prévia selecionada;
+4. substituir o catálogo completo da home pelo Product Runway selecionado;
 5. manter a mesma fonte de dados para que o rollback não duplique conteúdo.

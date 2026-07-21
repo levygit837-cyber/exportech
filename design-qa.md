@@ -1,3 +1,44 @@
+# QA de design — Exportech
+
+## Home de curadoria Product Runway — 2026-07-20
+
+Estado atual: aprovada em Chromium desktop 1440 × 900 e mobile 390 × 844, incluindo o primeiro frame 3D, movimento reduzido, Product Runway, guia compacto e capítulo final.
+
+### Comparação obrigatória
+
+- Referência aprovada: `/Users/apple/.codex/generated_images/019f81ee-cb9a-78f3-a626-53040ccf779a/exec-06d14cc7-9370-4725-8d7a-56c36e911395.png`.
+- Implementação determinística: `artifacts/3d/apple-user-remaster/site-captures/home-runway-desktop-reduced.png` e `home-runway-mobile-reduced.png`.
+- Primeiro frame real: `home-runway-desktop-first-frame.png` e `home-runway-mobile-first-frame.png`.
+- Capítulo final: `home-runway-desktop-outro.png` e `home-runway-mobile-outro.png`.
+- A referência e a implementação foram abertas em uma única prancha lado a lado em `/tmp/exportech-home-design-comparison.png`.
+
+### Resultado por superfície
+
+- Tipografia: Geist preservada; escala, peso, tracking e quebras mantêm a hierarquia editorial da referência sem fontes substitutas.
+- Layout e espaçamento: Hero com texto à esquerda e aparelho completo à direita; três faixas alternadas no desktop e ordem texto → imagem → preço → CTA no mobile; ritmo vertical recalibrado para aproximar a densidade da referência.
+- Cores e superfícies: fundo contínuo escuro, divisores discretos, laranja do produto preservado e brilhos contidos atrás das mídias; não foram criadas ilustrações CSS substitutas.
+- Imagens: os produtos usam assets reais de `src/data/products.ts`, `object-contain` e `mediaScale`; não há cortes destrutivos nem placeholders.
+- Conteúdo: exatamente três caminhos editoriais; preços e imagens são dinâmicos; perfis do guia são apresentados como atalhos da interface, não como comportamento comprovado.
+- Ícones: somente Phosphor, com peso e alinhamento consistentes.
+- Estados: loading, erro, retry, ausência de WebGL, reduced motion, intro, narrativa, outro, seleção do guia e navegação por hash foram exercitados.
+- Acessibilidade: foco visível, alvos mínimos de 44 px, `aria-pressed`, `fieldset`/`legend`, `aria-live`, CTAs fora de `aria-hidden` e reduced motion sem carregar GLB, HDRI ou chunk do canvas.
+- Console: nenhuma mensagem de erro na inspeção final da Home pelo navegador interno.
+
+### Constatações corrigidas durante o QA
+
+- [P1] O poster mobile/desktop estava sendo capturado depois do scroll para o capítulo final e incorporava navegação/CTAs. A rotina foi reordenada, os WebPs foram recapturados do frame intro e o manifesto recebeu dimensões, bytes e SHA-256 novos.
+- [P1] No mobile, o bloco de preço/CTA tinha ordem CSS implícita e aparecia antes do texto. `.runway-commerce` passou a `order: 3`.
+- [P1] No erro 3D mobile, as ações comerciais interceptavam o botão de retry. O status recebeu camada superior e afastamento seguro; o cenário passou em desktop e mobile.
+- [P2] As faixas estavam mais altas que a composição aprovada. Altura mínima, padding desktop e altura da mídia foram reduzidos sem cortar os produtos.
+
+### Limites externos
+
+Safari/WebKit, aparelhos físicos, rede real/offline, hospedagem/CDN, fallback SPA em produção e licença vinculante do ativo 3D continuam pendentes. Esses gates não rebaixam o resultado do QA local Chromium, mas impedem declarar a experiência aprovada para produção.
+
+---
+
+## Histórico anterior
+
 # QA de design — restauração da Exportech
 
 ## Atualização: roteamento e catálogo `/iphones` em 2026-07-15
@@ -50,7 +91,7 @@ Bloqueada. As capturas de referência continuam disponíveis no histórico da ta
 - Fontes e tipografia: código-fonte e tokens restaurados; comparação renderizada bloqueada.
 - Espaçamento e ritmo do layout: estrutura restaurada; comparação renderizada bloqueada.
 - Cores e tokens visuais: tokens CSS originais restaurados; comparação renderizada bloqueada.
-- Qualidade e fidelidade das imagens: aprovada no nível dos arquivos; renders transparentes oficiais, canal alfa válido, mapeamento correto por modelo e acabamento, sem placeholders.
+- Qualidade e fidelidade das imagens: aprovada no nível dos arquivos; renders transparentes presentes no catálogo, canal alfa válido, mapeamento correto por modelo e acabamento, sem placeholders. Procedência e autorização de uso não foram comprovadas por esta verificação visual.
 - Textos e conteúdo: restaurados da implementação anterior, incluindo frase curta do hero, remoção de origem e remoção da seção de estatísticas.
 
 ## Verificação funcional
@@ -86,3 +127,5 @@ Bloqueada. As capturas de referência continuam disponíveis no histórico da ta
 - Conferir erros do console depois do primeiro carregamento completo das imagens.
 
 resultado histórico da restauração: bloqueado naquele momento
+
+final result: passed

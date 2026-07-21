@@ -1,7 +1,7 @@
 # Briefings de página e requisitos de evidência
 
 Status: especificação de conteúdo
-Última atualização: 2026-07-15
+Última atualização: 2026-07-20
 
 ## Estados de evidência
 
@@ -11,9 +11,26 @@ Toda afirmação que não seja diretamente um dado de produto deve possuir um de
 |---|---|---|
 | Confirmado | Informação fornecida e aprovada pelo responsável da empresa | Pode ser publicada com data de revisão |
 | Respaldado por fonte | Sustentado por fonte primária aplicável ao produto ou política exata | Pode ser publicado com atribuição quando necessário |
+| Hipótese a validar | Decisão de produto ou conteúdo ainda sem sinal suficiente de clientes | Pode orientar um experimento interno, mas não deve ser apresentada como fato |
 | Pendente de confirmação | Plausível, mas ainda não aprovado | Deve permanecer fora da interface pública |
 | Planejado | Capacidade ou decisão de roadmap futura | Pode aparecer somente em documentação interna |
 | Proibido | Falso, não verificável ou enganoso | Nunca publicar |
+
+## Evidência proporcional ao estágio
+
+A empresa não precisa acumular grande quantidade de depoimentos, cases ou métricas antes de evoluir o produto. A evidência mínima depende do tipo de afirmação:
+
+| Tipo | Evidência mínima |
+|---|---|
+| Dado de produto | Fonte primária e data de consulta |
+| Preço | Lista recebida, responsável, data de vigência e regra de apresentação |
+| Canal de contato | Destino ativo testado |
+| Processo comercial | Descrição aprovada de algo que já acontece |
+| Política | Definição operacional e revisão adequada antes da publicação |
+| Prioridade de produto | Sinal de uso, dúvida recorrente, observação ou entrevista |
+| Prova social | Registro real e consentimento aplicável |
+
+Na ausência dessa evidência, reduzir o escopo ou omitir o conteúdo. Não exigir provas sociais que a empresa ainda não tem e não fabricar substitutos.
 
 ## Fatos que precisam de confirmação
 
@@ -85,10 +102,10 @@ Conteúdo mínimo:
 - posicionamento em linguagem simples;
 - galeria e acabamentos;
 - armazenamento e preço;
-- três a cinco benefícios relevantes para o uso;
-- orientação “ideal para” e “considere outro modelo se”;
+- três a cinco benefícios respaldados por características do produto;
+- orientação comparativa somente quando houver fonte ou hipótese explicitamente testável;
 - produtos relacionados;
-- ação de atendimento;
+- ação de atendimento somente com destino real;
 - detalhes técnicos respaldados por fonte.
 
 Ação principal: consultar esta configuração.
@@ -98,7 +115,7 @@ Ação secundária: comparar com um modelo próximo.
 
 Objetivo do visitante: decidir entre dois ou três modelos.
 
-Dimensões mínimas de comparação:
+Dimensões candidatas de comparação, a confirmar por dúvidas observadas:
 
 - perfil de uso;
 - experiência de tela;
@@ -109,13 +126,13 @@ Dimensões mínimas de comparação:
 - preço inicial atual;
 - resumo da recomendação.
 
-Evitar uma tabela exaustiva de especificações. Explicar por que cada diferença importa.
+Não assumir que todas essas dimensões importam igualmente. Evitar uma tabela exaustiva de especificações e explicar por que cada diferença importa quando houver base técnica e sinal de interesse.
 
 ## Briefing de página: `/ajuda`
 
 Objetivo do visitante: entender compra e pós-venda.
 
-Conteúdo mínimo depois da validação:
+Conteúdo possível depois da validação:
 
 - antes da compra;
 - confirmação do pedido;
@@ -147,7 +164,7 @@ Ação principal: abrir o canal real de comunicação.
 
 Objetivo do visitante: verificar que a Exportech é uma empresa real e responsável.
 
-Conteúdo mínimo:
+Conteúdo mínimo para justificar a publicação:
 
 - história curta fornecida pela empresa;
 - evidências reais das pessoas, operação ou local;
@@ -158,11 +175,13 @@ Conteúdo mínimo:
 
 Não usar missão, visão e valores genéricos como substitutos para evidências.
 
+Se esses elementos ainda não existirem, adiar a rota. A ausência de `/sobre` é preferível a uma página genérica.
+
 ## Briefing de página: `/guias`
 
 Objetivo do visitante: aprender antes de escolher.
 
-Condição de lançamento: pelo menos dois guias substanciais.
+Condição de lançamento: pelo menos um guia substancial que responda a uma dúvida observada. Um segundo guia deve ser adicionado somente quando houver outro tema útil, sem criar uma estrutura editorial vazia.
 
 Cada guia precisa ter:
 

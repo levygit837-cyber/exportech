@@ -1,22 +1,24 @@
-# Decisão 004: hero interativo 3D futuro
+# Decisão 004: hero interativo 3D em prévia privada
 
-Status: planejado, não implementado
+Status: protótipo técnico privado, não aprovado para publicação
 Data: 2026-07-14
+Última revisão: 2026-07-20
 
 ## Decisão
 
-A Exportech pretende adicionar ao primeiro hero da home uma visualização 3D interativa do iPhone mais recente. O objetivo é gerar uma primeira impressão mais forte, tornar o produto mais tangível e diferenciar a vitrine de um catálogo convencional.
+A Exportech possui uma prévia privada de visualização 3D interativa do iPhone mais recente, implementada com React Three Fiber e protegida por flag e query string.
 
-Esta é uma decisão de roadmap, não uma funcionalidade disponível hoje.
+O protótipo comprova viabilidade técnica no ambiente local testado. Ele não comprova benefício para clientes, impacto em conversão, licença pronta para uso comercial, desempenho em aparelhos reais ou prontidão para publicação.
 
-## Por que não é uma prioridade inicial
+## Por que não é uma prioridade pública
 
-- ainda não foi identificado um modelo 3D fiel e com licença adequada;
-- o arquivo pode prejudicar o carregamento inicial;
-- a interação precisa funcionar em toque, mouse e teclado;
-- dispositivos móveis ou de baixo consumo precisam de alternativa;
-- o conteúdo e a arquitetura do site ainda possuem prioridades mais fundamentais;
-- o hero estático atual já oferece um fallback seguro.
+- a licença do modelo precisa ser revalidada e arquivada;
+- Safari desktop e iOS real ainda não foram aprovados;
+- falta medição em aparelho mobile físico;
+- a revisão visual humana das comparações A/B permanece pendente;
+- não existe evidência de que o 3D melhora compreensão, preferência ou ação comercial;
+- páginas de produto, verdade comercial mínima e aprendizado possuem dependências menores;
+- o hero estático continua sendo o fallback e a experiência pública.
 
 ## Opções consideradas
 
@@ -39,7 +41,7 @@ Uso recomendado: fallback ou protótipo conceitual, não solução 3D definitiva
 
 ### B. `<model-viewer>` com GLB otimizado
 
-Recomendado para o primeiro protótipo técnico.
+Foi a recomendação inicial para um primeiro protótipo técnico.
 
 Vantagens:
 
@@ -61,7 +63,7 @@ Referências:
 - [carregamento e poster](https://modelviewer.dev/examples/loading/);
 - [exemplo de desempenho com Lighthouse](https://modelviewer.dev/examples/lighthouse.html).
 
-### C. Cena customizada com Three.js
+### C. Cena customizada com React Three Fiber e Three.js
 
 Vantagens:
 
@@ -75,22 +77,30 @@ Desvantagens:
 - exige gerenciamento explícito de recursos WebGL;
 - dificulta rollback e testes.
 
-Decisão: adiar, a menos que o protótipo com `<model-viewer>` não consiga entregar a direção visual aprovada. O Three.js exige liberação explícita de recursos, conforme o [guia de limpeza do Three.js](https://threejs.org/manual/en/cleanup.html).
+Decisão revisada: esta opção foi implementada em prévia privada porque a narrativa exigiu controle de câmera, materiais, anotações e interação além do protótipo anterior. A implementação deve permanecer isolada e reversível. O Three.js exige liberação explícita de recursos, conforme o [guia de limpeza do Three.js](https://threejs.org/manual/en/cleanup.html).
 
-## Condições para iniciar o protótipo
+## Condições atendidas pelo protótipo
 
-O trabalho começa somente quando existirem:
+- GLB preparado para web e poster estático;
+- carregamento progressivo;
+- comportamento responsivo;
+- alternativa para `prefers-reduced-motion`;
+- controles por toque e teclado;
+- descrição textual acessível;
+- fallback para erro ou ausência de WebGL;
+- remoção por flag sem afetar preço, catálogo ou navegação;
+- validação local em Chromium desktop e emulação mobile.
 
-1. modelo GLB fiel e licenciado;
-2. poster estático aprovado;
-3. baseline de desempenho da home atual;
-4. orçamento de tamanho para biblioteca e modelo;
-5. comportamento definido para mobile e baixo consumo;
-6. alternativa para `prefers-reduced-motion`;
-7. controles por toque e teclado;
-8. descrição textual acessível;
-9. fallback para erro ou ausência de WebGL;
-10. método de remoção sem afetar preço, catálogo ou navegação.
+## Condições pendentes para publicação
+
+1. licença revalidada;
+2. aprovação visual humana;
+3. Safari desktop real;
+4. Safari iOS em aparelho real;
+5. medição em pelo menos um aparelho mobile físico;
+6. hipótese mensurável de benefício;
+7. comparação entre hero estático e 3D;
+8. confirmação de que a ação principal não piora.
 
 ## Orçamento provisório de desempenho
 
@@ -116,7 +126,7 @@ O protótipo deverá definir números finais, mas precisa respeitar estas regras
 
 O hero 3D deve ser uma melhoria isolada. Sua remoção precisa restaurar a imagem estática atual sem alterar dados de produto, preços, catálogo ou navegação.
 
-## Critérios de sucesso
+## Critérios de sucesso para promoção
 
 - melhora perceptível da apresentação sem prejudicar a ação principal;
 - carregamento progressivo estável;
@@ -126,3 +136,6 @@ O hero 3D deve ser uma melhoria isolada. Sua remoção precisa restaurar a image
 - poster e fallback visualmente completos;
 - produto, preço e CTA continuam disponíveis mesmo quando o 3D falha;
 - remoção possível por uma mudança pequena e reversível.
+- sinal observado de benefício para compreensão, exploração ou ação do visitante.
+
+As métricas técnicas detalhadas e as pendências atuais estão em [estado da prévia privada](../3d/prototype-status.md).

@@ -5,13 +5,33 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router";
+import { lazy, Suspense, useEffect } from "react";
 import type { HeroMode } from "./components/Hero";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import HomePage from "./pages/HomePage";
 import IphonesPage from "./pages/IphonesPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import { useEffect } from "react";
+
+const IphoneDetailPage = lazy(() => import("./pages/IphoneDetailPage"));
+
+function DetailPageFallback() {
+  return (
+    <section
+      aria-label="Carregando detalhes do iPhone"
+      className="min-h-[75dvh] pb-20 pt-32 md:pt-40"
+    >
+      <div className="mx-auto grid w-full max-w-[1240px] animate-pulse gap-8 px-5 md:px-8 lg:grid-cols-[1.55fr_0.85fr]">
+        <div className="aspect-[5/4] rounded-3xl bg-white/[0.04]" />
+        <div className="grid content-start gap-4 pt-4">
+          <div className="h-14 w-3/4 rounded-xl bg-white/[0.06]" />
+          <div className="h-4 w-full rounded bg-white/[0.04]" />
+          <div className="h-4 w-2/3 rounded bg-white/[0.04]" />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function RouteEffects() {
   const location = useLocation();
@@ -64,6 +84,14 @@ function RoutedContent({ heroMode }: { heroMode: HeroMode }) {
         <Routes location={location}>
           <Route path="/" element={<HomePage heroMode={heroMode} />} />
           <Route path="/iphones" element={<IphonesPage />} />
+          <Route
+            path="/iphones/:slug"
+            element={
+              <Suspense fallback={<DetailPageFallback />}>
+                <IphoneDetailPage />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </motion.main>
@@ -72,13 +100,7 @@ function RoutedContent({ heroMode }: { heroMode: HeroMode }) {
 }
 
 export default function App() {
-  const prototypeEnabled =
-    import.meta.env.VITE_ENABLE_HERO3D_PROTOTYPE === "true";
-  const heroMode: HeroMode =
-    prototypeEnabled &&
-    new URLSearchParams(window.location.search).get("hero3d") === "1"
-      ? "prototype-3d"
-      : "static";
+  const heroMode: HeroMode = "prototype-3d";
 
   return (
     <div className="relative min-h-[100dvh] overflow-x-clip bg-[#0A0A0A] text-zinc-50">

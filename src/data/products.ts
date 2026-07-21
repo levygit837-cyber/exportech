@@ -249,13 +249,60 @@ export const products: Product[] = [
 
 export const featuredProduct = products[0];
 
+export function getProductBySlug(slug: string | undefined) {
+  return products.find((product) => product.id === slug);
+}
+
+export function resolveProductConfiguration(
+  product: Product,
+  finishId?: string | null,
+  storageId?: string | null,
+) {
+  const finish =
+    product.finishes.find((item) => item.id === finishId) ??
+    product.finishes.find((item) => item.id === product.defaultFinish) ??
+    product.finishes[0];
+  const storage =
+    product.storages.find(
+      (item) =>
+        item.id === storageId && finish.pricesUSD[item.id] !== undefined,
+    ) ??
+    product.storages.find(
+      (item) =>
+        item.id === product.defaultStorage &&
+        finish.pricesUSD[item.id] !== undefined,
+    ) ??
+    product.storages.find(
+      (item) => finish.pricesUSD[item.id] !== undefined,
+    );
+
+  if (!finish || !storage) {
+    throw new Error(`Configuração incompleta para ${product.id}.`);
+  }
+
+  return {
+    finish,
+    finishId: finish.id,
+    priceUSD: getPriceUSD(product, finish.id, storage.id),
+    storageId: storage.id,
+  };
+}
+
 export function getPriceUSD(
   product: Product,
   finishId: string,
   storageId: StorageId,
 ) {
   const finish = product.finishes.find((item) => item.id === finishId);
-  return finish?.pricesUSD[storageId] ?? 0;
+  const price = finish?.pricesUSD[storageId];
+
+  if (price === undefined) {
+    throw new Error(
+      `Preço ausente para ${product.id}, acabamento ${finishId}, armazenamento ${storageId}.`,
+    );
+  }
+
+  return price;
 }
 
 export function convertUSDToBRL(valueUSD: number) {

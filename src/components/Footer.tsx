@@ -22,8 +22,8 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="/#beneficios" className="transition-colors hover:text-zinc-100">
-              Benefícios
+            <Link to="/#destaques" className="transition-colors hover:text-zinc-100">
+              Destaques
             </Link>
           </li>
           <li>

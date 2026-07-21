@@ -1,22 +1,32 @@
-# Hero 3D da Exportech: estado da prévia privada
+# Hero 3D da Exportech: estado da experiência padrão local
 
-- **Estado:** `prévia frontend privada, ainda não publicada`
-- **Última validação local:** 2026-07-16
+- **Estado:** `experiência padrão no checkout local atual; produção ainda não aprovada`
+- **Última atualização local:** 2026-07-20
 - **Implementação:** React Three Fiber + Three.js, sem `<model-viewer>`
 - **Modelo ativo na prévia:** derivado web otimizado para demonstração
 - **Modelo anterior:** preservado apenas como histórico e fallback técnico; não é carregado pela nova experiência
 
+## Limite da evidência
+
+As evidências deste documento são técnicas e locais. Elas demonstram que a prévia pode carregar, renderizar, responder a entradas e falhar com fallback no ambiente testado.
+
+Ainda não existe evidência de que o hero 3D:
+
+- melhora a compreensão do produto;
+- aumenta preferência pela marca;
+- gera mais exploração do catálogo;
+- melhora contato ou conversão;
+- supera o hero estático para visitantes reais.
+
+Esses resultados devem ser tratados como hipóteses e exigem comparação antes de qualquer promoção pública.
+
 ## Resultado disponível
 
-A home pública continua usando o hero estático. A narrativa 3D só é selecionada quando as duas condições abaixo são verdadeiras:
+A rota `/` usa o Hero 3D como experiência padrão independentemente de query string. O ramo estático continua no código como rollback e o poster permanece a primeira camada visível, inclusive em carregamento, erro, ausência de WebGL e movimento reduzido.
 
-```bash
-VITE_ENABLE_HERO3D_PROTOTYPE=true npm run dev
-```
+A composição é editorial e full-bleed: texto do iPhone 17 Pro Max à esquerda, aparelho em perspectiva frontal de três quartos à direita e fundo contínuo da página. Durante a narrativa há um atalho para `/#destaques`; no capítulo final aparecem ações para `/iphones/iphone-17-pro-max` e `/iphones`. Esses controles são HTML focável fora de qualquer árvore com `aria-hidden`.
 
-Depois, abrir `/?hero3d=1`. Sem a variável de ambiente, sem a query string ou com qualquer outro valor, a aplicação renderiza o hero estático existente.
-
-A variante privada é uma composição editorial full-bleed: não há card, moldura, raio, preço, parcelamento, CTA ou seletor de modo dentro do hero. O canvas é transparente e utiliza o mesmo fundo contínuo da página. Navegação, catálogo, produtos, preços, seletores, Buying Guide e rodapé permanecem no fluxo normal. `src/data/products.ts` não foi alterado.
+O catálogo completo vive em `/iphones`; a Home continua depois do sticky com Product Runway, guia compacto e rodapé. `src/data/products.ts` permanece a fonte de verdade dos produtos e preços.
 
 ## Controle do ativo
 
@@ -81,9 +91,9 @@ O HDRI Studio Small 08 foi obtido da Poly Haven e é distribuído sob CC0. Ele i
 
 As dependências estão fixadas em `three@0.185.1`, `@react-three/fiber@9.6.1`, `@react-three/drei@10.7.7` e `@types/three@0.185.1`. `@google/model-viewer` e o custom element anterior foram removidos.
 
-`Hero3DExperience.tsx` mantém o host leve, estado, poster, acessibilidade, observadores e interação. `Hero3DCanvas.tsx` é um chunk assíncrono e concentra todo código que importa Three.js, R3F e Drei. O chunk e os ativos não são solicitados na home estática.
+`Hero3DExperience.tsx` mantém o host leve, estado, poster, acessibilidade, observadores e interação. `Hero3DCanvas.tsx` é um chunk assíncrono e concentra todo código que importa Three.js, R3F e Drei. Em movimento reduzido, esse chunk, o GLB e o HDRI não são solicitados.
 
-A narrativa usa 320dvh abaixo de 768 px e 420dvh a partir de 768 px, com palco sticky de 100svh. O progresso do Motion é somente uma entrada normalizada. Posição, quaternion, alvo, FOV, escala e deslocamento do modelo são interpolados dentro de `useFrame`, com smootherstep, arco tridimensional, damping e slerp. O scroll reverso percorre o mesmo caminho no sentido oposto.
+A narrativa usa 720svh abaixo de 768 px e 800svh a partir de 768 px, com palco sticky de 100svh. O progresso do Motion é somente uma entrada normalizada. Posição, quaternion, alvo, FOV, escala e deslocamento do modelo são interpolados dentro de `useFrame`, com smootherstep, arco tridimensional, damping e slerp. O scroll reverso percorre o mesmo caminho no sentido oposto.
 
 Os capítulos são: introdução, Controle da Câmera, traseira/Sistema Fusion Pro, macro/LiDAR, lateral esquerda/alumínio e Botão de Ação, frente/tela e saída. Há no máximo duas anotações simultâneas no desktop e uma no mobile. As linhas são ancoradas ao modelo, testam a face visível e oclusão, e usam histerese de 120 ms para reduzir flicker.
 
@@ -98,37 +108,33 @@ Não há OrbitControls ou modo manual. Drag horizontal acrescenta temporariament
 - `frameloop="demand"`; fora da viewport o Canvas muda para `never`.
 - DPR adaptativo: desktop 1–2; mobile 1–1,5.
 - Shadow map 1024, reduzido para 512; anisotropia 8, reduzida para 4.
-- Carregamento automático via `IntersectionObserver` com `rootMargin` de 600 px.
+- Carregamento automático no primeiro layout do hero, mantendo o poster durante a preparação; o observador controla a atividade fora da viewport.
 - Poster imediato e crossfade de 250 ms após o primeiro frame completo.
 - Estados explícitos: `poster`, `loading`, `ready` e `error`.
 - Timeout de 12 s, Error Boundary, fallback de WebGL e tratamento de perda de contexto.
 - Retry invalida as URLs do GLB e do HDRI para não reutilizar uma rejeição em cache.
 - Conteúdo visual das anotações marcado como decorativo; uma lista HTML estável fornece o mesmo conteúdo ao leitor de tela.
 
-Com `prefers-reduced-motion: reduce`, a história passa a 100svh, o canvas não é montado, o poster permanece estático, drag e rotação são desativados e todos os detalhes aparecem em lista HTML estável.
+Com `prefers-reduced-motion: reduce`, a história passa a 100svh, o canvas não é montado, o poster permanece estático, drag e rotação são desativados e os dois CTAs aparecem imediatamente. Uma lista HTML não visual mantém os detalhes disponíveis para tecnologias assistivas.
 
 ## Validação executada
 
 ### Build e isolamento
 
-- `npm run build` passou com a flag ausente/desabilitada.
-- A build padrão remove `dist/models/iphone-17-pro-max` e não distribui GLB, HDRI ou posters privados.
-- A rota `/` não solicitou Three.js, R3F, Drei, HDRI ou GLB durante a inspeção de Network.
-- Uma build privada com a flag habilitada passou e incluiu os ativos necessários.
-- O host `Hero3DExperience` também é assíncrono: aproximadamente 7,42 kB bruto / 3,17 kB gzip.
-- O chunk assíncrono `Hero3DCanvas` ficou em aproximadamente 1.036,55 kB bruto / 286,77 kB gzip. Nenhum dos dois chunks pertence ao caminho de rede da home estática.
-- Contra o commit-base estático, o main atual passou de 381,16 para 387,65 kB bruto e de 118,49 para 121,05 kB gzip. O delta do caminho inicial ficou em aproximadamente 6,49 kB bruto / 2,56 kB gzip; Three.js, R3F e Drei permanecem integralmente nos chunks assíncronos.
-- O CSS passou de 56,26 para 61,19 kB bruto e de 9,76 para 11,11 kB gzip, delta referente ao palco, callouts, fallback e reduced motion.
-- `git diff --check` e a inspeção final de dependências fazem parte do fechamento desta worktree.
+- `npm run build` passou com o Hero 3D como experiência padrão.
+- `Hero3DExperience` e `Hero3DCanvas` continuam em chunks assíncronos separados do main.
+- O chunk do canvas concentra Three.js, R3F e Drei; o teste de movimento reduzido confirma que ele, o GLB e o HDRI não são solicitados nesse caminho.
+- O manifesto dos posters registra dimensões, bytes, SHA-256 e a captura por `tools/3d/capture_runtime_posters.mjs`.
+- Cada poster permanece abaixo de 1 MB e o orçamento combinado de modelo, HDRI e poster continua protegido pela suíte dedicada.
 
 ### Viewports e comportamento
 
-Inspeção Chromium local concluída em 1440 × 900, 1024 × 768, 768 × 1024 e 390 × 844. Foram verificados intro, laterais, traseira, macro, frente, saída, drag, teclado, scroll rápido, reversão, liberação do sticky, poster/canvas sem mudança de dimensões e ausência de overflow horizontal.
+Inspeção Chromium local desta versão concluída em 1440 × 900 e 390 × 844. Foram verificados intro, laterais, traseira, macro, frente, saída, drag, teclado, scroll rápido, reversão, liberação do sticky, poster/canvas sem mudança de dimensões e ausência de overflow horizontal.
 
 Também foram verificados:
 
-- `/` estático sem alteração do hero comercial;
-- variante sem preço, parcelamento, CTA ou card de mídia;
+- Hero 3D como padrão com poster e rollback estático preservados;
+- ações comerciais somente no `outro` e imediatamente no reduced motion;
 - máximo de duas anotações no desktop e uma no mobile;
 - reduced motion sem GLB, chunk 3D ou HDRI;
 - GLB bloqueado/404 com timeout e fallback persistente;
@@ -138,6 +144,8 @@ Também foram verificados:
 - WebGL indisponível antes do retry;
 - recuperação por `Tentar novamente` depois que o recurso volta a ficar disponível;
 - nenhum scroll trap no gesto vertical.
+
+As capturas da Home atual estão em `artifacts/3d/apple-user-remaster/site-captures/home-runway-*`, incluindo primeiro frame, `outro` e baselines completos em movimento reduzido.
 
 ### Referência de desempenho
 
@@ -160,12 +168,12 @@ Essa medição usa `requestAnimationFrame` e Long Tasks como referência de exec
 - Um ciclo offline completo desde o primeiro carregamento. Os fallbacks equivalentes de recurso e timeout já foram exercitados, mas esse cenário específico não deve ser descrito como concluído.
 - Revisão visual humana de highlights, UVs, pretos, lentes, vidro, botões e cor laranja em todos os ângulos críticos.
 
-Enquanto essas pendências existirem, o protótipo não deve ser promovido para `/`, publicado em hospedagem aberta nem descrito como funcionalidade lançada.
+Enquanto essas pendências existirem, a experiência pode continuar como padrão no checkout local atual, mas não deve ser descrita como aprovada para produção ou publicada em hospedagem aberta.
 
 ## Rollback
 
-1. Remover ou definir `VITE_ENABLE_HERO3D_PROTOTYPE=false`.
-2. Executar a build padrão e confirmar que `dist/models/iphone-17-pro-max` não existe.
-3. Se a prévia deixar de ser necessária, remover apenas os ativos 3D da branch/worktree privada e os componentes `Hero3DExperience`/`Hero3DCanvas`.
+1. Alterar `heroMode` em `src/App.tsx` de `prototype-3d` para `static`.
+2. Executar a build padrão e verificar a Home estática.
+3. Se a experiência deixar de ser necessária, remover os ativos 3D e os componentes `Hero3DExperience`/`Hero3DCanvas` em uma mudança separada e revisável.
 4. Manter o ramo estático de `Hero.tsx`, `src/data/products.ts`, rotas e seções comerciais intactos.
 5. Restaurar a dependência anterior somente se surgir uma necessidade técnica independente; ela não é necessária para o rollback do hero público.

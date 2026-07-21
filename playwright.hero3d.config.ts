@@ -33,8 +33,7 @@ export default defineConfig({
   },
   webServer: {
     command:
-      `VITE_ENABLE_HERO3D_PROTOTYPE=true npm run build && ` +
-      `npm run preview -- --host 127.0.0.1 --port ${hero3DPort} --strictPort`,
+      `npm run build && npm run preview -- --host 127.0.0.1 --port ${hero3DPort} --strictPort`,
     url: `http://127.0.0.1:${hero3DPort}`,
     reuseExistingServer: false,
     timeout: 180_000,

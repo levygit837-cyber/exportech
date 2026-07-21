@@ -1,11 +1,13 @@
 import type { MotionValue } from "motion/react";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useMotionValueEvent,
   useSpring,
   useTransform,
 } from "motion/react";
+import { ArrowDown, ArrowRight } from "@phosphor-icons/react";
 import {
   Component,
   Suspense,
@@ -20,6 +22,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from "react";
+import { Link } from "react-router";
 import {
   HERO_3D_MANIFEST,
   HERO_ANNOTATIONS,
@@ -29,6 +32,7 @@ import {
   type Hero3DVisualState,
   type Hero3DState,
 } from "../data/hero3d";
+import { emitInteraction } from "../lib/interactionEvents";
 
 const DRAG_YAW_LIMIT = (18 * Math.PI) / 180;
 const DRAG_PITCH_LIMIT = (8 * Math.PI) / 180;
@@ -449,8 +453,18 @@ export default function Hero3DExperience({
     .map((id) => HERO_ANNOTATIONS.find((annotation) => annotation.id === id))
     .filter((annotation) => annotation !== undefined);
   const detailAnnotation = visibleAnnotations[0];
+  const showCommercialActions =
+    reduceMotion ||
+    experienceState === "error" ||
+    (visualState.chapter === "outro" && visualState.settled);
+  const showSkip =
+    !reduceMotion &&
+    (experienceState === "error" || visualState.chapter !== "outro");
   const narrativeVisible =
-    experienceState === "ready" && !reduceMotion;
+    experienceState === "ready" &&
+    !reduceMotion &&
+    visualState.chapter !== "intro" &&
+    !showCommercialActions;
 
   return (
     <div
@@ -541,7 +555,73 @@ export default function Hero3DExperience({
       >
         <p>iPhone 17 Pro Max</p>
         <span>Laranja-cósmico</span>
+        <small>
+          Câmeras avançadas, tela ampla e a maior autonomia da linha iPhone 17.
+        </small>
       </motion.div>
+
+      <AnimatePresence initial={false}>
+        {showSkip ? (
+          <motion.div
+            key="hero-skip"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.24 }}
+          >
+            <Link
+              to="/#destaques"
+              onClick={() =>
+                emitInteraction({
+                  name: "hero_skip",
+                  destination: "/#destaques",
+                })
+              }
+              className="hero-3d-skip"
+            >
+              Pular para os modelos
+              <ArrowDown size={14} weight="bold" aria-hidden />
+            </Link>
+          </motion.div>
+        ) : null}
+        {showCommercialActions ? (
+          <motion.div
+            key="hero-actions"
+            className="hero-3d-actions"
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.32, 0.72, 0, 1] }}
+          >
+            <Link
+              to="/iphones/iphone-17-pro-max"
+              onClick={() =>
+                emitInteraction({
+                  name: "hero_product_open",
+                  productId: "iphone-17-pro-max",
+                  destination: "/iphones/iphone-17-pro-max",
+                })
+              }
+              className="hero-3d-action-primary"
+            >
+              Conhecer o iPhone 17 Pro Max
+              <ArrowRight size={15} weight="bold" aria-hidden />
+            </Link>
+            <Link
+              to="/iphones"
+              onClick={() =>
+                emitInteraction({
+                  name: "hero_catalog_open",
+                  destination: "/iphones",
+                })
+              }
+              className="hero-3d-action-secondary"
+            >
+              Ver todos os iPhones
+            </Link>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       {!reduceMotion ? (
         <aside

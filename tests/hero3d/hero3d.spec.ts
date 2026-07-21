@@ -269,26 +269,25 @@ async function stopCalloutSampling(page: Page) {
   }, calloutSelector);
 }
 
-test.describe("hero 3D privado", () => {
-  test("exige opt-in por query mesmo na build habilitada", async ({ page }) => {
-    const runtime = monitorRuntime(page);
-
-    for (const path of ["/", "/?hero3d=0"]) {
+test.describe("hero 3D", () => {
+  test("é a experiência padrão independentemente da query", async ({ page }) => {
+    for (const path of ["/", "/?hero3d=0", "/?hero3d=1"]) {
       await page.goto(path);
-      await expect(page.locator(storySelector)).toHaveCount(0);
-      await expect(
-        page.getByRole("heading", { name: "iPhone 17 Pro Max." }),
-      ).toBeVisible();
-      await page.waitForLoadState("networkidle");
-      expect(runtime.localRequests.filter(isHero3DResource)).toEqual([]);
+      await expect(page.locator(storySelector)).toHaveCount(1);
+      await expect(page.locator(experienceSelector)).toHaveAttribute(
+        "data-hero-3d-state",
+        /poster|loading|ready/,
+      );
     }
+  });
 
+  test("atalho libera a narrativa e posiciona os destaques", async ({ page }) => {
     await page.goto("/?hero3d=1");
-    await expect(page.locator(storySelector)).toHaveCount(1);
-    await expect(page.locator(experienceSelector)).toHaveAttribute(
-      "data-hero-3d-state",
-      /poster|loading|ready/,
-    );
+    const skip = page.getByRole("link", { name: "Pular para os modelos" });
+    await expect(skip).toBeVisible();
+    await skip.click();
+    await expect(page).toHaveURL(/\/#destaques$/);
+    await expect(page.locator("#destaques")).toBeInViewport();
   });
 
   test("percorre início, meio, fim e retorno com callouts estáveis", async ({
@@ -310,11 +309,20 @@ test.describe("hero 3D privado", () => {
       await expectCalloutsInsideViewport(page);
     }
     await scrollToProgress(page, 1, { chapter: "outro" });
+    await expect(
+      page.getByRole("link", { name: "Conhecer o iPhone 17 Pro Max" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Ver todos os iPhones" }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Pular para os modelos" }),
+    ).toHaveCount(0);
     const catalogY = await page.evaluate(
       () => window.scrollY + window.innerHeight * 0.6,
     );
     await setInstantScroll(page, catalogY);
-    await expect(page.locator("#loja")).toBeInViewport();
+    await expect(page.locator("#destaques")).toBeInViewport();
 
     for (const progress of [...chapterProgress].reverse()) {
       await scrollToProgress(page, progress);
@@ -543,12 +551,15 @@ test.describe("hero 3D privado", () => {
       "poster",
     );
     await expect(page.locator(canvasSelector)).toHaveCount(0);
-    await expect(page.locator(".hero-3d-reduced-details li")).toHaveCount(
-      HERO_ANNOTATIONS.length,
-    );
     await expect(page.locator(".hero-3d-experience li")).toHaveCount(
       HERO_ANNOTATIONS.length,
     );
+    await expect(
+      page.getByRole("link", { name: "Conhecer o iPhone 17 Pro Max" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Ver todos os iPhones" }).first(),
+    ).toBeVisible();
     await expect
       .poll(async () =>
         page.locator(storySelector).evaluate(
@@ -597,24 +608,18 @@ test.describe("hero 3D privado", () => {
       const publicBuildRoot = testInfo.outputPath("public-build-root");
       const publicOutput = resolve(publicBuildRoot, "dist");
       mkdirSync(publicBuildRoot, { recursive: true });
-      const childEnvironment = { ...process.env };
-      delete childEnvironment.VITE_ENABLE_HERO3D_PROTOTYPE;
       execFileSync(
         resolve(repositoryRoot, "node_modules/.bin/vite"),
         ["build", repositoryRoot, "--outDir", publicOutput, "--emptyOutDir"],
         {
-          // The current Vite isolation plugin resolves `dist` from cwd. Building
-          // from a disposable cwd keeps the public-build assertion isolated from
-          // the private preview that Playwright is exercising concurrently.
           cwd: publicBuildRoot,
-          env: childEnvironment,
           stdio: "pipe",
           maxBuffer: 10 * 1024 * 1024,
         },
       );
       expect(
         existsSync(resolve(publicOutput, "models/iphone-17-pro-max")),
-      ).toBe(false);
+      ).toBe(true);
 
       const publicFile = (url: string) =>
         resolve(repositoryRoot, "public", url.replace(/^\//, ""));

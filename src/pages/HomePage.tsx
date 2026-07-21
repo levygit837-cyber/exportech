@@ -1,7 +1,6 @@
-import BentoBenefits from "../components/BentoBenefits";
 import BuyingGuide from "../components/BuyingGuide";
 import Hero, { type HeroMode } from "../components/Hero";
-import ProductShowcase from "../components/ProductShowcase";
+import ProductRunway from "../components/ProductRunway";
 
 export default function HomePage({ heroMode }: { heroMode: HeroMode }) {
   return (
@@ -12,8 +11,7 @@ export default function HomePage({ heroMode }: { heroMode: HeroMode }) {
         content="Compare modelos, armazenamentos, acabamentos e estimativas de iPhone em BRL, com referência original em USD."
       />
       <Hero mode={heroMode} />
-      <ProductShowcase />
-      <BentoBenefits />
+      <ProductRunway />
       <BuyingGuide />
     </>
   );

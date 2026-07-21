@@ -1,7 +1,8 @@
 # Pipeline de produção 3D — iPhone 17 Pro Max
 
-- Status: modelo preparado e validado; integração frontend não implementada
+- Status: candidato histórico validado tecnicamente no pipeline Blender; não é o ativo da prévia frontend atual
 - Data: 2026-07-15
+- Revisão de contexto: 2026-07-20
 - Blender: 3.6.23 LTS Intel
 - Render: Eevee, 64 amostras, sem bloom
 
@@ -13,12 +14,12 @@ O `.blend` reproduzível permanece ignorado em:
 
 - `.tools/models/taufiq-k-working/iphone-17-pro-max-production.blend`
 
-Os ativos promovidos para integração futura são:
+Os ativos produzidos como candidato histórico são:
 
 - `public/models/iphone-17-pro-max/iphone-17-pro-max-optimized.glb`
 - `public/models/iphone-17-pro-max/poster.webp`
 
-Nenhum componente React, CSS, rota, dependência ou comportamento de scroll foi modificado nesta branch.
+Esta etapa não modificou componente React, CSS, rota, dependência ou comportamento de scroll. Uma implementação posterior adotou outro ativo e React Three Fiber; consulte [estado da prévia privada](prototype-status.md).
 
 ## Inventário validado
 
@@ -142,16 +143,16 @@ O exportador oferece `--draco` para uma experiência futura. Em teste local, Dra
   --draco
 ```
 
-Antes de qualquer promoção dessa variante, o futuro componente `<model-viewer>` ou outro carregador deverá ser implementado e validado em desktop, mobile, rede limitada, fallback e ausência de WebGL.
+Antes de qualquer reutilização dessa variante, ela precisa ser integrada ao carregador atual ou a outro carregador e validada em desktop, mobile, rede limitada, fallback e ausência de WebGL.
 
 ## Limitações restantes
 
-- A timeline de scroll, controles de câmera e carregamento progressivo ainda não existem.
+- Este candidato histórico não foi integrado à timeline de scroll, aos controles de câmera ou ao carregamento progressivo da prévia atual.
 - A tela não possui sequência final de inicialização.
 - Não foram modelados sensores internos ou seções técnicas inexistentes no fonte.
 - As variantes laranja cósmico e azul profundo não foram produzidas; prata é a única variante desta etapa.
 - O Mac Intel atual validou Blender/Eevee e reimportação, mas não substitui testes futuros em navegadores e dispositivos móveis reais.
-- Acessibilidade, movimento reduzido, interação por teclado/toque e fallback de execução pertencem à futura integração frontend.
+- Acessibilidade, movimento reduzido, interação por teclado/toque e fallback foram tratados na implementação posterior, mas não foram validados com este candidato.
 
 ## Relatórios
 

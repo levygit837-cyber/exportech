@@ -2,67 +2,64 @@
 
 Status: sequência proposta
 Horizonte de decisão: entregas incrementais
-Última atualização: 2026-07-15
+Última atualização: 2026-07-20
 
 ## Decisão executiva
 
-A primeira grande implementação deve ser uma rota dedicada de catálogo construída com os dados e componentes que já existem. Somente depois de essa rota estar estável a home deve deixar de renderizar o catálogo completo.
+Roteamento, catálogo dedicado, páginas reutilizáveis de produto e a Home de curadoria já foram implementados localmente. A próxima fase não deve pressupor que a empresa possua cases, avaliações, histórico institucional ou políticas completas.
 
-A sequência é propositalmente transitória:
+A sequência revisada prioriza superfícies que podem ser construídas com evidências disponíveis e cria aprendizado antes de ampliar o site:
 
-1. tornar a navegação verdadeira e preparar os fatos comerciais;
-2. adicionar roteamento sem retirar a experiência atual;
-3. publicar o catálogo usando os ativos existentes;
-4. reduzir a home depois da verificação do catálogo;
-5. adicionar conteúdo real de suporte quando os fatos estiverem confirmados;
-6. criar páginas reutilizáveis de produto;
-7. adicionar comparação e profundidade editorial;
-8. experimentar 3D somente depois da estabilização da arquitetura e do desempenho.
+1. confirmar o conjunto mínimo de verdade comercial;
+2. concluir a publicação técnica do catálogo e medir ações essenciais;
+3. manter as páginas reutilizáveis de produto com dados verificáveis;
+4. validar a Home de curadoria como experimento reversível;
+5. registrar dúvidas e sinais de interesse para decidir entre comparação, guias e suporte;
+6. publicar atendimento, ajuda, políticas e conteúdo institucional somente na proporção dos fatos reais disponíveis;
+7. manter o rollback estático do hero 3D e não considerar a experiência pronta para produção até concluir validação legal, visual, técnica em dispositivos reais e de valor para o cliente.
 
 ## Modelo de priorização
 
-Cada iniciativa é avaliada por sete critérios:
+Cada iniciativa é avaliada por critérios observáveis:
 
 | Critério | Pergunta |
 |---|---|
-| Valor para o cliente | Ajuda o visitante a entender, confiar ou escolher? |
+| Problema ou hipótese | Qual necessidade acreditamos atender e por que ainda é uma hipótese? |
 | Reaproveitamento | Os dados, componentes e imagens atuais resolvem boa parte do trabalho? |
-| Impacto na confiança | Remove ambiguidade ou oferece segurança real? |
 | Prontidão de conteúdo | Já existem informações verificadas para publicar? |
 | Esforço de implementação | Quanto código, conteúdo e QA são necessários? |
 | Risco | Pode introduzir problemas de rota, desempenho, operação ou comunicação? |
-| Valor de transição | Torna a próxima entrega mais simples e segura? |
+| Sinal de validação | Que comportamento, dúvida ou resultado indicará se devemos continuar? |
 
-Nenhum critério decide sozinho. Uma página tecnicamente simples, mas preenchida com fatos não confirmados, não está pronta. Um hero 3D de alto impacto, mas sem modelo licenciado e fallback, não é prioridade inicial.
+Os rótulos de valor usados anteriormente eram julgamentos internos, não conclusões baseadas em tráfego, entrevistas ou conversão. Nenhum critério decide sozinho. Uma página tecnicamente simples, mas preenchida com fatos não confirmados, não está pronta. Uma experiência visual tecnicamente forte não é prioridade pública sem licença, validação em hardware real e hipótese mensurável.
 
 ## Iniciativas ordenadas
 
-| Ordem | Iniciativa | Valor | Reaproveitamento | Prontidão | Esforço | Risco | Motivo |
-|---:|---|---|---|---|---|---|---|
-| 0 | Navegação verdadeira e inventário de fatos | Alto | Alto | Alta | Muito baixo | Baixo | Remove controles enganosos e inicia o trabalho de confiança sem bloquear engenharia |
-| 1 | Base de rotas e `/iphones` | Alto | Muito alto | Alta | Baixo a médio | Baixo | Reutiliza o catálogo e cria o primeiro destino real fora da home |
-| 2 | Simplificação da home | Alto | Alto | Alta após a etapa 1 | Baixo a médio | Baixo | Remove repetição somente depois de existir um acesso seguro ao catálogo completo |
-| 3A | `/ajuda` e `/atendimento` | Muito alto | Médio | Depende dos fatos comerciais | Baixo tecnicamente | Médio no conteúdo | Grande ganho de confiança, mas exige políticas e canais validados |
-| 3B | Rota reutilizável de produto | Alto | Alto | Alta | Médio | Baixo a médio | Trabalho seguro quando os fatos de suporte ainda não estão prontos; um template atende todos os modelos |
-| 4 | `/comparar` | Alto | Médio | Depende de especificações estruturadas | Médio | Médio | Útil depois da normalização dos dados de produto |
-| 5 | `/guias` com dois artigos fortes | Médio a alto | Médio | Exige conteúdo editorial | Médio | Baixo | Cria credibilidade e profundidade sem venda direta |
-| 6 | `/sobre` | Alto potencial de confiança | Baixo | Depende de evidências reais | Baixo tecnicamente | Alto nas afirmações | Publicar somente com história, imagens, canais e fatos reais |
-| 7 | Hero interativo 3D | Alta diferenciação | Baixo | Baixa hoje | Alto | Alto | Depende de modelo licenciado, desempenho, controles e fallbacks |
-| Adiado | Conta, sacola e pesquisa | Potencialmente alto depois | Baixo | Baixa | Alto | Alto | Não devem aparecer antes dos fluxos reais existirem |
-
-As etapas 3A e 3B são alternativas paralelas. Se o conteúdo de suporte estiver validado, ajuda vem primeiro. Caso contrário, páginas de produto avançam enquanto o trabalho comercial continua.
+| Ordem | Iniciativa | Estado | Evidência necessária | Sinal de validação |
+|---:|---|---|---|---|
+| 0 | Verdade comercial mínima | Em aberto | canal oficial, responsável pelo catálogo, vigência dos preços e limites da oferta | informações aprovadas e com responsável |
+| 1 | Publicação e medição de `/iphones` | Implementada localmente, publicação pendente | fallback de SPA e hospedagem real | URLs diretas funcionando e ações essenciais registradas |
+| 2 | `/iphones/:slug` reutilizável | Implementada localmente | dados atuais e especificações de fonte primária | acesso aos detalhes, configurações consultadas e contato iniciado |
+| 3 | Home de curadoria com Product Runway | Implementada localmente, validação externa pendente | catálogo estável e comparação antes/depois | navegação para catálogo e produto não piora |
+| 4 | Coleta de aprendizado | Próxima atividade contínua | eventos básicos, dúvidas e conversas | padrões recorrentes suficientes para ordenar o backlog |
+| 5 | `/comparar` ou `/guias` | Condicionada aos sinais | critérios de decisão ou dúvidas recorrentes | uso da ferramenta ou leitura útil |
+| 6 | Atendimento e ajuda mínimos | Condicionada à operação real | canal ativo e processo executado | contatos chegam ao destino e expectativas são cumpridas |
+| 7 | `/sobre` e políticas completas | Adiada | fatos empresariais e revisão adequada | conteúdo aprovado, específico e revisável |
+| 8 | Hero interativo 3D | Experiência padrão local, produção não aprovada | licença, Safari, hardware real, hospedagem e teste de hipótese | benefício observado sem regressão técnica |
+| Adiado | Conta, sacola e pesquisa | Não planejada | fluxos completos e necessidade demonstrada | definição futura |
 
 ## Plano de entregas
 
 ### Entrega 0 — verdade antes da expansão
 
-Objetivo: remover falsas possibilidades e estabelecer o que pode ser publicado.
+Objetivo: remover falsas possibilidades e estabelecer o mínimo que pode ser publicado, sem exigir grande volume de prova social.
 
 Trabalho:
 
-- listar todas as afirmações comerciais atuais e planejadas;
+- listar as afirmações comerciais atuais e planejadas;
 - classificar cada uma como confirmada, pendente ou proibida;
-- definir canal real de contato e expectativa de resposta;
+- identificar o responsável pelo catálogo e a validade da lista de preços;
+- definir um canal real de contato, caso já exista, sem prometer tempo de resposta não medido;
 - remover ou ocultar pesquisa, conta e sacola enquanto não funcionarem;
 - documentar rotas atuais e URLs desejadas;
 - registrar um build-base e checklist de QA manual.
@@ -73,10 +70,10 @@ Plano de retorno: a página atual permanece intacta.
 Critérios de aceite:
 
 - nenhum controle visível promete uma função indisponível;
-- nenhuma afirmação pública fica sem fonte ou responsável;
+- nenhuma afirmação pública fica sem fonte, responsável ou indicação de que se trata de estimativa;
 - plano de rotas e conteúdo aprovado.
 
-Desbloqueia: roteamento seguro e conteúdo de suporte confiável.
+Desbloqueia: catálogo publicável, páginas de produto e aprendizado com usuários.
 
 ### Entrega 1 — roteamento e catálogo dedicado
 
@@ -127,120 +124,112 @@ Critérios de aceite:
 
 Desbloqueia: simplificação da home e páginas individuais de produto.
 
-### Entrega 2 — remover a repetição da home
+### Entrega 2 — páginas reutilizáveis de produto
 
-Objetivo: transformar a home em introdução, não em um segundo catálogo.
+Status em 2026-07-20: implementada localmente para todos os slugs válidos, com configuração por query string e retorno ao catálogo.
+
+Objetivo: oferecer profundidade usando dados verificáveis antes de depender de conteúdo institucional.
 
 Trabalho:
 
-- manter o hero do lançamento;
-- substituir o catálogo horizontal completo por três caminhos editoriais;
-- ligar a prévia a `/iphones` e às futuras páginas de produto;
-- manter uma versão curta do guia até `/comparar` existir;
-- remover a grade de benefícios se ela não puder ser substituída por benefícios operacionais comprovados;
-- adicionar uma prévia de confiança somente com fatos confirmados.
+- criar o template `/iphones/:slug`;
+- reutilizar imagens, acabamentos, armazenamentos e preços atuais;
+- documentar especificações com fonte primária;
+- apresentar benefícios concretos do produto sem inventar perfis de cliente;
+- ligar modelos relacionados;
+- oferecer contato somente quando existir destino real.
 
 Pré-condição: `/iphones` está estável e fácil de encontrar.
-Plano de retorno: restaurar o catálogo completo sem alterar os dados.
+Plano de retorno: remover os links de detalhes sem alterar o catálogo.
 
 Critérios de aceite:
 
-- não existem duas seções adjacentes cumprindo a mesma função;
-- catálogo completo permanece a uma ação de distância;
-- a home conta uma história de marca, não apenas uma história de preço;
-- no mobile, o visitante alcança uma ação relevante sem rolagem excessiva.
+- todo card pode abrir uma URL durável;
+- dados técnicos possuem fonte;
+- preço informa seu caráter de referência ou condição de confirmação;
+- nenhuma recomendação é apresentada como comportamento comprovado de clientes;
+- estados mobile, URL direta e navegação de retorno funcionam.
 
-Desbloqueia: espaço claro para guias, suporte e futuro 3D.
+Desbloqueia: comparação e observação de interesse por modelo.
 
-### Entrega 3 — confiança ou profundidade de produto
+### Entrega 3 — simplificação mensurável da home
 
-Esta entrega possui uma condição de conteúdo.
+Status em 2026-07-20: implementada localmente na direção Product Runway. O catálogo completo e `BentoBenefits` saíram da Home; três faixas editoriais, o guia compacto e seus preços continuam derivados de `src/data/products.ts`.
 
-#### Caminho A: fatos prontos
-
-Publicar `/ajuda` e `/atendimento` com informações confirmadas sobre:
-
-- canal de contato;
-- horário ou tempo de resposta;
-- processo de pagamento;
-- confirmação de disponibilidade;
-- entrega ou retirada;
-- responsabilidade de garantia;
-- trocas, devoluções e resolução de problemas.
-
-#### Caminho B: fatos ainda não prontos
-
-Criar o template reutilizável `/iphones/:slug` com:
-
-- imagens existentes;
-- cores e armazenamentos disponíveis;
-- lógica de preço atual;
-- posicionamento curto por perfil de uso;
-- modelos relacionados;
-- CTA de suporte somente quando o destino for real.
-
-Não publicar textos legais ou de atendimento apenas como placeholder.
-
-### Entrega 4 — completar confiança e profundidade de produto
-
-O caminho que não foi concluído na Entrega 3 passa a ser a prioridade.
-
-Critérios de aceite:
-
-- todo card pode abrir uma URL durável de produto;
-- CTAs de suporte levam a uma experiência real;
-- textos de ajuda possuem responsável e data de validação;
-- nenhuma página afirma autorização, escala, garantia, entrega ou volume de clientes sem evidência.
-
-Desbloqueia: comparação.
-
-### Entrega 5 — comparação
-
-Objetivo: ajudar o cliente a decidir sem abrir várias páginas.
+Objetivo: testar se uma home mais focada melhora a descoberta sem tratar a hipótese como fato.
 
 Trabalho:
 
-- normalizar poucos campos realmente relevantes;
-- comparar dois ou três modelos;
-- enfatizar diferenças em vez de especificações completas;
-- reutilizar os perfis do guia de escolha;
-- ligar cada resultado à página do produto.
+- manter o hero e um caminho claro para `/iphones`;
+- substituir o catálogo completo por uma seleção pequena usando a mesma fonte de dados;
+- manter exatamente os caminhos editoriais `iphone-17-pro-max`, `iphone-17` e `iphone-17e` nesta V1;
+- emitir somente eventos locais `exportech:interaction`, sem fornecedor, cookies ou requisições;
+- não exigir um “momento de confiança” quando não houver fatos suficientes;
+- manter módulos de guia, atendimento e prova social fora da página até possuírem conteúdo real;
+- comparar cliques e navegação antes e depois da mudança.
 
-Pré-condições:
+Plano de retorno: restaurar o catálogo completo da home.
 
-- modelo de dados das páginas de produto disponível;
-- dados comparativos com fonte e responsável;
-- comportamento mobile definido.
+Critérios de aceite:
+
+- catálogo completo permanece a uma ação de distância;
+- nenhum CTA perde destino;
+- a mudança possui sinais mínimos de comparação;
+- o resultado pode ser revertido sem duplicar dados.
+
+### Entrega 4 — aprendizado e próxima decisão
+
+Objetivo: usar evidência leve para ordenar o backlog.
+
+Registrar:
+
+- produtos e configurações mais acessados;
+- cliques de contato;
+- dúvidas recebidas;
+- objeções recorrentes;
+- dificuldades observadas em desktop e mobile;
+- cinco a dez conversas com potenciais clientes, quando possível.
+
+Resultado esperado: decidir qual problema aparece primeiro entre comparação, educação, atendimento e clareza comercial.
+
+### Entrega 5 — comparação ou conteúdo editorial
+
+Não construir as duas frentes por padrão.
+
+Escolher `/comparar` quando houver dúvida recorrente entre modelos e critérios estruturáveis. Escolher um ou dois guias quando as dúvidas forem melhor resolvidas por explicação.
+
+Todo conteúdo deve:
+
+- responder a uma dúvida observada;
+- usar fontes primárias para afirmações técnicas;
+- possuir data de revisão;
+- evitar recomendações categóricas sem base.
 
 ### Entrega 6 — profundidade editorial e institucional
 
-Publicar apenas um conjunto pequeno de páginas fortes:
+Publicar somente superfícies proporcionais aos fatos disponíveis:
 
-- `/guias` com dois conteúdos iniciais;
-- `/sobre` com evidências reais da empresa;
-- políticas no footer depois da validação.
+- contato mínimo com canal ativo;
+- ajuda curta descrevendo somente o processo que já acontece;
+- políticas após definição operacional e revisão adequada;
+- `/sobre` somente quando houver identidade e fatos empresariais aprovados.
 
-Primeiros guias recomendados:
+Depoimentos, cases, contadores e imagens de operação não são requisitos para começar. Também não podem ser substituídos por conteúdo inventado.
 
-1. Qual iPhone combina com cada tipo de uso?
-2. Quanto armazenamento você realmente precisa?
+### Entrega 7 — validação externa do Hero 3D padrão
 
-Evitar lançar uma estrutura grande de blog com categorias vazias.
+Objetivo: decidir se a prévia privada merece promoção, sem assumir que complexidade visual gera valor.
 
-### Entrega 7 — experiência do hero 3D
+Antes de qualquer publicação aberta:
 
-Objetivo: introduzir diferenciação depois da estabilização da base.
+- revalidar a licença do modelo;
+- concluir aprovação visual humana;
+- testar Safari desktop e iOS real;
+- medir pelo menos um aparelho mobile físico;
+- definir uma hipótese, por exemplo aumento de exploração do produto sem piora da ação principal;
+- comparar a variante estática e a variante 3D.
 
-O trabalho começa somente quando:
-
-- existe um GLB fiel e licenciado;
-- existe um poster estático aprovado;
-- o desempenho atual da home foi medido;
-- comportamentos mobile e de redução de movimento estão definidos;
-- a interação possui suporte a teclado, toque e descrição acessível;
-- existe fallback para erro e baixo consumo.
-
-O primeiro experimento deve ser isolado e reversível. Ele não pode exigir reescrita do catálogo nem dos dados dos produtos.
+O Hero 3D é agora a experiência padrão do checkout local atual, com poster e fallback estático. Isso não elimina os gates de produção: métricas locais de renderização comprovam viabilidade técnica no ambiente testado, não impacto em preferência, compreensão ou conversão.
 
 Consulte a [Decisão 004](../decisions/004-future-3d-hero.md).
 
@@ -248,11 +237,11 @@ Consulte a [Decisão 004](../decisions/004-future-3d-hero.md).
 
 ### Trilha de engenharia
 
-`roteamento → catálogo → redução da home → detalhes de produto → comparação → 3D`
+`roteamento → catálogo → detalhes de produto → Home de curadoria → medição → comparação ou guias → validação externa 3D`
 
 ### Trilha de conteúdo comercial
 
-`inventário de fatos → contato → pagamento → entrega → garantia → devoluções → história da empresa → guias`
+`verdade comercial mínima → vigência de preço → contato real → processo executado → políticas → história da empresa`
 
 A trilha de engenharia nunca deve preencher lacunas da trilha comercial com texto inventado.
 
