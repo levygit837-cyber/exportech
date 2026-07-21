@@ -2,6 +2,7 @@
 
 Status: aceita
 Data: 2026-07-14
+Última revisão: 2026-07-20
 
 ## Contexto
 
@@ -15,7 +16,7 @@ A Exportech é uma operação recente. Conteúdo genérico de ecommerce — núm
 
 ### B. Evitar todo conteúdo de confiança até a empresa crescer
 
-Evita afirmações falsas, mas desperdiça fatos reais que já podem ajudar o cliente. Rejeitada.
+Evita afirmações falsas, mas também impediria o uso de fatos operacionais simples caso eles existam. Rejeitada.
 
 ### C. Publicar apenas fatos operacionais validados
 
@@ -36,9 +37,21 @@ Todo conteúdo não relacionado diretamente ao produto deve ser classificado com
 
 Não publicar números, depoimentos, avaliações, disponibilidade, entrega, garantia, formas de pagamento, status de revendedor ou certificações sem evidência aplicável à Exportech.
 
+A falta de grande volume de prova social não bloqueia a evolução do produto. No estágio atual, confiança deve vir primeiro de:
+
+- interface funcional;
+- informação precisa;
+- origem e vigência identificáveis para preços;
+- limites explícitos;
+- canal real, quando disponível;
+- ausência de promessas decorativas.
+
+Depoimentos, cases, números de clientes e imagens de operação são opcionais e só entram quando existirem de forma legítima.
+
 ## Consequências
 
 - Páginas de ajuda e atendimento dependem da validação comercial.
 - A falta de conteúdo confirmado não será preenchida com texto inventado.
 - O site pode ser menor, mas será mais preciso e confiável.
 - A documentação deve preservar fonte, responsável e data para futuras revisões.
+- Páginas institucionais não são requisito para catálogo, detalhes de produto ou experimentos mensuráveis.

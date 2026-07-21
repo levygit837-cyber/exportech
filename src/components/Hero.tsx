@@ -1,4 +1,4 @@
-import { ArrowRight } from "@phosphor-icons/react";
+import { ArrowDown, ArrowRight } from "@phosphor-icons/react";
 import {
   motion,
   useReducedMotion,
@@ -24,6 +24,7 @@ import {
   getStartingPriceUSD,
 } from "../data/products";
 import { blurReveal, stagger } from "../lib/motion";
+import { emitInteraction } from "../lib/interactionEvents";
 
 const LazyHero3DExperience = lazy(() => import("./Hero3DExperience"));
 
@@ -49,7 +50,53 @@ function Hero3DPosterFallback({ failed = false }: { failed?: boolean }) {
       <div className="hero-3d-intro pointer-events-none absolute z-20">
         <p>iPhone 17 Pro Max</p>
         <span>Laranja-cósmico</span>
+        <small>
+          Câmeras avançadas, tela ampla e a maior autonomia da linha iPhone 17.
+        </small>
       </div>
+      <Link
+        to="/#destaques"
+        onClick={() =>
+          emitInteraction({
+            name: "hero_skip",
+            destination: "/#destaques",
+          })
+        }
+        className="hero-3d-skip"
+      >
+        Pular para os modelos
+        <ArrowDown size={14} weight="bold" aria-hidden />
+      </Link>
+      {failed ? (
+        <div className="hero-3d-actions is-visible">
+          <Link
+            to="/iphones/iphone-17-pro-max"
+            onClick={() =>
+              emitInteraction({
+                name: "hero_product_open",
+                productId: "iphone-17-pro-max",
+                destination: "/iphones/iphone-17-pro-max",
+              })
+            }
+            className="hero-3d-action-primary"
+          >
+            Conhecer o iPhone 17 Pro Max
+            <ArrowRight size={15} weight="bold" aria-hidden />
+          </Link>
+          <Link
+            to="/iphones"
+            onClick={() =>
+              emitInteraction({
+                name: "hero_catalog_open",
+                destination: "/iphones",
+              })
+            }
+            className="hero-3d-action-secondary"
+          >
+            Ver todos os iPhones
+          </Link>
+        </div>
+      ) : null}
       {failed ? (
         <div className="hero-3d-error" role="status">
           <p>Visualização 3D indisponível</p>

@@ -1,10 +1,22 @@
 # Fonte dos preços do catálogo
 
-Status: informações comerciais restauradas
+Status: lista comercial recebida, com vigência pendente de confirmação
 Fonte: conversa da tarefa Exportech, 2026-07-14
 Última restauração: 2026-07-15
+Última revisão documental: 2026-07-20
 
-Este documento preserva os valores em USD fornecidos pela empresa. Ele não representa uma cotação cambial em tempo real e não deve ser apresentado dessa forma.
+Este documento preserva os valores em USD recebidos durante a tarefa. A conversa registrada não comprova, sozinha, vigência, disponibilidade, impostos, margem, condição final de venda ou autorização permanente para publicação.
+
+Antes de tratar os valores como oferta atual, registrar:
+
+- responsável comercial;
+- data de início da vigência;
+- data de expiração ou próxima revisão;
+- o que está incluído no valor;
+- como a disponibilidade é confirmada;
+- texto público aprovado.
+
+Enquanto esses campos estiverem pendentes, os valores devem ser apresentados como referência sujeita a confirmação, nunca como preço final garantido.
 
 ## Regra de conversão
 
@@ -15,10 +27,11 @@ Este documento preserva os valores em USD fornecidos pela empresa. Ele não repr
 - BRL é o preço principal da vitrine.
 - USD aparece apenas como referência discreta ao lado do valor em BRL.
 - A taxa é estática até existir um fluxo de atualização cambial aprovado separadamente.
+- A estimativa em BRL não confirma disponibilidade nem condição final de venda.
 
 Exemplo: `USD 1.155 × 5,27 = BRL 6.086,85`, exibido como `BRL 6.099`.
 
-## Preços fornecidos
+## Valores recebidos
 
 ### iPhone 15
 
@@ -92,15 +105,17 @@ A informação comercial original chamava este modelo de “iPhone 17 Air”. A 
 - Manter discretos e funcionais os seletores de armazenamento e acabamento.
 - Atualizar juntos imagem, referência em USD e estimativa em BRL ao trocar o acabamento.
 - Não chamar o preço de “ao vivo”, “final” ou “garantido” sem uma política comercial que sustente essa afirmação.
+- Informar de forma próxima ao preço que se trata de referência sujeita a confirmação enquanto a vigência não estiver aprovada.
 
 ## Checklist de atualização
 
 Quando a empresa fornecer uma nova lista:
 
 1. registrar fonte e data;
-2. atualizar este documento;
-3. atualizar `src/data/products.ts`;
-4. conferir todas as combinações de armazenamento e acabamento;
-5. executar o build de produção;
-6. verificar manualmente o par BRL e USD exibido;
-7. commitar juntos documentação, dados e imagens afetadas.
+2. registrar responsável, vigência e condição comercial;
+3. atualizar este documento;
+4. atualizar `src/data/products.ts`;
+5. conferir todas as combinações de armazenamento e acabamento;
+6. executar o build de produção;
+7. verificar manualmente o par BRL e USD exibido;
+8. commitar juntos documentação, dados e imagens afetadas.

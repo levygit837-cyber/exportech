@@ -78,9 +78,9 @@ const CAMERA_STOPS: readonly CameraStop[] = [
   {
     at: 0.12,
     camera: {
-      position: [1.63, 0.67, 5.16],
+      position: [2.08, 0.68, 5.04],
       target: cameras.intro.target,
-      fov: 30.4,
+      fov: 30.2,
     },
     modelPosition: [0.08, -0.24, 0],
     modelScale: 18.12,
@@ -709,7 +709,17 @@ function ProductScene({
       segment.progress,
     );
     desiredModelPosition.y -= mobile ? 0.1 : 0.06;
-    desiredScale *= mobile ? 0.9 : 0.95;
+    if (!mobile && progress < 0.28) {
+      const introBlend = 1 - progress / 0.28;
+      desiredModelPosition.x += 0.68 * introBlend;
+      desiredModelPosition.y += 0.2 * introBlend;
+      desiredScale *= 0.95 - 0.13 * introBlend;
+    } else if (mobile && progress < 0.28) {
+      const introBlend = 1 - progress / 0.28;
+      desiredScale *= 0.9 - 0.04 * introBlend;
+    } else {
+      desiredScale *= mobile ? 0.9 : 0.95;
+    }
     const desiredFov = THREE.MathUtils.lerp(
       segment.from.camera.fov,
       segment.to.camera.fov,

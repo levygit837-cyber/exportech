@@ -1,13 +1,13 @@
+import { ArrowRight } from "@phosphor-icons/react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
+import { Link } from "react-router";
 import {
   convertUSDToBRL,
   formatBRL,
   formatUSD,
-  getPriceUSD,
   type Product,
-  type StorageId,
 } from "../data/products";
+import { useProductConfiguration } from "../lib/useProductConfiguration";
 import { blurReveal } from "../lib/motion";
 
 type ProductCardProps = {
@@ -22,14 +22,18 @@ export default function ProductCard({
   variant,
 }: ProductCardProps) {
   const reduceMotion = useReducedMotion();
-  const [finishId, setFinishId] = useState(product.defaultFinish);
-  const [storageId, setStorageId] = useState<StorageId>(product.defaultStorage);
-
-  const finish = product.finishes.find((item) => item.id === finishId)!;
-  const priceUSD = getPriceUSD(product, finishId, storageId);
+  const {
+    finish,
+    finishId,
+    priceUSD,
+    selectFinish,
+    selectStorage,
+    storageId,
+  } = useProductConfiguration(product);
   const priceBRL = convertUSDToBRL(priceUSD);
   const titleId = `${variant}-${product.id}-title`;
   const Heading = variant === "rail" ? "h3" : "h2";
+  const detailUrl = `/iphones/${product.id}?finish=${finishId}&storage=${storageId}`;
 
   return (
     <motion.div
@@ -45,9 +49,16 @@ export default function ProductCard({
         data-product-card
         data-product-id={product.id}
         aria-labelledby={titleId}
-        className="product-card group relative flex h-full scroll-mt-28 flex-col rounded-3xl border border-white/[0.08] bg-[#0e0f12] p-3.5 transition-[transform,border-color] duration-200"
+        className="product-card group relative flex h-full cursor-pointer scroll-mt-28 flex-col rounded-3xl border border-white/[0.08] bg-[#0e0f12] p-3.5 transition-[transform,border-color] duration-200"
         style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
       >
+        <Link
+          to={detailUrl}
+          aria-label={`Ver detalhes do ${product.name}`}
+          data-product-card-link
+          className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-offset-4"
+        />
+
         <figure
           data-product-media
           className="product-media-surface relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/[0.06]"
@@ -97,7 +108,7 @@ export default function ProductCard({
           </div>
 
           <div className="mt-4 grid gap-4">
-            <fieldset>
+            <fieldset className="relative z-20 cursor-default">
               <legend className="mb-2 text-[11px] font-medium text-zinc-400">
                 Armazenamento
               </legend>
@@ -109,7 +120,7 @@ export default function ProductCard({
                       key={option.id}
                       type="button"
                       aria-pressed={selected}
-                      onClick={() => setStorageId(option.id)}
+                      onClick={() => selectStorage(option.id)}
                       className={
                         "min-h-11 rounded-full border px-3 py-2 text-[11px] font-medium transition duration-200 active:scale-[0.98] " +
                         (selected
@@ -124,7 +135,7 @@ export default function ProductCard({
               </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset className="relative z-20 cursor-default">
               <legend className="mb-2 text-[11px] font-medium text-zinc-400">
                 Cor: <span className="text-zinc-200">{finish.name}</span>
               </legend>
@@ -138,7 +149,7 @@ export default function ProductCard({
                       aria-label={`Selecionar ${option.name}`}
                       aria-pressed={selected}
                       title={option.name}
-                      onClick={() => setFinishId(option.id)}
+                      onClick={() => selectFinish(option.id)}
                       className={
                         "flex h-11 w-11 items-center justify-center rounded-full border transition duration-200 active:scale-[0.96] " +
                         (selected
@@ -165,6 +176,10 @@ export default function ProductCard({
             <p className="mt-1 text-[10px] text-zinc-500">
               Referência original: {formatUSD(priceUSD)}
             </p>
+            <span className="mt-4 inline-flex min-h-11 items-center gap-2 text-[12px] font-medium text-zinc-200 transition-colors group-hover:text-white">
+              Ver detalhes
+              <ArrowRight size={14} weight="bold" aria-hidden />
+            </span>
           </div>
         </div>
       </article>

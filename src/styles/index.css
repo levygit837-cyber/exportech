@@ -88,6 +88,16 @@
       inset 0 -1px 0 rgba(255, 255, 255, 0.025);
   }
 
+  .product-detail-media {
+    background:
+      radial-gradient(circle at 50% 43%, rgba(122, 164, 207, 0.2), transparent 46%),
+      linear-gradient(145deg, #1a1f27 0%, #11151b 54%, #0c0e12 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.075),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.025),
+      0 28px 70px rgba(0, 0, 0, 0.22);
+  }
+
   .hero-price-panel {
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
@@ -182,6 +192,15 @@
     color: #c8c8cc;
   }
 
+  .hero-3d-intro small {
+    display: block;
+    max-width: 31ch;
+    margin-top: 1.25rem;
+    color: #a1a1aa;
+    font-size: clamp(0.78rem, 1vw, 0.9rem);
+    line-height: 1.55;
+  }
+
   .hero-3d-intro {
     top: clamp(8.5rem, 21svh, 12rem);
     left: max(1.5rem, 7vw);
@@ -191,7 +210,7 @@
 
   .hero-3d-error {
     position: absolute;
-    z-index: 24;
+    z-index: 30;
     left: 50%;
     bottom: 9svh;
     translate: -50% 0;
@@ -219,6 +238,76 @@
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: none;
+  }
+
+  .hero-3d-skip {
+    position: absolute;
+    z-index: 26;
+    left: max(1.5rem, 7vw);
+    bottom: max(1.5rem, 5.5svh);
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 0.55rem;
+    padding-inline: 0.2rem;
+    color: #a1a1aa;
+    font-size: 0.72rem;
+    font-weight: 500;
+    transition: color 180ms var(--ease-fluid);
+  }
+
+  .hero-3d-skip:hover {
+    color: #fafafa;
+  }
+
+  .hero-3d-actions {
+    position: absolute;
+    z-index: 27;
+    left: max(1.5rem, 7vw);
+    bottom: max(1.5rem, 6svh);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-3d-action-primary,
+  .hero-3d-action-secondary {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding: 0.75rem 1.15rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    transition:
+      color 180ms var(--ease-fluid),
+      background-color 180ms var(--ease-fluid),
+      border-color 180ms var(--ease-fluid),
+      transform 180ms var(--ease-fluid);
+  }
+
+  .hero-3d-action-primary {
+    gap: 0.55rem;
+    background: #fafafa;
+    color: #09090b;
+  }
+
+  .hero-3d-action-primary:hover {
+    background: #fff;
+    transform: translateY(-1px);
+  }
+
+  .hero-3d-action-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(10, 10, 10, 0.54);
+    color: #e4e4e7;
+  }
+
+  .hero-3d-action-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
   }
 
   .hero-3d-loading {
@@ -406,6 +495,19 @@
     line-height: 1.25;
     color: #8f8f97;
   }
+
+  .runway-media-glow {
+    background: radial-gradient(circle, rgba(73, 132, 186, 0.22), transparent 68%);
+    filter: blur(34px);
+  }
+
+  [data-featured-product="iphone-17-pro-max"] .runway-media-glow {
+    background: radial-gradient(circle, rgba(225, 104, 50, 0.24), transparent 68%);
+  }
+
+  [data-featured-product="iphone-17e"] .runway-media-glow {
+    background: radial-gradient(circle, rgba(148, 154, 163, 0.17), transparent 68%);
+  }
 }
 
 @keyframes hero-3d-callout-in {
@@ -445,6 +547,31 @@
     font-size: clamp(2.15rem, 11vw, 3rem);
   }
 
+  .hero-3d-intro small {
+    max-width: 26ch;
+    margin-top: 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-3d-skip {
+    right: 1.25rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: auto;
+  }
+
+  .hero-3d-actions {
+    right: 1.25rem;
+    bottom: max(1.1rem, env(safe-area-inset-bottom));
+    left: 1.25rem;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .hero-3d-action-primary,
+  .hero-3d-action-secondary {
+    width: 100%;
+  }
+
   .hero-3d-callout {
     max-width: none;
   }
@@ -452,6 +579,10 @@
   .hero-3d-loading {
     right: 1rem;
     bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .hero-3d-error {
+    bottom: max(9.5rem, calc(8.5rem + env(safe-area-inset-bottom)));
   }
 
   .hero-3d-narrative {
@@ -479,6 +610,18 @@
     max-width: 8rem;
     padding-inline: 0.48rem;
     font-size: 0.64rem;
+  }
+
+  .runway-row .runway-copy {
+    order: 1;
+  }
+
+  .runway-row .runway-media {
+    order: 2;
+  }
+
+  .runway-row .runway-commerce {
+    order: 3;
   }
 }
 
@@ -580,7 +723,10 @@
     cursor: default;
   }
   .hero-3d-poster img {
-    opacity: 0.72;
+    opacity: 0.82;
+  }
+  .hero-3d-reduced-details {
+    display: none;
   }
   *,
   *::before,

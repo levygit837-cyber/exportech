@@ -42,22 +42,18 @@ export default function IphonesPage() {
             <p className="mt-6 max-w-[58ch] text-[16px] leading-relaxed text-zinc-400">
               Selecione armazenamento e acabamento para conferir a estimativa atual de cada configuração.
             </p>
-            <p className="mt-5 text-[13px] text-zinc-500">
-              {products.length} modelos catalogados
-            </p>
           </div>
 
-          <aside
-            aria-labelledby="pricing-method-title"
-            className="mt-12 max-w-[720px] rounded-2xl border border-white/[0.08] bg-white/[0.025] p-5 sm:p-6"
+          <details
+            className="group mt-8 max-w-[720px] border-l border-white/10 pl-4 text-[12px] text-zinc-500"
           >
-            <h2 id="pricing-method-title" className="text-[14px] font-medium text-zinc-200">
+            <summary className="min-h-11 w-fit cursor-pointer content-center font-medium text-zinc-400 transition-colors hover:text-zinc-200">
               Como os valores são calculados
-            </h2>
-            <p className="mt-2 text-[13px] leading-relaxed text-zinc-400">
+            </summary>
+            <p className="max-w-[64ch] pb-2 leading-relaxed text-zinc-500">
               A estimativa em BRL usa a taxa estática de USD 1 = {formatBRL(USD_BRL_RATE, true)} e arredondamento comercial. A referência original em USD permanece visível em cada card.
             </p>
-          </aside>
+          </details>
 
           <motion.div
             variants={stagger(0.04)}

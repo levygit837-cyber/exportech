@@ -1,26 +1,28 @@
 {
-  "date": "2026-07-19",
+  "date": "2026-07-20",
   "source": "Primeiro frame real do Hero3DCanvas com o ativo apple-user-remastered-runtime.glb",
   "capture": {
     "local_only": true,
     "uploaded": false,
     "format": "image/webp",
-    "quality": 0.82,
-    "background": "transparent"
+    "quality": 0.88,
+    "background": "#0a0a0a",
+    "script": "tools/3d/capture_runtime_posters.mjs",
+    "runtime": "Hero3DCanvas; mesmo GLB, HDRI, materiais, iluminação e câmera intro"
   },
   "desktop": {
     "filename": "hero-runtime-poster-desktop.webp",
-    "bytes": 21150,
-    "width": 1425,
+    "bytes": 23630,
+    "width": 1440,
     "height": 900,
-    "sha256": "3102228531cb9867edeb621b8b91db04f829ccac049cd961e80829afc595b802"
+    "sha256": "8c4b8af1d3a5f9d53d78d40d8da71725f8d2ff07444ad63d42317ffd6f2d5861"
   },
   "mobile": {
     "filename": "hero-runtime-poster-mobile.webp",
-    "bytes": 15282,
-    "width": 375,
+    "bytes": 17122,
+    "width": 390,
     "height": 844,
-    "sha256": "c15c8ba692e9d9df8b6d576ec64549ed6c61be09e957a4544ed0497839b1dd5f"
+    "sha256": "8dbf7be66a06e3ad6c5e95658205bad899de28f36cb190c41aa323ff166b7997"
   },
   "provenance": {
     "source_author": "Apple User",

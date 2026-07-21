@@ -72,9 +72,9 @@ export const HERO_3D_MANIFEST = {
   },
   cameras: {
     intro: {
-      position: [1.71, 0.684, 5.4],
-      target: [0, 0.09, 0],
-      fov: 31,
+      position: [2.18, 0.7, 5.18],
+      target: [0.02, 0.08, 0],
+      fov: 30.5,
     },
     "camera-control": {
       position: [5.67, 0.36, 0.36],
